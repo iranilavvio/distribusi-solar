@@ -1,0 +1,101 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\KaryawanRequest;
+use App\Models\Karyawan;
+use Illuminate\Http\Request;
+
+class KaryawanController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $params = $request->except('_token');   
+        $karya = Karyawan::filter($params)->latest()->paginate($params['show'] ?? 10);
+        $karyawan = Karyawan::all();
+        return view('karyawan.index', compact('karyawan'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(KaryawanRequest $request)
+    {
+        $attr = $request->all();
+
+        //insert into table
+        Karyawan::create($attr);
+
+        //redirect
+        return redirect()->back();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Karyawan $karyawan)
+    {
+        //findorfail
+        // $karyawan = Karyawan::findOrFail($karyawan->id);
+        //return view
+        return view('karyawan.edit', compact('karyawan'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(KaryawanRequest $request, Karyawan $karyawan)
+    {
+        //update
+        $karyawan->update($request->all());
+        //redirect
+        return redirect()->back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
