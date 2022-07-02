@@ -16,7 +16,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="#" class="btn btn-sm btn-neutral">New</a>
+                        <a href="javascript:void(0)" class="btn btn-sm btn-neutral" id="create">New</a>
                         <a href="#" class="btn btn-sm btn-neutral">Filters</a>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                     </div>
                     <!-- Light table -->
                     <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                        <table class="table align-items-center table-flush" id="customerTable">
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
@@ -163,14 +163,15 @@
                             </thead>
                             <tbody class="list">
                                 @forelse ($customer as $item)
-                                    <tr>
+                                    <tr id="customer_{{ $item->id }}">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->kode }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->nama_contact }}</td>
                                         <td>{{ $item->nomor_contact }}</td>
-                                        <td><button class="btn btn-sm btn-success" style="border-radius: 0.5rem" onclick="showEditModal({{ $item->id }}, `{{ route('customer.edit', ['customer' => $item->id]) }}`, `{{ route('customer.update', ['customer' => $item->id]) }}`)"><i
+                                        <td><button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
+                                                onclick="showEditModal({{ $item->id }}, `{{ route('customer.edit', ['customer' => $item->id]) }}`, `{{ route('customer.update', ['customer' => $item->id]) }}`)"><i
                                                     class="fas fa-edit"></i></button></td>
                                     </tr>
                                 @empty
@@ -214,7 +215,8 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -275,7 +277,8 @@
                                         </div>
                                         <input
                                             class="form-control form-control-alternative @error('alamat') is-invalid @enderror"
-                                            placeholder="Masukkan Alamat" type="text" name="alamat" id="alamat_edit">
+                                            placeholder="Masukkan Alamat" type="text" name="alamat"
+                                            id="alamat_edit">
                                     </div>
                                     @error('alamat')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -337,7 +340,7 @@
     <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
     <script>
-        function showEditModal(id, url_edit, url_update){
+        function showEditModal(id, url_edit, url_update) {
             // ajax show edit modal
             $.ajax({
                 url: url_edit,
@@ -345,7 +348,7 @@
                 data: {
                     id: id
                 },
-                success: function(data){
+                success: function(data) {
                     console.log(data)
                     $('#action-modal-edit').attr('action', url_update);
                     $('#kode_edit').val(data.kode);

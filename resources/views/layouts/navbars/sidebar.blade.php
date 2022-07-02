@@ -6,9 +6,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
-        <a class="navbar-brand pt-0" href="{{ route('home') }}">
+        {{-- <a class="navbar-brand pt-0" href="{{ route('home') }}">
             <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
-        </a>
+        </a> --}}
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
             <li class="nav-item dropdown">
@@ -86,7 +86,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
+                        <i class="{{ request()->routeIs('home') ? 'mm-active' : '' }}"></i> {{ __('Dashboard') }}
                     </a>
                 </li>
                 <li class="nav-item">
@@ -113,60 +113,46 @@
                                     <i class="ni ni-tv-2 text-primary"></i> {{ __('Truck') }}
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('driver.index') }}">
-                                    <i class="ni ni-tv-2 text-primary"></i> {{ __('Driver') }}
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </li>
 
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('icons') }}">
-                        <i class="ni ni-planet text-blue"></i> {{ __('Icons') }}
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('map') }}">
-                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Maps') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('table') }}">
-                        <i class="ni ni-bullet-list-67 text-default"></i>
-                        <span class="nav-link-text">Tables</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="ni ni-circle-08 text-pink"></i> {{ __('Register') }}
-                    </a>
-                </li>
             </ul>
             <!-- Divider -->
             <hr class="my-3">
             <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Documentation</h6>
+            <h6 class="navbar-heading text-muted">Data</h6>
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <a class="nav-link"
-                        href="https://argon-dashboard-laravel.creative-tim.com/docs/getting-started/overview.html">
-                        <i class="ni ni-spaceship"></i> Getting started
+                    <a class="nav-link" href="{{ route('driver.index') }}">
+                        <i class="ni ni-planet text-blue"></i> {{ __('Driver') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"
-                        href="https://argon-dashboard-laravel.creative-tim.com/docs/foundation/colors.html">
-                        <i class="ni ni-palette"></i> Foundation
+                    <a class="nav-link" href="{{ route('orderreal.index') }}">
+                        <i class="ni ni-planet text-blue"></i> {{ __('Order & Real') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('laporan.index') }}">
+                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Laporan Penjualan') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('suratjalan.index') }}">
+                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Surat Jalan') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"
-                        href="https://argon-dashboard-laravel.creative-tim.com/docs/components/alerts.html">
-                        <i class="ni ni-ui-04"></i> Components
+                    <a class="nav-link" href="{{ route('delivery.index') }}">
+                        <i class="ni ni-circle-08 text-pink"></i> {{ __('Delivery') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('control.index') }}">
+                        <i class="ni ni-circle-08 text-pink"></i> {{ __('Control Delivery') }}
                     </a>
                 </li>
             </ul>

@@ -41,7 +41,18 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validation
+        $request->validate([
+            'driver' => 'required',
+            'nopol' => 'required',
+        ]);
+        $attr = $request->all();
+
+        //insert into table
+        Driver::create($attr);
+
+        //redirect
+        return redirect()->back();
     }
 
     /**

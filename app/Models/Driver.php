@@ -17,4 +17,16 @@ class Driver extends Model
 
     //protected table
     protected $table = 'driver';
+
+    //relationship with karyawan
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class, 'karyawan_id');
+    }
+
+    //relationship with truck
+    public function truck()
+    {
+        return $this->belongsTo(Truck::class, 'truck_id');
+    }
 }

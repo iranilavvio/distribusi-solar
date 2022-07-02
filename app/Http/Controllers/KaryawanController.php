@@ -68,7 +68,7 @@ class KaryawanController extends Controller
     public function edit(Karyawan $karyawan)
     {
         //findorfail
-        // $karyawan = Karyawan::findOrFail($karyawan->id);
+        $karyawan = Karyawan::findOrFail($karyawan->id);
         //return view
         return view('karyawan.edit', compact('karyawan'));
     }
@@ -94,8 +94,11 @@ class KaryawanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Karyawan $karyawan)
     {
-        //
+        //delete
+        $karyawan->delete();
+        //redirect
+        return redirect()->back();
     }
 }

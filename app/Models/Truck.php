@@ -18,4 +18,9 @@ class Truck extends Model
 
     //protected table
     protected $table = 'truck';
+
+    public function driver()
+    {
+        return $this->hasOne(Driver::class);
+    }
 }

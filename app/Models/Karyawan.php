@@ -20,7 +20,7 @@ class Karyawan extends Model
         'jabatan',
         'no_telp',
     ];
-    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
     //protected table
     protected $table = 'karyawan';
 
@@ -34,5 +34,10 @@ class Karyawan extends Model
             }
 
         });
+    }
+
+    public function driver()
+    {
+        return $this->hasOne(Driver::class);
     }
 }

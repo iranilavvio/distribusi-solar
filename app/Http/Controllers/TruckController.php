@@ -65,9 +65,13 @@ class TruckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Truck $truck, Request $request)
     {
-        //
+        // $truck = Truck::findOrFail($truck->id);
+        // return view('truck.edit', compact('truck'));
+        if ($request->ajax()) {
+            return response()->json($truck);
+        }
     }
 
     /**
@@ -77,9 +81,16 @@ class TruckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TruckRequest $request, Truck $truck)
     {
-        //
+        //all
+        $attr = $request->all();
+
+        //update
+        $truck->update($attr);
+
+        //redirect
+        return redirect()->back();
     }
 
     /**
@@ -88,8 +99,13 @@ class TruckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Truck $truck)
     {
-        //
+        //findorfail
+        $truck = Truck::findOrFail($truck->id);
+        //delete
+        $truck->delete();
+        //redirect
+        return redirect()->back();
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrderReal;
+use App\Models\SuratJalan;
 use Illuminate\Http\Request;
 
-class OrderRealController extends Controller
+class SuratJalanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class OrderRealController extends Controller
      */
     public function index()
     {
-        //get all
-        $orderreal = OrderReal::all();
-        return view('order_real.index', compact('orderreal'));
+        //all
+        $suratjalan = SuratJalan::all();
+        return view('surat_jalan.index', compact('suratjalan'));
     }
 
     /**
