@@ -6,12 +6,12 @@
             <div class="header-body">
                 <div class="row align-items-center py-4">
                     <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-white d-inline-block mb-0">Karyawan</h6>
+                        <h6 class="h2 text-white d-inline-block mb-0">Laporan Penjualan</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Karyawan</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Karyawan</li>
+                                <li class="breadcrumb-item"><a href="#">Laporan Penjualan</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Laporan Penjualan</li>
                             </ol>
                         </nav>
                     </div>
@@ -30,10 +30,10 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Tambah Data Karyawan</h3>
+                        <h3 class="mb-0">Tambah Data Laporan Penjualan</h3>
                     </div>
                     <div class="container">
-                        <form action="{{ route('karyawan.store') }}" method="POST">
+                        <form action="{{ route('laporan.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
@@ -220,7 +220,7 @@
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                @forelse ($karyawan as $kary)
+                                @forelse ($laporan as $kary)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $kary->name }}</td>
@@ -229,11 +229,11 @@
                                         <td>{{ $kary->no_telp }}</td>
                                         <td>
                                             <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
-                                                data-url="{{ route('karyawan.edit', $kary->id) }}" data-toggle="modal"
+                                                data-url="{{ route('laporan.edit', $kary->id) }}" data-toggle="modal"
                                                 data-target=".modalOpen" data-title="Edit Karyawan"><i
                                                     class="fas fa-edit mr-1"></i> Ubah</button>
                                             <button class="btn btn-sm btn-danger" style="border-radius: 0.5rem"
-                                                data-url="{{ route('karyawan.destroy', $kary->id) }}"
+                                                data-url="{{ route('laporan.destroy', $kary->id) }}"
                                                 data-toggle="modal" data-target="#modalDelete"
                                                 data-title="Hapus Karyawan" data-message="{{ $kary->name }}"><i
                                                     class="fas fa-trash"></i></button>

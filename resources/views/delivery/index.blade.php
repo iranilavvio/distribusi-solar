@@ -6,12 +6,12 @@
             <div class="header-body">
                 <div class="row align-items-center py-4">
                     <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-white d-inline-block mb-0">Karyawan</h6>
+                        <h6 class="h2 text-white d-inline-block mb-0">Delivery</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Karyawan</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Karyawan</li>
+                                <li class="breadcrumb-item"><a href="#">Delivery</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Delivery</li>
                             </ol>
                         </nav>
                     </div>
@@ -30,15 +30,15 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Tambah Data Karyawan</h3>
+                        <h3 class="mb-0">Tambah Data Delivery</h3>
                     </div>
                     <div class="container">
-                        <form action="{{ route('karyawan.store') }}" method="POST">
+                        <form action="{{ route('delivery.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="namakaryawan" class="form-label">Nama Karyawan</label>
+                                        <label for="namadelivery" class="form-label">Nama delivery</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
@@ -46,7 +46,7 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('name') is-invalid @enderror"
-                                                placeholder="Masukkan Nama Karyawan" type="text" name="name"
+                                                placeholder="Masukkan Nama delivery" type="text" name="name"
                                                 id="name">
                                         </div>
                                         @error('name')
@@ -220,7 +220,7 @@
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                @forelse ($karyawan as $kary)
+                                @forelse ($delivery as $kary)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $kary->name }}</td>
@@ -229,13 +229,13 @@
                                         <td>{{ $kary->no_telp }}</td>
                                         <td>
                                             <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
-                                                data-url="{{ route('karyawan.edit', $kary->id) }}" data-toggle="modal"
-                                                data-target=".modalOpen" data-title="Edit Karyawan"><i
+                                                data-url="{{ route('delivery.edit', $kary->id) }}" data-toggle="modal"
+                                                data-target=".modalOpen" data-title="Edit delivery"><i
                                                     class="fas fa-edit mr-1"></i> Ubah</button>
                                             <button class="btn btn-sm btn-danger" style="border-radius: 0.5rem"
-                                                data-url="{{ route('karyawan.destroy', $kary->id) }}"
+                                                data-url="{{ route('delivery.destroy', $kary->id) }}"
                                                 data-toggle="modal" data-target="#modalDelete"
-                                                data-title="Hapus Karyawan" data-message="{{ $kary->name }}"><i
+                                                data-title="Hapus delivery" data-message="{{ $kary->name }}"><i
                                                     class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>

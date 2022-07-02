@@ -3,7 +3,9 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\LaporanPenjualanController;
 use App\Http\Controllers\TruckController;
+use App\Models\LaporanPenjualan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +45,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('customer', CustomerController::class);
 	Route::resource('driver', DriverController::class);
 	Route::resource('truck', TruckController::class);
+	Route::resource('laporan', LaporanPenjualanController::class);
+	Route::resource('orderreal', 'App\Http\Controllers\OrderRealController');
+	Route::resource('delivery', 'App\Http\Controllers\DeliveryController');
+	Route::resource('purchase', 'App\Http\Controllers\PurchaseOrderController');
+	Route::resource('control', 'App\Http\Controllers\ControlDeliveryController');
+	Route::resource('suratjalan', 'App\Http\Controllers\SuratJalanController');
 
 });
 

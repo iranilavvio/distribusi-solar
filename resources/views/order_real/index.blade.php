@@ -6,12 +6,12 @@
             <div class="header-body">
                 <div class="row align-items-center py-4">
                     <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-white d-inline-block mb-0">Karyawan</h6>
+                        <h6 class="h2 text-white d-inline-block mb-0">Order Real</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Karyawan</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Karyawan</li>
+                                <li class="breadcrumb-item"><a href="#">Order Real</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Order Real</li>
                             </ol>
                         </nav>
                     </div>
@@ -30,10 +30,10 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Tambah Data Karyawan</h3>
+                        <h3 class="mb-0">Tambah Data Order Real</h3>
                     </div>
                     <div class="container">
-                        <form action="{{ route('karyawan.store') }}" method="POST">
+                        <form action="{{ route('orderreal.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
@@ -81,14 +81,14 @@
                                             <div>
                                                 <div class=" custom-control custom-control-inline">
                                                     <label class="form-check-label">
-                                                        <input name="jenis_kelamin" type="radio" class="form-check-input"
+                                                        <input name="gender" type="radio" class="form-check-input"
                                                             value="Laki-laki">
                                                         Laki-laki
                                                     </label>
                                                 </div>
                                                 <div class=" custom-control custom-control-inline">
                                                     <label class="form-check-label">
-                                                        <input name="jenis_kelamin" type="radio" class="form-check-input"
+                                                        <input name="gender" type="radio" class="form-check-input"
                                                             value="Perempuan">
                                                         Perempuan
                                                     </label>
@@ -106,11 +106,11 @@
                                                 <span class="input-group-text"><i class="fa fa-city"></i></i></span>
                                             </div>
                                             <input
-                                                class="form-control form-control-alternative @error('tempat_lahir') is-invalid @enderror"
-                                                placeholder="Masukkan Tempat Lahir" type="text" name="tempat_lahir"
-                                                id="tempat_lahir">
+                                                class="form-control form-control-alternative @error('tempat') is-invalid @enderror"
+                                                placeholder="Masukkan Tempat Lahir" type="text" name="tempat"
+                                                id="tempat">
                                         </div>
-                                        @error('tempat_lahir')
+                                        @error('tempat')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -127,8 +127,7 @@
                                                         class="ni ni-calendar-grid-58"></i></span>
                                             </div>
                                             <input class="form-control datepicker" placeholder="Select date"
-                                                data-date-format='yy-mm-dd' type="text" id="tanggal_lahir"
-                                                name="tanggal_lahir">
+                                                type="text" id="tanggal" name="tanggal">
                                         </div>
                                     </div>
                                 </div>
@@ -179,11 +178,11 @@
                                                 <span class="input-group-text"><i class="fa fa-phone"></i></span>
                                             </div>
                                             <input
-                                                class="form-control form-control-alternative @error('no_telp') is-invalid @enderror"
-                                                placeholder="Masukkan Nomor Telpon" type="text" name="no_telp"
-                                                id="no_telp">
+                                                class="form-control form-control-alternative @error('telp') is-invalid @enderror"
+                                                placeholder="Masukkan Nomor Telpon" type="text" name="telp"
+                                                id="telp">
                                         </div>
-                                        @error('no_telp')
+                                        @error('telp')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
 
@@ -213,31 +212,30 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
+                                    <th>Nik</th>
                                     <th>Jenis Kelamin</th>
+                                    <th>Tempat Lahir</th>
+                                    <th>Tanggal Lahir</th>
+                                    <th>Alamat</th>
                                     <th>Jabatan</th>
                                     <th>No Telp</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                @forelse ($karyawan as $kary)
+                                @forelse ($orderreal as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kary->name }}</td>
-                                        <td>{{ $kary->jenis_kelamin }}</td>
-                                        <td>{{ $kary->jabatan }}</td>
-                                        <td>{{ $kary->no_telp }}</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
-                                                data-url="{{ route('karyawan.edit', $kary->id) }}" data-toggle="modal"
-                                                data-target=".modalOpen" data-title="Edit Karyawan"><i
-                                                    class="fas fa-edit mr-1"></i> Ubah</button>
-                                            <button class="btn btn-sm btn-danger" style="border-radius: 0.5rem"
-                                                data-url="{{ route('karyawan.destroy', $kary->id) }}"
-                                                data-toggle="modal" data-target="#modalDelete"
-                                                data-title="Hapus Karyawan" data-message="{{ $kary->name }}"><i
-                                                    class="fas fa-trash"></i></button>
-                                        </td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->nik }}</td>
+                                        <td>{{ $item->jenis_kelamin }}</td>
+                                        <td>{{ $item->tempat_lahir }}</td>
+                                        <td>{{ $item->tanggal_lahir }}</td>
+                                        <td>{{ $item->alamat }}</td>
+                                        <td>{{ $item->jabatan }}</td>
+                                        <td>{{ $item->no_telp }}</td>
+                                        <td><button class="btn btn-sm btn-success" style="border-radius: 0.5rem"><i
+                                                    class="fas fa-edit"></i></button></td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -247,7 +245,6 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <x-pagination :pagination="$karyawan" /> --}}
                     <!-- Card footer -->
                     <div class="card-footer py-4">
                         <nav aria-label="...">
@@ -279,11 +276,6 @@
         </div>
         @include('layouts.footers.auth')
     </div>
-
-    {{-- include modal delete component --}}
-    <x-modal-delete />
-    {{-- include modal edit component --}}
-    <x-modal class="modal-lg" />
 @endsection
 
 @push('js')

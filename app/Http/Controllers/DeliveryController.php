@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrderReal;
+use App\Models\Delivery;
 use Illuminate\Http\Request;
 
-class OrderRealController extends Controller
+class DeliveryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class OrderRealController extends Controller
      */
     public function index()
     {
-        //get all
-        $orderreal = OrderReal::all();
-        return view('order_real.index', compact('orderreal'));
+        //all
+        $delivery = Delivery::all();
+        return view('delivery.index', compact('delivery'));
     }
 
     /**

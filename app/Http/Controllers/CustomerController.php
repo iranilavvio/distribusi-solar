@@ -37,20 +37,35 @@ class CustomerController extends Controller
      */
     public function store(CustomerRequest $request)
     {
-        $request->validate([
-            'kode' => 'required',
-            'name' => 'required',
-            'alamat' => 'required',
-            'nama_contact' => 'required',
-            'nomor_contact' => 'required',
-        ]);
-        $attr = $request->all();
+        // $request->validate([
+        //     'kode' => 'required',
+        //     'name' => 'required',
+        //     'alamat' => 'required',
+        //     'nama_contact' => 'required',
+        //     'nomor_contact' => 'required',
+        // ]);
+        // $attr = $request->all();
+        // Customer::create($attr);
+        // return redirect()->back();
 
-        //insert into table
-        Customer::create($attr);
+        //update or create
+        $customer = Customer::updateOrCreate(
+            ['id' => $request->custId
+            ],
+            ['kode' => $request->kode, 
+            'name' => $request->name, 
+            'alamat' => $request->alamat, 
+            'nama_contact' => $request->nama_contact, 
+            'nomor_contact' => $request->nomor_contact
+            ]
+        );
 
-        //redirect
-        return redirect()->back();
+        if($customer) {
+            return response()->json(['status' => 'success', 'data' => $customer]);
+        }
+        else {
+            return response()->json(['status' => 'failed', 'message' => 'Failed to create customer']);
+        }
     }
 
     /**
@@ -59,9 +74,14 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Customer $customer)
     {
-        //
+        if($customer) {
+            return response()->json(['status' => 'success', 'data' => $customer]);
+        }
+        else {
+            return response()->json(['status' => 'failed', 'message' => 'No data found']);
+        }
     }
 
     /**
@@ -70,9 +90,20 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        //findorfail customer
+        // $customer = Customer::findOrFail($customer->id);
+        //return view
+        // return view('customer.edit', compact('customer'));
+        //if request is ajax
+        // if (request()->ajax()) {
+        //     return response()->json($customer);
+        // }
+        $where = array('id' => $request->custId);
+        $customer  = Customer::where($where)->first();
+ 
+        return response()->json($customer);
     }
 
     /**
@@ -82,9 +113,23 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CustomerRequest $request, Customer $customer)
     {
-        //
+        //update
+        $request->validate([
+            'kode' => 'required',
+            'name' => 'required',
+            'alamat' => 'required',
+            'nama_contact' => 'required',
+            'nomor_contact' => 'required',
+        ]);
+        $attr = $request->all();
+
+        //update table
+        $customer->update($attr);
+
+        //redirect
+        return redirect()->back();
     }
 
     /**
@@ -93,8 +138,12 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Customer $customer)
     {
-        //
+        // $customer->delete();
+        // return redirect()->back();
+
+        $customer->delete();
+        return response()->json(['status' => 'success', 'data' => $customer]);
     }
 }

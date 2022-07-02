@@ -44,10 +44,13 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
                                             </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('driver') is-invalid @enderror"
-                                                placeholder="Masukkan Nama Driver" type="text" name="driver"
-                                                id="driver">
+                                            <select name="driver" id="driver"
+                                                class="form-control form-control-alternative @error('driver') is-invalid @enderror">
+                                                <option value="">Pilih Driver</option>
+                                                @foreach ($karyawan as $karyawan)
+                                                    <option value="{{ $karyawan->id }}">{{ $karyawan->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         @error('driver')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -62,10 +65,13 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-address-card"></i></span>
                                             </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('nopol') is-invalid @enderror"
-                                                placeholder="Masukkan Nomor Polisi" type="text" name="nopol"
-                                                id="nopol">
+                                            <select name="nopol" id="nopol"
+                                                class="form-control form-control-alternative @error('nopol') is-invalid @enderror">
+                                                <option value="">Pilih No Polisi</option>
+                                                @foreach ($truck as $mobil)
+                                                    <option value="{{ $mobil->id }}">{{ $mobil->no_pol }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         @error('nopol')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -105,9 +111,9 @@
                                 @forelse ($driver as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->karyawan_id }}</td>
-                                        <td>{{ $item->truck_id }}</td>
-                                        <td>{{ $item->truck_id }}</td>
+                                        <td>{{ $item->karyawan->name }}</td>
+                                        <td>{{ $item->truck->name }}</td>
+                                        <td>{{ $item->kuantitas }}</td>
                                         <td><button class="btn btn-sm btn-success" style="border-radius: 0.5rem"><i
                                                     class="fas fa-edit"></i></button></td>
                                     </tr>
