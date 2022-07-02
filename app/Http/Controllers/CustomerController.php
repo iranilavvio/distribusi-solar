@@ -72,7 +72,9 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::find($id);
+
+        return response()->json($customer);
     }
 
     /**
@@ -84,7 +86,21 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'kode' => 'required',
+            'name' => 'required',
+            'alamat' => 'required',
+            'nama_contact' => 'required',
+            'nomor_contact' => 'required',
+        ]);
+        $attr = $request->all();
+
+        $customer = Customer::find($id);
+
+        $customer->update($attr);
+
+        //redirect
+        return redirect()->back();
     }
 
     /**
