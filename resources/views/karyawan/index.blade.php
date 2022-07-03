@@ -229,14 +229,11 @@
                                         <td>{{ $kary->no_telp }}</td>
                                         <td>
                                             <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
-                                                data-url="{{ route('karyawan.edit', $kary->id) }}" data-toggle="modal"
-                                                data-target=".modalOpen" data-title="Edit Karyawan"><i
-                                                    class="fas fa-edit mr-1"></i> Ubah</button>
-                                            <button class="btn btn-sm btn-danger" style="border-radius: 0.5rem"
-                                                data-url="{{ route('karyawan.destroy', $kary->id) }}"
-                                                data-toggle="modal" data-target="#modalDelete"
-                                                data-title="Hapus Karyawan" data-message="{{ $kary->name }}"><i
-                                                    class="fas fa-trash"></i></button>
+                                                onclick="showEditModal({{ $kary->id }}, `{{ route('karyawan.edit', ['karyawan' => $kary->id]) }}`, `{{ route('karyawan.update', ['karyawan' => $kary->id]) }}`)"><i
+                                                    class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger"
+                                                onclick="hapusData(`{{ route('karyawan.destroy', ['karyawan' => $kary->id]) }}`)"><i
+                                                    class="far fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
                                 @empty
@@ -280,10 +277,11 @@
         @include('layouts.footers.auth')
     </div>
 
-    {{-- include modal delete component --}}
-    <x-modal-delete />
-    {{-- include modal edit component --}}
-    <x-modal class="modal-lg" />
+    {{-- include hapus --}}
+    @include('karyawan.delete')
+
+    {{-- include edit --}}
+    @include('karyawan.edit')
 @endsection
 
 @push('js')

@@ -43,8 +43,8 @@ class DriverController extends Controller
     {
         //validation
         $request->validate([
-            'driver' => 'required',
-            'nopol' => 'required',
+            'karyawan_id' => 'required',
+            'truck_id' => 'required',
         ]);
         $attr = $request->all();
 

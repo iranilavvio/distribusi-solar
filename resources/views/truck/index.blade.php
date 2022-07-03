@@ -132,11 +132,14 @@
                                         <td>{{ $item->no_pol }}</td>
                                         <td>{{ $item->no_lambung }}</td>
                                         <td>{{ $item->kuantitas }}</td>
-                                        {{-- <td><button class="btn btn-sm btn-success" style="border-radius: 0.5rem"><i
-                                                    class="fas fa-edit"></i></button></td> --}}
-                                        <td><button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
-                                                onclick="showModalEdit({{ $item->id }})"><i
-                                                    class="fas fa-edit"></i></button></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
+                                                onclick="showEditModal({{ $item->id }}, `{{ route('truck.edit', ['truck' => $item->id]) }}`, `{{ route('truck.update', ['truck' => $item->id]) }}`)"><i
+                                                    class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger"
+                                                onclick="hapusData(`{{ route('truck.destroy', ['truck' => $item->id]) }}`)"><i
+                                                    class="far fa-trash-alt"></i></button>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -177,109 +180,14 @@
         </div>
         @include('layouts.footers.auth')
     </div>
-    //modal
-    <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="modalEdit"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form method="POST" id="customerForm">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Customer</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nopol" class="form-label">Nomor Polisi</label>
-                                    <span class="text-danger">*</span>
-                                    <div class="input-group input-group-alternative mb-4">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
-                                        </div>
-                                        <input
-                                            class="form-control form-control-alternative @error('no_pol') is-invalid @enderror"
-                                            placeholder="Masukkan Nomor Polisi" type="text" name="no_pol"
-                                            id="no_pol">
-                                    </div>
-                                    @error('no_pol')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nolambung" class="form-label">No Lambung</label>
-                                    <span class="text-danger">*</span>
-                                    <div class="input-group input-group-alternative mb-4">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fa fa-address-card"></i></span>
-                                        </div>
-                                        <input
-                                            class="form-control form-control-alternative @error('no_lambung') is-invalid @enderror"
-                                            placeholder="Masukkan Nomor Lambung" type="number" name="no_lambung"
-                                            id="no_lambung">
-                                    </div>
-                                    @error('no_lambung')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="kuantitas" class="form-label">Kuantitas</label>
-                                    <span class="text-danger">*</span>
-                                    <div class="input-group input-group-alternative mb-4">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fa fa-user-tie"></i></span>
-                                        </div>
-                                        <input
-                                            class="form-control form-control-alternative @error('kuantitas') is-invalid @enderror"
-                                            placeholder="Masukkan Kuantitas" type="text" name="kuantitas"
-                                            id="kuantitas">
-                                    </div>
-                                    @error('kuantitas')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
+    {{-- include hapus --}}
+    @include('truck.delete')
+    {{-- include edit --}}
+    @include('truck.edit')
 @endsection
 
 @push('js')
     <script src="{{ asset('argon') }}/vendor/js-cookie/js.cookie.js"></script>
     <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-
-    <script>
-        function showModalEdit(id) {
-            console.log(id);
-            $.ajax({
-                url: `{{ route('truck.edit') }}`,
-                type: 'GET',
-                data: {
-                    id: id
-                },
-                success: function(data) {
-                    $('#form-modal-edit').attr('action', `truck/edit/${id}`),
-                        $('#no_pol').val(data.no_pol);
-                    $('#no_lambung').val(data.no_lambung);
-                    $('#kuantitas').val(data.kuantitas);
-                    $('#modalEdit').modal('show');
-                }
-            });
-        }
-    </script>
 @endpush

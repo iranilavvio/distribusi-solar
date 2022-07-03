@@ -85,32 +85,32 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
-                        <i class="{{ request()->routeIs('home') ? 'mm-active' : '' }}"></i> {{ __('Dashboard') }}
+                    <a href="{{ route('home') }}" class="nav-link {{ request()->is('home') ? 'active' : '' }}">
+                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button"
                         aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="fas fa-user-circle text-primary"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Master Data') }}</span>
+                        <i class="fas fa-table text-primary"></i>
+                        <span class="nav-link-text">{{ __('Master Data') }}</span>
                     </a>
 
                     <div class="collapse show" id="navbar-examples">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('karyawan.index') }}">
-                                    <i class="ni ni-tv-2 text-primary"></i> {{ __('Karyawan') }}
+                                    <i class="fas fa-user-tie text-primary"></i> {{ __('Karyawan') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('customer.index') }}">
-                                    <i class="ni ni-tv-2 text-primary"></i> {{ __('Customer') }}
+                                    <i class="fas fa-people-carry text-primary"></i> {{ __('Customer') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('truck.index') }}">
-                                    <i class="ni ni-tv-2 text-primary"></i> {{ __('Truck') }}
+                                    <i class="fas fa-truck text-primary"></i> {{ __('Truck') }}
                                 </a>
                             </li>
                         </ul>
@@ -126,33 +126,34 @@
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('driver.index') }}">
-                        <i class="ni ni-planet text-blue"></i> {{ __('Driver') }}
+                    <a href="{{ route('driver.index') }}"
+                        class="nav-link {{ request()->routeIs('driver.index') ? 'mm-active' : '' }}">
+                        <i class="fas fa-truck-loading text-blue"></i> {{ __('Driver') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('orderreal.index') }}">
-                        <i class="ni ni-planet text-blue"></i> {{ __('Order & Real') }}
+                        <i class="fas fa-shopping-cart text-blue"></i> {{ __('Order & Real') }}
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('laporan.index') }}">
-                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Laporan Penjualan') }}
+                        <i class="fas fa-store text-orange"></i> {{ __('Laporan Penjualan') }}
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('suratjalan.index') }}">
-                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Surat Jalan') }}
+                        <i class="fas fa-mail-bulk text-orange"></i> {{ __('Surat Jalan') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('delivery.index') }}">
-                        <i class="ni ni-circle-08 text-pink"></i> {{ __('Delivery') }}
+                        <i class="fas fa-truck-loading text-pink"></i> {{ __('Delivery') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('control.index') }}">
-                        <i class="ni ni-circle-08 text-pink"></i> {{ __('Control Delivery') }}
+                        <i class="fas fa-shopping-basket text-pink"></i> {{ __('Control Delivery') }}
                     </a>
                 </li>
             </ul>

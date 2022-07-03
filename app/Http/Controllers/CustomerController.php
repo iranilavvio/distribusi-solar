@@ -37,35 +37,17 @@ class CustomerController extends Controller
      */
     public function store(CustomerRequest $request)
     {
-        // $request->validate([
-        //     'kode' => 'required',
-        //     'name' => 'required',
-        //     'alamat' => 'required',
-        //     'nama_contact' => 'required',
-        //     'nomor_contact' => 'required',
-        // ]);
-        // $attr = $request->all();
-        // Customer::create($attr);
-        // return redirect()->back();
+        $request->validate([
+            'kode' => 'required',
+            'name' => 'required',
+            'alamat' => 'required',
+            'nama_contact' => 'required',
+            'nomor_contact' => 'required',
+        ]);
+        $attr = $request->all();
+        Customer::create($attr);
+        return redirect()->back();
 
-        //update or create
-        $customer = Customer::updateOrCreate(
-            ['id' => $request->custId
-            ],
-            ['kode' => $request->kode, 
-            'name' => $request->name, 
-            'alamat' => $request->alamat, 
-            'nama_contact' => $request->nama_contact, 
-            'nomor_contact' => $request->nomor_contact
-            ]
-        );
-
-        if($customer) {
-            return response()->json(['status' => 'success', 'data' => $customer]);
-        }
-        else {
-            return response()->json(['status' => 'failed', 'message' => 'Failed to create customer']);
-        }
     }
 
     /**
@@ -76,12 +58,12 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        if($customer) {
-            return response()->json(['status' => 'success', 'data' => $customer]);
-        }
-        else {
-            return response()->json(['status' => 'failed', 'message' => 'No data found']);
-        }
+        // if($customer) {
+        //     return response()->json(['status' => 'success', 'data' => $customer]);
+        // }
+        // else {
+        //     return response()->json(['status' => 'failed', 'message' => 'No data found']);
+        // }
     }
 
     /**
@@ -104,7 +86,7 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerRequest $request, Customer $customer, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'kode' => 'required',
@@ -135,6 +117,6 @@ class CustomerController extends Controller
         // return redirect()->back();
 
         $customer->delete();
-        return response()->json(['status' => 'success', 'data' => $customer]);
+        return redirect()->back();
     }
 }

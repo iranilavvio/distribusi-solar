@@ -65,12 +65,11 @@ class KaryawanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Karyawan $karyawan)
+    public function edit($id)
     {
-        //findorfail
-        $karyawan = Karyawan::findOrFail($karyawan->id);
-        //return view
-        return view('karyawan.edit', compact('karyawan'));
+        $karyawan = Karyawan::findOrFail($id);
+
+        return response()->json($karyawan);
     }
 
     /**
@@ -80,11 +79,21 @@ class KaryawanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(KaryawanRequest $request, Karyawan $karyawan)
+    public function update(Request $request, $id)
     {
-        //update
-        $karyawan->update($request->all());
-        //redirect
+       $request->validate([
+        'name' => 'required',
+            'nik' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'alamat' => 'required',
+            'jabatan' => 'required',
+            'no_telp' => 'required',
+       ]);
+       
+        $attr = $request->all();
+        $karyawan = Karyawan::findOrFail($id);
+        $karyawan->update($attr);
         return redirect()->back();
     }
 
