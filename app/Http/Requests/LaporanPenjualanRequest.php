@@ -13,7 +13,7 @@ class LaporanPenjualanRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,27 @@ class LaporanPenjualanRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'truck_id' => 'required|integer',
+            'driver_id' => 'required|integer',
+            'surat_jalan_id' => 'required|integer',
+            'customer_id' => 'required|integer',
+            'tujuan' => 'required|string',
+            'volume' => 'required|integer',
+            'keterangan' => 'required|string',
+        ];
+    }
+
+    //attributes
+    public function attributes()
+    {
+        return [
+            'truck_id' => 'Truck',
+            'driver_id' => 'Driver',
+            'surat_jalan_id' => 'Surat Jalan',
+            'customer_id' => 'Customer',
+            'tujuan' => 'Tujuan',
+            'volume' => 'Volume',
+            'keterangan' => 'Keterangan',
         ];
     }
 }

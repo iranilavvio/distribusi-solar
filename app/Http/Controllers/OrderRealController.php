@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRealRequest;
+use App\Models\Customer;
 use App\Models\OrderReal;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,8 @@ class OrderRealController extends Controller
     {
         //get all
         $orderreal = OrderReal::all();
-        return view('order_real.index', compact('orderreal'));
+        $customer = Customer::all();
+        return view('order_real.index', compact('orderreal', 'customer'));
     }
 
     /**
@@ -35,9 +38,16 @@ class OrderRealController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderRealRequest $request)
     {
-        //
+        //request all
+        $attr = $request->all();
+
+        //insert into table
+        OrderReal::create($attr);
+
+        //redirect
+        return redirect()->back();
     }
 
     /**
@@ -59,7 +69,11 @@ class OrderRealController extends Controller
      */
     public function edit($id)
     {
-        //
+        //find or fail
+        $orderreal = OrderReal::findOrFail($id);
+
+        //return response
+        return response()->json($orderreal);
     }
 
     /**
@@ -71,7 +85,24 @@ class OrderRealController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validate
+        $request->validate([
+            'customer_id' => 'required',
+            'alamat' => 'required',
+            'receive_po' => 'required',
+            'realisasi' => 'required',
+            'unreal' => 'required',
+            'keterangan' => 'required',
+        ]);
+
+        //find or fail
+        $orderreal = OrderReal::findOrFail($id);
+
+        //update
+        $orderreal->update($request->all());
+
+        //redirect
+        return redirect()->back();
     }
 
     /**
@@ -82,6 +113,10 @@ class OrderRealController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //delete
+        OrderReal::destroy($id);
+
+        //redirect
+        return redirect()->back();
     }
 }

@@ -21,4 +21,10 @@ class OrderReal extends Model
 
     //protected table
     protected $table = 'order_real';
+
+    //relationship with customer
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
 }

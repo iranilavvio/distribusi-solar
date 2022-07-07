@@ -44,15 +44,17 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
                                             </div>
-                                            <select name="driver" id="driver"
-                                                class="form-control form-control-alternative @error('driver') is-invalid @enderror">
+                                            <select name="karyawan_id" id="karyawan_id"
+                                                class="form-control form-control-alternative @error('karyawan_id') is-invalid @enderror">
                                                 <option value="">Pilih Driver</option>
-                                                @foreach ($karyawan as $karyawan)
-                                                    <option value="{{ $karyawan->id }}">{{ $karyawan->name }}</option>
+                                                @foreach ($karyawan as $kary)
+                                                    <option value="{{ $kary->id }}"
+                                                        {{ old('karyawan_id') == $kary->id ? 'selected' : '' }}>
+                                                        {{ $kary->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        @error('driver')
+                                        @error('karyawan_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -65,15 +67,17 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-address-card"></i></span>
                                             </div>
-                                            <select name="nopol" id="nopol"
-                                                class="form-control form-control-alternative @error('nopol') is-invalid @enderror">
+                                            <select name="truck_id" id="truck_id"
+                                                class="form-control form-control-alternative @error('truck_id') is-invalid @enderror">
                                                 <option value="">Pilih No Polisi</option>
                                                 @foreach ($truck as $mobil)
-                                                    <option value="{{ $mobil->id }}">{{ $mobil->no_pol }}</option>
+                                                    <option value="{{ $mobil->id }}"
+                                                        {{ old('truck_id') == $mobil->id ? 'selected' : '' }}>
+                                                        {{ $mobil->no_pol }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        @error('nopol')
+                                        @error('truck_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <div class="d-flex flex-column">
@@ -102,7 +106,10 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Driver</th>
+                                    <th>NIK</th>
+                                    <th>Alamat</th>
                                     <th>Nomor Polisi</th>
+                                    <th>No Lambung</th>
                                     <th>Kuantitas</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -112,10 +119,19 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->karyawan->name }}</td>
-                                        <td>{{ $item->truck->name }}</td>
-                                        <td>{{ $item->kuantitas }}</td>
-                                        <td><button class="btn btn-sm btn-success" style="border-radius: 0.5rem"><i
-                                                    class="fas fa-edit"></i></button></td>
+                                        <td>{{ $item->karyawan->nik }}</td>
+                                        <td>{{ $item->karyawan->alamat }}</td>
+                                        <td>{{ $item->truck->no_pol }}</td>
+                                        <td>{{ $item->truck->no_lambung }}</td>
+                                        <td>{{ $item->truck->kuantitas }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
+                                                onclick="showEditModal({{ $item->id }}, `{{ route('driver.edit', ['driver' => $item->id]) }}`, `{{ route('driver.update', ['driver' => $item->id]) }}`)"><i
+                                                    class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger"
+                                                onclick="hapusData(`{{ route('driver.destroy', ['driver' => $item->id]) }}`)"><i
+                                                    class="far fa-trash-alt"></i></button>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -156,6 +172,12 @@
         </div>
         @include('layouts.footers.auth')
     </div>
+
+    {{-- include modal delete component --}}
+    <x-modal-delete />
+
+    {{-- include edit --}}
+    @include('driver.edit')
 @endsection
 
 @push('js')

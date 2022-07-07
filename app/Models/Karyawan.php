@@ -40,4 +40,10 @@ class Karyawan extends Model
     {
         return $this->hasOne(Driver::class);
     }
+
+    //relationship with suratjalan
+    public function suratjalan()
+    {
+        return $this->hasMany(SuratJalan::class, 'karyawan_id');
+    }
 }

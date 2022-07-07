@@ -42,11 +42,12 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-laptop-code"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('kode') is-invalid @enderror"
-                                                placeholder="Masukkan Kode" type="text" name="kode" id="kode">
+                                                value="{{ old('kode') }}" placeholder="Masukkan Kode" type="text"
+                                                name="kode" id="kode">
                                         </div>
                                         @error('kode')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -63,8 +64,8 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('name') is-invalid @enderror"
-                                                placeholder="Masukkan Nama Customer" type="text" name="name"
-                                                id="name">
+                                                value="{{ old('name') }}" placeholder="Masukkan Nama Customer"
+                                                type="text" name="name" id="name">
                                         </div>
                                         @error('name')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -79,11 +80,12 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-city"></i></i></span>
+                                                <span class="input-group-text"><i class="fas fa-map-marked"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('alamat') is-invalid @enderror"
-                                                placeholder="Masukkan Alamat" type="text" name="alamat" id="alamat">
+                                                value="{{ old('alamat') }}" placeholder="Masukkan Alamat" type="text"
+                                                name="alamat" id="alamat">
                                         </div>
                                         @error('alamat')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -96,12 +98,12 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-city"></i></i></span>
+                                                <span class="input-group-text"><i class="far fa-id-badge"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('nama_contact') is-invalid @enderror"
-                                                placeholder="Masukkan Nama Contact" type="text" name="nama_contact"
-                                                id="nama_contact">
+                                                value="{{ old('nama_contact') }}" placeholder="Masukkan Nama Contact"
+                                                type="text" name="nama_contact" id="nama_contact">
                                         </div>
                                         @error('nama_contact')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -116,12 +118,12 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-map"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-phone-square"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('nomor_contact') is-invalid @enderror"
-                                                placeholder="Masukkan Nomor Contact" type="text" name="nomor_contact"
-                                                id="nomor_contact">
+                                                value="{{ old('nomor_contact') }}" placeholder="Masukkan Nomor Contact"
+                                                type="text" name="nomor_contact" id="nomor_contact">
                                         </div>
                                         @error('nomor_contact')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -219,8 +221,8 @@
         @include('layouts.footers.auth')
     </div>
 
-    {{-- Hapus --}}
-    @include('customer.delete')
+    {{-- include modal delete component --}}
+    <x-modal-delete />
 
     <!-- Edit -->
     @include('customer.edit')

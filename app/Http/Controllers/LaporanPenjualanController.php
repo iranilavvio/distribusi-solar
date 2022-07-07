@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LaporanPenjualanRequest;
+use App\Models\Customer;
+use App\Models\Driver;
 use App\Models\LaporanPenjualan;
+use App\Models\SuratJalan;
+use App\Models\Truck;
 use Illuminate\Http\Request;
 
 class LaporanPenjualanController extends Controller
@@ -16,7 +21,11 @@ class LaporanPenjualanController extends Controller
     {
         //all
         $laporan = LaporanPenjualan::all();
-        return view('lap_penjualan.index', compact('laporan'));
+        $truck = Truck::all();
+        $driver = Driver::all();
+        $suratjalan = SuratJalan::all();
+        $customer = Customer::all();
+        return view('lap_penjualan.index', compact('laporan', 'truck', 'driver', 'suratjalan', 'customer'));
     }
 
     /**
@@ -35,9 +44,13 @@ class LaporanPenjualanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LaporanPenjualanRequest $request)
     {
-        //
+        $attr = $request->all();
+
+        LaporanPenjualan::create($attr);
+
+        return redirect()->back();
     }
 
     /**
@@ -59,7 +72,9 @@ class LaporanPenjualanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $laporan = LaporanPenjualan::findOrFail($id);
+        
+        return response()->json($laporan);
     }
 
     /**
@@ -71,7 +86,13 @@ class LaporanPenjualanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $attr = $request->all();
+
+        $laporan = LaporanPenjualan::findOrFail($id);
+
+        $laporan->update($attr);
+
+        return redirect()->back();
     }
 
     /**
@@ -82,6 +103,10 @@ class LaporanPenjualanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $laporan = LaporanPenjualan::findOrFail($id);
+
+        $laporan->delete();
+
+        return redirect()->back();
     }
 }

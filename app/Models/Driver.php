@@ -29,4 +29,16 @@ class Driver extends Model
     {
         return $this->belongsTo(Truck::class, 'truck_id');
     }
+
+    //relationship with suratjalan
+    public function suratjalan()
+    {
+        return $this->hasMany(SuratJalan::class, 'driver_id');
+    }
+
+    //relationship with laporanpenjualan
+    public function laporanpenjualan()
+    {
+        return $this->hasMany(LaporanPenjualan::class, 'driver_id');
+    }
 }

@@ -46,8 +46,8 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('no_pol') is-invalid @enderror"
-                                                placeholder="Masukkan Nomor Polisi" type="text" name="no_pol"
-                                                id="no_pol">
+                                                value="{{ old('no_pol') }}" placeholder="Masukkan Nomor Polisi"
+                                                type="text" name="no_pol" id="no_pol">
                                         </div>
                                         @error('no_pol')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -64,8 +64,8 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('no_lambung') is-invalid @enderror"
-                                                placeholder="Masukkan Nomor Lambung" type="number" name="no_lambung"
-                                                id="no_lambung">
+                                                value="{{ old('no_lambung') }}" placeholder="Masukkan Nomor Lambung"
+                                                type="text" name="no_lambung" id="no_lambung">
                                         </div>
                                         @error('no_lambung')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -84,8 +84,8 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('kuantitas') is-invalid @enderror"
-                                                placeholder="Masukkan Kuantitas" type="text" name="kuantitas"
-                                                id="kuantitas">
+                                                value="{{ old('kuantitas') }}" placeholder="Masukkan Kuantitas"
+                                                type="text" name="kuantitas" id="kuantitas">
                                         </div>
                                         @error('kuantitas')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -181,8 +181,9 @@
         @include('layouts.footers.auth')
     </div>
 
-    {{-- include hapus --}}
-    @include('truck.delete')
+    {{-- include modal delete component --}}
+    <x-modal-delete />
+
     {{-- include edit --}}
     @include('truck.edit')
 @endsection

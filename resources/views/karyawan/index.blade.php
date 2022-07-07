@@ -46,8 +46,8 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('name') is-invalid @enderror"
-                                                placeholder="Masukkan Nama Karyawan" type="text" name="name"
-                                                id="name">
+                                                value="{{ old('name') }}" placeholder="Masukkan Nama Karyawan"
+                                                type="text" name="name" id="name">
                                         </div>
                                         @error('name')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -64,7 +64,8 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('nik') is-invalid @enderror"
-                                                placeholder="Masukkan NIK" type="number" name="nik" id="nik">
+                                                value="{{ old('nik') }}" placeholder="Masukkan NIK" type="number"
+                                                name="nik" id="nik">
                                         </div>
                                         @error('nik')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -107,8 +108,8 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('tempat_lahir') is-invalid @enderror"
-                                                placeholder="Masukkan Tempat Lahir" type="text" name="tempat_lahir"
-                                                id="tempat_lahir">
+                                                value="{{ old('tempat_lahir') }}" placeholder="Masukkan Tempat Lahir"
+                                                type="text" name="tempat_lahir" id="tempat_lahir">
                                         </div>
                                         @error('tempat_lahir')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -142,8 +143,8 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('alamat') is-invalid @enderror"
-                                                placeholder="Masukkan Alamat" type="text" name="alamat"
-                                                id="alamat">
+                                                value="{{ old('alamat') }}" placeholder="Masukkan Alamat"
+                                                type="text" name="alamat" id="alamat">
                                         </div>
                                         @error('alamat')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -162,8 +163,8 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('jabatan') is-invalid @enderror"
-                                                placeholder="Masukkan Jabatan" type="text" name="jabatan"
-                                                id="jabatan">
+                                                value="{{ old('jabatan') }}" placeholder="Masukkan Jabatan"
+                                                type="text" name="jabatan" id="jabatan">
                                         </div>
                                         @error('jabatan')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -180,8 +181,8 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('no_telp') is-invalid @enderror"
-                                                placeholder="Masukkan Nomor Telpon" type="text" name="no_telp"
-                                                id="no_telp">
+                                                value="{{ old('no_telp') }}" placeholder="Masukkan Nomor Telpon"
+                                                type="text" name="no_telp" id="no_telp">
                                         </div>
                                         @error('no_telp')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -277,8 +278,8 @@
         @include('layouts.footers.auth')
     </div>
 
-    {{-- include hapus --}}
-    @include('karyawan.delete')
+    {{-- include modal delete component --}}
+    <x-modal-delete />
 
     {{-- include edit --}}
     @include('karyawan.edit')

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SuratJalanRequest;
+use App\Models\Customer;
+use App\Models\Driver;
+use App\Models\Karyawan;
 use App\Models\SuratJalan;
+use App\Models\Truck;
 use Illuminate\Http\Request;
 
 class SuratJalanController extends Controller
@@ -16,7 +21,12 @@ class SuratJalanController extends Controller
     {
         //all
         $suratjalan = SuratJalan::all();
-        return view('surat_jalan.index', compact('suratjalan'));
+        $driver = Driver::all();
+        $truck = Truck::all();
+        $customer = Customer::all();
+        $karyawan = Karyawan::all();
+
+        return view('surat_jalan.index', compact('suratjalan', 'driver', 'truck', 'customer', 'karyawan'));
     }
 
     /**
@@ -35,9 +45,16 @@ class SuratJalanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SuratJalanRequest $request)
     {
-        //
+        //attr 
+        $attr = $request->all();
+
+        //insert into table
+        SuratJalan::create($attr);
+
+        //redirect
+        return redirect()->back();
     }
 
     /**
@@ -59,7 +76,11 @@ class SuratJalanController extends Controller
      */
     public function edit($id)
     {
-        //
+        //find or fail
+        $suratjalan = SuratJalan::findOrFail($id);
+
+        //return response
+        return response()->json($suratjalan);
     }
 
     /**
@@ -69,9 +90,19 @@ class SuratJalanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SuratJalanRequest $request, $id)
     {
-        //
+        //find or fail
+        $suratjalan = SuratJalan::findOrFail($id);
+
+        //attr
+        $attr = $request->all();
+
+        //update
+        $suratjalan->update($attr);
+
+        //redirect
+        return redirect()->back();
     }
 
     /**
@@ -82,6 +113,13 @@ class SuratJalanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //find or fail
+        $suratjalan = SuratJalan::findOrFail($id);
+
+        //delete
+        $suratjalan->delete();
+
+        //redirect
+        return redirect()->back();
     }
 }

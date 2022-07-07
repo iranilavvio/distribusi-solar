@@ -137,13 +137,13 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('laporan.index') }}">
-                        <i class="fas fa-store text-orange"></i> {{ __('Laporan Penjualan') }}
+                    <a class="nav-link" href="{{ route('suratjalan.index') }}">
+                        <i class="fas fa-mail-bulk text-orange"></i> {{ __('Surat Jalan') }}
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('suratjalan.index') }}">
-                        <i class="fas fa-mail-bulk text-orange"></i> {{ __('Surat Jalan') }}
+                    <a class="nav-link" href="{{ route('laporan.index') }}">
+                        <i class="fas fa-store text-orange"></i> {{ __('Laporan Penjualan') }}
                     </a>
                 </li>
                 <li class="nav-item">

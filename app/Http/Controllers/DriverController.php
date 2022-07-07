@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DriverRequest;
 use App\Models\Driver;
 use App\Models\Karyawan;
 use App\Models\Truck;
@@ -39,13 +40,8 @@ class DriverController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DriverRequest $request)
     {
-        //validation
-        $request->validate([
-            'karyawan_id' => 'required',
-            'truck_id' => 'required',
-        ]);
         $attr = $request->all();
 
         //insert into table
@@ -74,7 +70,10 @@ class DriverController extends Controller
      */
     public function edit($id)
     {
-        //
+        //find or fail
+        $driver = Driver::findOrFail($id);
+
+        return response()->json($driver);
     }
 
     /**
@@ -86,7 +85,14 @@ class DriverController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //find or fail
+        $driver = Driver::findOrFail($id);
+
+        //update
+        $driver->update($request->all());
+
+        //redirect
+        return redirect()->back();
     }
 
     /**
@@ -97,6 +103,10 @@ class DriverController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //delete
+        Driver::destroy($id);
+
+        //redirect
+        return redirect()->back();
     }
 }

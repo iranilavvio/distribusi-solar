@@ -38,97 +38,25 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="namakaryawan" class="form-label">Nama Karyawan</label>
+                                        <label for="customer" class="form-label">Customer</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
                                             </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('name') is-invalid @enderror"
-                                                placeholder="Masukkan Nama Karyawan" type="text" name="name"
-                                                id="name">
+                                            <select name="customer_id" id="customer_id"
+                                                class="form-control form-control-alternative @error('customer_id') is-invalid @enderror">
+                                                <option value="">Pilih Customer</option>
+                                                @foreach ($customer as $cust)
+                                                    <option value="{{ $cust->id }}"
+                                                        {{ old('customer_id') == $cust->id ? 'selected' : '' }}>
+                                                        {{ $cust->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                        @error('name')
+                                        @error('customer_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="nik" class="form-label">NIK</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
-                                            </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('nik') is-invalid @enderror"
-                                                placeholder="Masukkan NIK" type="number" name="nik" id="nik">
-                                        </div>
-                                        @error('nik')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="jk" class="form-label">Jenis Kelamin</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="position-relative form-group">
-                                            <div>
-                                                <div class=" custom-control custom-control-inline">
-                                                    <label class="form-check-label">
-                                                        <input name="gender" type="radio" class="form-check-input"
-                                                            value="Laki-laki">
-                                                        Laki-laki
-                                                    </label>
-                                                </div>
-                                                <div class=" custom-control custom-control-inline">
-                                                    <label class="form-check-label">
-                                                        <input name="gender" type="radio" class="form-check-input"
-                                                            value="Perempuan">
-                                                        Perempuan
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="tempatlahir" class="form-label">Tempat Lahir</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-city"></i></i></span>
-                                            </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('tempat') is-invalid @enderror"
-                                                placeholder="Masukkan Tempat Lahir" type="text" name="tempat"
-                                                id="tempat">
-                                        </div>
-                                        @error('tempat')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="tanggallahir" class="form-label">Tanggal Lahir</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="ni ni-calendar-grid-58"></i></span>
-                                            </div>
-                                            <input class="form-control datepicker" placeholder="Select date"
-                                                type="text" id="tanggal" name="tanggal">
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -137,12 +65,12 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-map"></i></span>
+                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('alamat') is-invalid @enderror"
-                                                placeholder="Masukkan Alamat" type="text" name="alamat"
-                                                id="alamat">
+                                                value="{{ old('alamat') }}" placeholder="Masukkan Alamat" type="text"
+                                                name="alamat" id="alamat">
                                         </div>
                                         @error('alamat')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -153,39 +81,76 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="jabatan" class="form-label">Jabatan</label>
+                                        <label for="receive" class="form-label">Receive PO</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-user-tie"></i></span>
+                                                <span class="input-group-text"><i class="fa fa-city"></i></i></span>
                                             </div>
                                             <input
-                                                class="form-control form-control-alternative @error('jabatan') is-invalid @enderror"
-                                                placeholder="Masukkan Jabatan" type="text" name="jabatan"
-                                                id="jabatan">
+                                                class="form-control form-control-alternative @error('receive_po') is-invalid @enderror"
+                                                value="{{ old('receive_po') }}" placeholder="Masukkan Receive PO"
+                                                type="number" name="receive_po" id="receive_po">
                                         </div>
-                                        @error('jabatan')
+                                        @error('receive_po')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="telp" class="form-label">Nomor Telpon</label>
+                                        <label for="realisasi" class="form-label">Realisasi</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                                <span class="input-group-text"><i class="fa fa-city"></i></i></span>
                                             </div>
                                             <input
-                                                class="form-control form-control-alternative @error('telp') is-invalid @enderror"
-                                                placeholder="Masukkan Nomor Telpon" type="text" name="telp"
-                                                id="telp">
+                                                class="form-control form-control-alternative @error('realisasi') is-invalid @enderror"
+                                                value="{{ old('realisasi') }}" placeholder="Masukkan realisasi"
+                                                type="number" name="realisasi" id="realisasi">
                                         </div>
-                                        @error('telp')
+                                        @error('realisasi')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="unreal" class="form-label">Unreal</label>
+                                        <span class="text-danger">*</span>
+                                        <div class="input-group input-group-alternative mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-city"></i></i></span>
+                                            </div>
+                                            <input
+                                                class="form-control form-control-alternative @error('unreal') is-invalid @enderror"
+                                                value="{{ old('unreal') }}" placeholder="Masukkan Unreal"
+                                                type="number" name="unreal" id="unreal">
+                                        </div>
+                                        @error('unreal')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="keterangan" class="form-label">Keterangan</label>
+                                        <span class="text-danger">*</span>
+                                        <div class="input-group input-group-alternative mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map"></i></span>
+                                            </div>
+                                            <input
+                                                class="form-control form-control-alternative @error('keterangan') is-invalid @enderror"
+                                                value="{{ old('keterangan') }}" placeholder="Masukkan Keterangan"
+                                                type="text" name="keterangan" id="keterangan">
+                                        </div>
+                                        @error('keterangan')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <div class="d-flex flex-column">
                                             <button class="btn btn-primary align-self-end">Simpan</button>
                                         </div>
@@ -211,35 +176,37 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Nik</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Tempat Lahir</th>
-                                    <th>Tanggal Lahir</th>
+                                    <th>Perusahaan</th>
                                     <th>Alamat</th>
-                                    <th>Jabatan</th>
-                                    <th>No Telp</th>
+                                    <th>Receive PO</th>
+                                    <th>Realisasi</th>
+                                    <th>Unreal</th>
+                                    <th>Keterangan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                @forelse ($orderreal as $item)
+                                @forelse ($orderreal as $order)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->nik }}</td>
-                                        <td>{{ $item->jenis_kelamin }}</td>
-                                        <td>{{ $item->tempat_lahir }}</td>
-                                        <td>{{ $item->tanggal_lahir }}</td>
-                                        <td>{{ $item->alamat }}</td>
-                                        <td>{{ $item->jabatan }}</td>
-                                        <td>{{ $item->no_telp }}</td>
-                                        <td><button class="btn btn-sm btn-success" style="border-radius: 0.5rem"><i
-                                                    class="fas fa-edit"></i></button></td>
+                                        <td>{{ $order->customer->name }}</td>
+                                        <td>{{ $order->alamat }}</td>
+                                        <td>{{ $order->receive_po }}</td>
+                                        <td>{{ $order->realisasi }}</td>
+                                        <td>{{ $order->unreal }}</td>
+                                        <td>{{ $order->keterangan }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
+                                                onclick="showEditModal({{ $order->id }}, `{{ route('orderreal.edit', ['orderreal' => $order->id]) }}`, `{{ route('orderreal.update', ['orderreal' => $order->id]) }}`)"><i
+                                                    class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger"
+                                                onclick="hapusData(`{{ route('orderreal.destroy', ['orderreal' => $order->id]) }}`)"><i
+                                                    class="far fa-trash-alt"></i></button>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="10" align="center">-tidak ada data-</td>
+                                        <td colspan="7" align="center">-tidak ada data-</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -276,9 +243,24 @@
         </div>
         @include('layouts.footers.auth')
     </div>
+
+    {{-- include modal delete component --}}
+    <x-modal-delete />
+
+    @include('order_real.edit')
 @endsection
 
 @push('js')
     <script src="{{ asset('argon') }}/vendor/js-cookie/js.cookie.js"></script>
     <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        //calculate receive_po - realisasi = unreal
+        $('#receive_po').on('keyup', function() {
+            var receive_po = $('#receive_po').val();
+            var realisasi = $('#realisasi').val();
+            var unreal = receive_po - realisasi;
+            $('#unreal').val(unreal);
+        });
+    </script>
 @endpush

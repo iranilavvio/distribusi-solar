@@ -23,4 +23,16 @@ class Truck extends Model
     {
         return $this->hasOne(Driver::class);
     }
+
+    //relationship with suratjalan
+    public function suratjalan()
+    {
+        return $this->hasMany(SuratJalan::class);
+    }
+
+    //relationship with laporanpenjualan
+    public function laporanpenjualan()
+    {
+        return $this->hasMany(LaporanPenjualan::class);
+    }
 }
