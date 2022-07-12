@@ -17,7 +17,7 @@ class Karyawan extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'alamat',
-        'jabatan',
+        'posisi',
         'no_telp',
     ];
     // protected $guarded = ['id'];

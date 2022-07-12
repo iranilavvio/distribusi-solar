@@ -19,7 +19,8 @@ class DriverController extends Controller
     {
         //get all
         $driver = Driver::all();
-        $karyawan = Karyawan::all();
+        //karyawan get all where posisi=Driver
+        $karyawan = Karyawan::where('posisi', 'Driver')->get();
         $truck = Truck::all();
         return view('driver.index', compact('driver', 'karyawan', 'truck'));
     }

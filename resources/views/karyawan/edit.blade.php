@@ -102,18 +102,21 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="jabatan" class="form-label">Jabatan</label>
+                                <label for="posisi" class="form-label">Posisi</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-user-tie"></i></span>
                                     </div>
-                                    <input
-                                        class="form-control form-control-alternative @error('jabatan') is-invalid @enderror"
-                                        placeholder="Masukkan Jabatan" type="text" name="jabatan"
-                                        id="jabatan_edit">
+                                    <select
+                                        class="form-control form-control-alternative @error('posisi') is-invalid @enderror"
+                                        name="posisi" id="posisi_edit">
+                                        <option value="">Pilih Posisi</option>
+                                        <option value="Karyawan">Karyawan</option>
+                                        <option value="Driver">Driver</option>
+                                    </select>
                                 </div>
-                                @error('jabatan')
+                                @error('posisi')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -167,7 +170,7 @@
                     $('#tempat_lahir_edit').val(data.tempat_lahir);
                     $('#tanggal_lahir_edit').val(data.tanggal_lahir);
                     $('#alamat_edit').val(data.alamat);
-                    $('#jabatan_edit').val(data.jabatan);
+                    $('#posisi_edit').val(data.posisi);
                     $('#no_telp_edit').val(data.no_telp);
                     $('#edit-modal').modal('show');
                 }

@@ -155,18 +155,24 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="jabatan" class="form-label">Jabatan</label>
+                                        <label for="posisi" class="form-label">Posisi</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-user-tie"></i></span>
                                             </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('jabatan') is-invalid @enderror"
-                                                value="{{ old('jabatan') }}" placeholder="Masukkan Jabatan"
-                                                type="text" name="jabatan" id="jabatan">
+                                            <select
+                                                class="form-control form-control-alternative @error('posisi') is-invalid @enderror"
+                                                name="posisi" id="posisi">
+                                                <option value="">Pilih Posisi</option>
+                                                <option value="Karyawan"
+                                                    {{ old('posisi') == 'Karyawan' ? 'selected' : '' }}>Karyawan</option>
+                                                <option value="Driver"
+                                                    {{ old('posisi') == 'Driver' ? 'selected' : '' }}>
+                                                    Driver</option>
+                                            </select>
                                         </div>
-                                        @error('jabatan')
+                                        @error('posisi')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -215,7 +221,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Jabatan</th>
+                                    <th>Posisi</th>
                                     <th>No Telp</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -226,7 +232,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $kary->name }}</td>
                                         <td>{{ $kary->jenis_kelamin }}</td>
-                                        <td>{{ $kary->jabatan }}</td>
+                                        <td>{{ $kary->posisi }}</td>
                                         <td>{{ $kary->no_telp }}</td>
                                         <td>
                                             <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"

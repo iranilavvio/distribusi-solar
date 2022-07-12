@@ -30,7 +30,7 @@ class KaryawanFactory extends Factory
             //alamat
             'alamat' => $this->faker->address,
             //jabatan
-            'jabatan' => $this->faker->randomElement(['Karyawan', 'Manager', 'Supervisor', 'Admin']),
+            'posisi' => $this->faker->randomElement(['Karyawan', 'Driver']),
             //no_telp
             'no_telp' => $this->faker->phoneNumber,
         ];

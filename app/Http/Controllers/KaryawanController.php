@@ -87,7 +87,7 @@ class KaryawanController extends Controller
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'alamat' => 'required',
-            'jabatan' => 'required',
+            'posisi' => 'required',
             'no_telp' => 'required',
        ]);
        

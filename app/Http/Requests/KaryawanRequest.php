@@ -30,7 +30,7 @@ class KaryawanRequest extends FormRequest
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'alamat' => 'required',
-            'jabatan' => 'required',
+            'posisi' => 'required',
             'no_telp' => 'required',
         ];
     }
@@ -44,7 +44,7 @@ class KaryawanRequest extends FormRequest
             'tempat_lahir' => 'Tempat Lahir',
             'tanggal_lahir' => 'Tanggal Lahir',
             'alamat' => 'Alamat',
-            'jabatan' => 'Jabatan',
+            'posisi' => 'Posisi',
             'no_telp' => 'Telepon',
         ];
     }
