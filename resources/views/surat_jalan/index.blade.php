@@ -97,33 +97,6 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="nopol" class="form-label">No Pol</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-list-ol"></i></span>
-                                            </div>
-                                            <select name="truck_id" id="truck_id"
-                                                class="form-control form-control-alternative @error('truck_id') is-invalid @enderror"
-                                                value="{{ old('truck_id') }}">
-                                                <option value="">Pilih Nopol</option>
-                                                @foreach ($truck as $nopol)
-                                                    <option value="{{ $nopol->id }}"
-                                                        {{ old('truck_id') == $nopol->id ? 'selected' : '' }}>
-                                                        {{ $nopol->no_pol }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        @error('truck_id')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
                                         <label for="volume" class="form-label">Volume</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
@@ -132,14 +105,16 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('volume') is-invalid @enderror"
-                                                value="{{ old('volume') }}" placeholder="Masukkan Volume"
-                                                type="number" name="volume" id="volume">
+                                                value="{{ old('volume') }}" placeholder="Masukkan Volume" type="number"
+                                                name="volume" id="volume">
                                         </div>
                                         @error('volume')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="kode" class="form-label">Kode Prs</label>
@@ -158,8 +133,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="perusahaan" class="form-label">Customer</label>
@@ -183,6 +156,8 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="kota" class="form-label">Kota Tujuan</label>
@@ -201,8 +176,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="a" class="form-label">Seal A</label>
@@ -221,6 +194,8 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="b" class="form-label">Seal B</label>
@@ -239,8 +214,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="petugascatat" class="form-label">Petugas Catat</label>
@@ -262,11 +235,9 @@
                                         @error('karyawan_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="d-flex flex-column mt-4">
-                                        <button class="btn btn-primary align-self-end">Simpan</button>
+                                        <div class="d-flex flex-column mt-4">
+                                            <button class="btn btn-primary align-self-end">Simpan</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -303,7 +274,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $sj->tanggal_kirim }}</td>
                                         <td>{{ $sj->no_kirim }}</td>
-                                        <td>{{ $sj->truck->no_pol }}</td>
+                                        <td>{{ $sj->driver->truck->no_pol }}</td>
                                         <td>{{ $sj->volume }}</td>
                                         <td>{{ $sj->customer->name }}</td>
                                         <td><button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
