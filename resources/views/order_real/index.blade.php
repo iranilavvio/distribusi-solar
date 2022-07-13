@@ -90,7 +90,7 @@
                                             <input
                                                 class="form-control form-control-alternative @error('receive_po') is-invalid @enderror"
                                                 value="{{ old('receive_po') }}" placeholder="Masukkan Receive PO"
-                                                type="number" name="receive_po" id="receive_po">
+                                                type="number" name="receive_po" id="receive_po" onkeyup="calc()">
                                         </div>
                                         @error('receive_po')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -108,7 +108,7 @@
                                             <input
                                                 class="form-control form-control-alternative @error('realisasi') is-invalid @enderror"
                                                 value="{{ old('realisasi') }}" placeholder="Masukkan realisasi"
-                                                type="number" name="realisasi" id="realisasi">
+                                                type="number" name="realisasi" id="realisasi" onkeyup="calc()">
                                         </div>
                                         @error('realisasi')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -255,12 +255,13 @@
     <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
     <script>
-        //calculate receive_po - realisasi = unreal
-        $('#receive_po').on('keyup', function() {
-            var receive_po = $('#receive_po').val();
-            var realisasi = $('#realisasi').val();
-            var unreal = receive_po - realisasi;
-            $('#unreal').val(unreal);
-        });
+        function calc() {
+            var receive = document.getElementById('receive_po').value;
+            var real = document.getElementById('realisasi').value;
+            var result = (parseFloat(receive) - parseFloat(real));
+            if (!isNaN(result)) {
+                document.getElementById('unreal').value = result;
+            }
+        }
     </script>
 @endpush

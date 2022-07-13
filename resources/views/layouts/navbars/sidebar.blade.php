@@ -143,7 +143,7 @@
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('laporan.index') }}">
-                        <i class="fas fa-store text-orange"></i> {{ __('Laporan Penjualan') }}
+                        <i class="fas fa-store text-orange"></i> {{ __('Pendistribusian') }}
                     </a>
                 </li>
                 <li class="nav-item">
