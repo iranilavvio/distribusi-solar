@@ -38,6 +38,24 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="no_sj" class="form-label">No Surat Jalan</label>
+                                        <span class="text-danger">*</span>
+                                        <div class="input-group input-group-alternative mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-gas-pump"></i></span>
+                                            </div>
+                                            <input
+                                                class="form-control form-control-alternative @error('no_sj') is-invalid @enderror"
+                                                value="{{ old('no_sj') }}" placeholder="Masukkan No Surat Jalan"
+                                                type="text" name="no_sj" id="no_sj">
+                                        </div>
+                                        @error('no_sj')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for="tanggalkirim" class="form-label">Tanggal Kirim</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative">
@@ -50,6 +68,8 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="no_kirim" class="form-label">No Kirim</label>
@@ -68,8 +88,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="driver" class="form-label">Nama Driver</label>
@@ -95,6 +113,8 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="volume" class="form-label">Volume</label>
@@ -105,30 +125,10 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('volume') is-invalid @enderror"
-                                                value="{{ old('volume') }}" placeholder="Masukkan Volume" type="number"
-                                                name="volume" id="volume">
+                                                value="{{ old('volume') }}" placeholder="Masukkan Volume"
+                                                type="number" name="volume" id="volume">
                                         </div>
                                         @error('volume')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="kode" class="form-label">Kode Prs</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-stream"></i></span>
-                                            </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('kode_prs') is-invalid @enderror"
-                                                value="{{ old('kode_prs') }}" placeholder="Masukkan Kode Prs"
-                                                type="text" name="kode_prs" id="kode_prs">
-                                        </div>
-                                        @error('kode_prs')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -252,7 +252,7 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Light table</h3>
+                        <h3 class="mb-0">Table List Surat Jalan</h3>
                     </div>
                     <!-- Light table -->
                     <div class="table-responsive">
@@ -260,6 +260,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
+                                    <th>No Surat Jalan</th>
                                     <th>Tanggal Kirim</th>
                                     <th>No Kirim</th>
                                     <th>Nopol</th>
@@ -272,6 +273,7 @@
                                 @forelse ($suratjalan as $sj)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $sj->no_sj }}</td>
                                         <td>{{ $sj->tanggal_kirim }}</td>
                                         <td>{{ $sj->no_kirim }}</td>
                                         <td>{{ $sj->driver->truck->no_pol }}</td>

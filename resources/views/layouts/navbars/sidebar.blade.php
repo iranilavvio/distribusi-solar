@@ -142,7 +142,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('laporan.index') }}">
+                    <a class="nav-link" href="{{ route('distribusi.index') }}">
                         <i class="fas fa-store text-orange"></i> {{ __('Pendistribusian') }}
                     </a>
                 </li>
@@ -154,6 +154,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('control.index') }}">
                         <i class="fas fa-shopping-basket text-pink"></i> {{ __('Control Delivery') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('tandaterima.index') }}">
+                        <i class="fas fa-clipboard text-pink"></i> {{ __('Tanda Terima') }}
                     </a>
                 </li>
             </ul>

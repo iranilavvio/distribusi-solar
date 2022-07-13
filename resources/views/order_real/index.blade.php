@@ -38,6 +38,24 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="no_order" class="form-label">No Order</label>
+                                        <span class="text-danger">*</span>
+                                        <div class="input-group input-group-alternative mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                            </div>
+                                            <input
+                                                class="form-control form-control-alternative @error('no_order') is-invalid @enderror"
+                                                value="{{ old('no_order') }}" placeholder="Masukkan No Order"
+                                                type="text" name="no_order" id="no_order">
+                                        </div>
+                                        @error('no_order')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for="customer" class="form-label">Customer</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
@@ -59,6 +77,8 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="alamat" class="form-label">Alamat</label>
@@ -77,8 +97,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="receive" class="form-label">Receive PO</label>
@@ -97,6 +115,8 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="realisasi" class="form-label">Realisasi</label>
@@ -115,8 +135,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="unreal" class="form-label">Unreal</label>
@@ -135,6 +153,8 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="keterangan" class="form-label">Keterangan</label>
@@ -151,9 +171,11 @@
                                         @error('keterangan')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <div class="d-flex flex-column">
-                                            <button class="btn btn-primary align-self-end">Simpan</button>
-                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex flex-column mt-4">
+                                        <button class="btn btn-primary align-self-end">Simpan</button>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +190,7 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Light table</h3>
+                        <h3 class="mb-0">Table List Order Real</h3>
                     </div>
                     <!-- Light table -->
                     <div class="table-responsive">
@@ -176,6 +198,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
+                                    <th>No Order Real</th>
                                     <th>Perusahaan</th>
                                     <th>Alamat</th>
                                     <th>Receive PO</th>
@@ -189,6 +212,7 @@
                                 @forelse ($orderreal as $order)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $order->no_order }}</td>
                                         <td>{{ $order->customer->name }}</td>
                                         <td>{{ $order->alamat }}</td>
                                         <td>{{ $order->receive_po }}</td>

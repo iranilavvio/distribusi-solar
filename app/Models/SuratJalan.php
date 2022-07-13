@@ -44,4 +44,24 @@ class SuratJalan extends Model
     {
         return $this->belongsTo(LaporanPenjualan::class, 'lap_penjualan_id');
     }
+
+    public function pendistribusian()
+    {
+        return $this->hasMany(Pendistribusian::class, 'surat_jalan_id');
+    }
+
+    public function delivery()
+    {
+        return $this->hasMany(Delivery::class, 'surat_jalan_id');
+    }
+
+    public function control_delivery()
+    {
+        return $this->hasMany(ControlDelivery::class, 'surat_jalan_id');
+    }
+
+    public function tanda_terima()
+    {
+        return $this->hasMany(TandaTerima::class, 'surat_jalan_id');
+    }
 }

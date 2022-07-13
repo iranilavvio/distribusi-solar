@@ -24,6 +24,7 @@ class OrderRealRequest extends FormRequest
     public function rules()
     {
         return [
+            'no_order' => 'required',
             'customer_id' => 'required',
             'alamat' => 'required',
             'receive_po' => 'required',
@@ -36,6 +37,7 @@ class OrderRealRequest extends FormRequest
     public function attributes()
     {
         return [
+            'no_order' => 'No. Order',
             'customer_id' => 'Customer',
             'alamat' => 'Alamat',
             'receive_po' => 'Receive PO',

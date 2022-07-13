@@ -9,10 +9,15 @@ class ControlDelivery extends Model
 {
     use HasFactory;
 
-    // protected $fillable = [
-    //     'id_order_real', 'id_delivery', 'status', 'created_at', 'updated_at'
-    // ];
+    // protected guarded
+    protected $guarded = ['id'];
 
     //protected table
     protected $table = 'control_delivery';
+
+    //relation with surat_jalan
+    public function suratjalan()
+    {
+        return $this->belongsTo(SuratJalan::class, 'surat_jalan_id');
+    }
 }

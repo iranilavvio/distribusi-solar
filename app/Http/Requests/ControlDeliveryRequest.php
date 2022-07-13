@@ -13,7 +13,7 @@ class ControlDeliveryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,22 @@ class ControlDeliveryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'kode' => 'required|string|max:255',
+            'jam_isi' => 'required|string|max:255',
+            'jam_finish' => 'required|string|max:255',
+            'surat_jalan_id' => 'required|integer',
+            'keterangan' => 'required|string|max:255',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'kode' => 'Kode',
+            'jam_isi' => 'Jam Isi',
+            'jam_finish' => 'Jam Finish',
+            'surat_jalan_id' => 'Surat Jalan',
+            'keterangan' => 'Keterangan',
         ];
     }
 }

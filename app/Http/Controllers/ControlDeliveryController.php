@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ControlDeliveryRequest;
 use App\Models\ControlDelivery;
+use App\Models\SuratJalan;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 
 class ControlDeliveryController extends Controller
@@ -14,9 +17,9 @@ class ControlDeliveryController extends Controller
      */
     public function index()
     {
-        //all
         $control = ControlDelivery::all();
-        return view('control_delivery.index', compact('control'));
+        $suratjalan = SuratJalan::all();
+        return view('control_delivery.index', compact('control', 'suratjalan'));
     }
 
     /**
@@ -35,9 +38,13 @@ class ControlDeliveryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ControlDeliveryRequest $request)
     {
-        //
+        $attr = $request->all();
+
+        ControlDelivery::create($attr);
+
+        return redirect()->back();
     }
 
     /**
@@ -59,7 +66,9 @@ class ControlDeliveryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $control = ControlDelivery::findOrFail($id);
+        
+        return response()->json($control);
     }
 
     /**
@@ -69,9 +78,13 @@ class ControlDeliveryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ControlDeliveryRequest $request, $id)
     {
-        //
+        $attr = $request->all();
+
+        ControlDelivery::findOrFail($id)->update($attr);
+
+        return redirect()->back();
     }
 
     /**
@@ -82,6 +95,8 @@ class ControlDeliveryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ControlDelivery::findOrFail($id)->delete();
+
+        return redirect()->back();
     }
 }

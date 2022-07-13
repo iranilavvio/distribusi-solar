@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Delivery extends Model
+class Pendistribusian extends Model
 {
     use HasFactory;
 
-    //protected table
-    protected $table = 'lap_delivery';
-
-    //protected guarded
     protected $guarded = ['id'];
 
-    //relationship with surat_jalan
+    protected $table = 'pendistribusian';   
+
+    public function orderreal()
+    {
+        return $this->belongsTo(OrderReal::class, 'order_real_id');
+    }
+
     public function suratjalan()
     {
         return $this->belongsTo(SuratJalan::class, 'surat_jalan_id');

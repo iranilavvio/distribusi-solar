@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeliveryRequest;
 use App\Models\Delivery;
+use App\Models\SuratJalan;
 use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
@@ -14,9 +16,9 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        //all
         $delivery = Delivery::all();
-        return view('delivery.index', compact('delivery'));
+        $suratjalan = SuratJalan::all();
+        return view('delivery.index', compact('delivery', 'suratjalan'));
     }
 
     /**
@@ -35,9 +37,13 @@ class DeliveryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DeliveryRequest $request)
     {
-        //
+        $attr = $request->all();
+
+        Delivery::create($attr);
+
+        return redirect()->back();
     }
 
     /**
@@ -59,7 +65,9 @@ class DeliveryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $delivery = Delivery::findOrFail($id);
+
+        return response()->json($delivery);
     }
 
     /**
@@ -69,9 +77,15 @@ class DeliveryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DeliveryRequest $request, $id)
     {
-        //
+        $attr = $request->all();
+
+        $delivery = Delivery::findOrFail($id);
+
+        $delivery->update($attr);
+
+        return redirect()->back();
     }
 
     /**
@@ -82,6 +96,10 @@ class DeliveryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delivery = Delivery::findOrFail($id);
+
+        $delivery->delete();
+
+        return redirect()->back();
     }
 }

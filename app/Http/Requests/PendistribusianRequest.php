@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeliveryRequest extends FormRequest
+class PendistribusianRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class DeliveryRequest extends FormRequest
     public function rules()
     {
         return [
-            'tanggal' => 'required|date',
+            'order_real_id' => 'required|integer',
             'surat_jalan_id' => 'required|integer',
         ];
     }
@@ -32,7 +32,7 @@ class DeliveryRequest extends FormRequest
     public function attributes()
     {
         return [
-            'tanggal' => 'Tanggal',
+            'order_real_id' => 'Order Real',
             'surat_jalan_id' => 'Surat Jalan',
         ];
     }

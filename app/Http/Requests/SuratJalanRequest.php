@@ -24,11 +24,11 @@ class SuratJalanRequest extends FormRequest
     public function rules()
     {
         return [
+            'no_sj' => 'required',
             'tanggal_kirim' => 'required|date',
             'no_kirim' => 'required|string|max:255',
             'driver_id' => 'required',
             'volume' => 'required|numeric',
-            'kode_prs' => 'required|string|max:255',
             'customer_id' => 'required',
             'kota_tujuan' => 'required|string|max:255',
             'seal_a' => 'required|string|max:255',
@@ -41,11 +41,11 @@ class SuratJalanRequest extends FormRequest
     public function attributes()
     {
         return [
+            'no_sj' => 'No. Surat Jalan',
             'tanggal_kirim' => 'Tanggal Kirim',
             'no_kirim' => 'No. Kirim',
             'driver_id' => 'Driver',
             'volume' => 'Volume',
-            'kode_prs' => 'Kode PRS',
             'customer_id' => 'Customer',
             'kota_tujuan' => 'Kota Tujuan',
             'seal_a' => 'Seal A',

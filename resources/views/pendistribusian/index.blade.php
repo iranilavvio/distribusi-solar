@@ -6,12 +6,12 @@
             <div class="header-body">
                 <div class="row align-items-center py-4">
                     <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-white d-inline-block mb-0">Truck</h6>
+                        <h6 class="h2 text-white d-inline-block mb-0">Pendistribusian</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Truck</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Truck</li>
+                                <li class="breadcrumb-item"><a href="#">Pendistribusian</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Pendistribusian</li>
                             </ol>
                         </nav>
                     </div>
@@ -30,44 +30,54 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Tambah Data Truck</h3>
+                        <h3 class="mb-0">Tambah Data Pendistribusian</h3>
                     </div>
                     <div class="container">
-                        <form action="{{ route('truck.store') }}" method="POST">
+                        <form action="{{ route('distribusi.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="nopol" class="form-label">Nomor Polisi</label>
+                                        <label for="namadriver" class="form-label">No Order Real</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
                                             </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('no_pol') is-invalid @enderror"
-                                                value="{{ old('no_pol') }}" placeholder="Masukkan Nomor Polisi"
-                                                type="text" name="no_pol" id="no_pol">
+                                            <select name="order_real_id" id="order_real_id"
+                                                class="form-control form-control-alternative @error('order_real_id') is-invalid @enderror">
+                                                <option value="">No Order Real</option>
+                                                @foreach ($orderreal as $order)
+                                                    <option value="{{ $order->id }}"
+                                                        {{ old('order_real_id') == $order->id ? 'selected' : '' }}>
+                                                        {{ $order->no_order }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                        @error('no_pol')
+                                        @error('order_real_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="nolambung" class="form-label">No Lambung</label>
+                                        <label for="sj" class="form-label">No Surat Jalan</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-address-card"></i></span>
                                             </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('no_lambung') is-invalid @enderror"
-                                                value="{{ old('no_lambung') }}" placeholder="Masukkan Nomor Lambung"
-                                                type="text" name="no_lambung" id="no_lambung">
+                                            <select name="surat_jalan_id" id="surat_jalan_id"
+                                                class="form-control form-control-alternative @error('surat_jalan_id') is-invalid @enderror">
+                                                <option value="">Pilih No Surat Jalan</option>
+                                                @foreach ($suratjalan as $sj)
+                                                    <option value="{{ $sj->id }}"
+                                                        {{ old('surat_jalan_id') == $sj->id ? 'selected' : '' }}>
+                                                        {{ $sj->no_sj }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                        @error('no_lambung')
+                                        @error('surat_jalan_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -76,27 +86,25 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="kuantitas" class="form-label">Kuantitas</label>
+                                        <label for="keterangan" class="form-label">Keterangan</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-user-tie"></i></span>
+                                                <span class="input-group-text"><i class="fa fa-map"></i></span>
                                             </div>
                                             <input
-                                                class="form-control form-control-alternative @error('kuantitas') is-invalid @enderror"
-                                                value="{{ old('kuantitas') }}" placeholder="Masukkan Kuantitas"
-                                                type="text" name="kuantitas" id="kuantitas">
+                                                class="form-control form-control-alternative @error('keterangan') is-invalid @enderror"
+                                                value="{{ old('keterangan') }}" placeholder="Masukkan Keterangan"
+                                                type="text" name="keterangan" id="keterangan">
                                         </div>
-                                        @error('kuantitas')
+                                        @error('keterangan')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="d-flex flex-column">
-                                            <button class="btn btn-primary align-self-end">Simpan</button>
-                                        </div>
+                                    <div class="d-flex flex-column mt-4">
+                                        <button class="btn btn-primary align-self-end">Simpan</button>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +119,7 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Table List Truck</h3>
+                        <h3 class="mb-0">Table List Pendistribusian</h3>
                     </div>
                     <!-- Light table -->
                     <div class="table-responsive">
@@ -119,31 +127,39 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
-                                    <th>No Polisi</th>
-                                    <th>No Lambung</th>
-                                    <th>Kuantitas</th>
+                                    <th>Nopol</th>
+                                    <th>Nama Driver</th>
+                                    <th>No Surat Jalan</th>
+                                    <th>Customer</th>
+                                    <th>Tujuan</th>
+                                    <th>Volume</th>
+                                    <th>Keterangan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                @forelse ($truck as $item)
+                                @forelse ($distribusi as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pol }}</td>
-                                        <td>{{ $item->no_lambung }}</td>
-                                        <td>{{ $item->kuantitas }}</td>
+                                        <td>{{ $item->suratjalan->driver->truck->no_pol }}</td>
+                                        <td>{{ $item->suratjalan->driver->karyawan->name }}</td>
+                                        <td>{{ $item->suratjalan->no_sj }}</td>
+                                        <td>{{ $item->suratjalan->customer->name }}</td>
+                                        <td>{{ $item->suratjalan->kota_tujuan }}</td>
+                                        <td>{{ $item->suratjalan->volume }}</td>
+                                        <td>{{ $item->keterangan }}</td>
                                         <td>
                                             <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
-                                                onclick="showEditModal({{ $item->id }}, `{{ route('truck.edit', ['truck' => $item->id]) }}`, `{{ route('truck.update', ['truck' => $item->id]) }}`)"><i
+                                                onclick="showEditModal({{ $item->id }}, `{{ route('distribusi.edit', ['distribusi' => $item->id]) }}`, `{{ route('distribusi.update', ['distribusi' => $item->id]) }}`)"><i
                                                     class="fas fa-edit"></i></button>
                                             <button class="btn btn-sm btn-danger"
-                                                onclick="hapusData(`{{ route('truck.destroy', ['truck' => $item->id]) }}`)"><i
+                                                onclick="hapusData(`{{ route('distribusi.destroy', ['distribusi' => $item->id]) }}`)"><i
                                                     class="far fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" align="center">-tidak ada data-</td>
+                                        <td colspan="9" align="center">-tidak ada data-</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -185,7 +201,7 @@
     <x-modal-delete />
 
     {{-- include edit --}}
-    @include('truck.edit')
+    @include('pendistribusian.edit')
 @endsection
 
 @push('js')

@@ -11,6 +11,7 @@ class OrderReal extends Model
     
     //protected fillable
     protected $fillable = [
+        'no_order',
         'customer_id',
         'alamat',
         'receive_po',
@@ -26,5 +27,10 @@ class OrderReal extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    public function pendistribusian()
+    {
+        return $this->hasMany(Pendistribusian::class, 'order_real_id');
     }
 }

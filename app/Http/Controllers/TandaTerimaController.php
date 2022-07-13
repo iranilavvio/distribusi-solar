@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SuratJalanRequest;
-use App\Models\Customer;
-use App\Models\Driver;
-use App\Models\Karyawan;
+use App\Http\Requests\TandaTerimaRequest;
 use App\Models\SuratJalan;
-use App\Models\Truck;
+use App\Models\TandaTerima;
 use Illuminate\Http\Request;
 
-class SuratJalanController extends Controller
+class TandaTerimaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,14 +16,9 @@ class SuratJalanController extends Controller
      */
     public function index()
     {
-        //all
+        $tandaterima = TandaTerima::all();
         $suratjalan = SuratJalan::all();
-        $driver = Driver::all();
-        $truck = Truck::all();
-        $customer = Customer::all();
-        $karyawan = Karyawan::where('posisi', 'Karyawan')->get();
-
-        return view('surat_jalan.index', compact('suratjalan', 'driver', 'truck', 'customer', 'karyawan'));
+        return view('tanda_terima.index', compact('tandaterima', 'suratjalan'));
     }
 
     /**
@@ -45,15 +37,12 @@ class SuratJalanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SuratJalanRequest $request)
+    public function store(TandaTerimaRequest $request)
     {
-        //attr 
         $attr = $request->all();
 
-        //insert into table
-        SuratJalan::create($attr);
-
-        //redirect
+        TandaTerima::create($attr);
+        
         return redirect()->back();
     }
 
@@ -76,11 +65,9 @@ class SuratJalanController extends Controller
      */
     public function edit($id)
     {
-        //find or fail
-        $suratjalan = SuratJalan::findOrFail($id);
+        $tandaterima = TandaTerima::findOrFail($id);
 
-        //return response
-        return response()->json($suratjalan);
+        return response()->json($tandaterima);
     }
 
     /**
@@ -90,18 +77,14 @@ class SuratJalanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SuratJalanRequest $request, $id)
+    public function update(TandaTerimaRequest $request, $id)
     {
-        //find or fail
-        $suratjalan = SuratJalan::findOrFail($id);
-
-        //attr
+        $tandaterima = TandaTerima::findOrFail($id);
+        
         $attr = $request->all();
 
-        //update
-        $suratjalan->update($attr);
+        $tandaterima->update($attr);
 
-        //redirect
         return redirect()->back();
     }
 
@@ -113,13 +96,9 @@ class SuratJalanController extends Controller
      */
     public function destroy($id)
     {
-        //find or fail
-        $suratjalan = SuratJalan::findOrFail($id);
+        $tandaterima = TandaTerima::findOrFail($id);
+        $tandaterima->delete();
 
-        //delete
-        $suratjalan->delete();
-
-        //redirect
         return redirect()->back();
     }
 }

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Order & Real</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Surat Jalan</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,6 +12,24 @@
                 @csrf
                 <div class="modal-body">
                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="no_sj" class="form-label">No Surat Jalan</label>
+                                <span class="text-danger">*</span>
+                                <div class="input-group input-group-alternative mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-gas-pump"></i></span>
+                                    </div>
+                                    <input
+                                        class="form-control form-control-alternative @error('no_sj') is-invalid @enderror"
+                                        value="{{ old('no_sj') }}" placeholder="Masukkan No Surat Jalan"
+                                        type="text" name="no_sj" id="no_sj_edit">
+                                </div>
+                                @error('no_sj')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="tanggalkirim" class="form-label">Tanggal Kirim</label>
@@ -26,6 +44,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="no_kirim" class="form-label">No Kirim</label>
@@ -44,8 +64,6 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="driver" class="form-label">Nama Driver</label>
@@ -68,6 +86,8 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="volume" class="form-label">Volume</label>
@@ -81,26 +101,6 @@
                                         placeholder="Masukkan Volume" type="number" name="volume" id="volume_edit">
                                 </div>
                                 @error('volume')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="kode" class="form-label">Kode Prs</label>
-                                <span class="text-danger">*</span>
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-map"></i></span>
-                                    </div>
-                                    <input
-                                        class="form-control form-control-alternative @error('kode_prs') is-invalid @enderror"
-                                        placeholder="Masukkan Kode Prs" type="text" name="kode_prs"
-                                        id="kode_prs_edit">
-                                </div>
-                                @error('kode_prs')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -229,6 +229,7 @@
                 success: function(data) {
                     console.log(data)
                     $('#action-modal-edit').attr('action', url_update);
+                    $('#no_sj_edit').val(data.no_sj);
                     $('#tanggal_kirim_edit').val(data.tanggal_kirim);
                     $('#no_kirim_edit').val(data.no_kirim);
                     $('#driver_id_edit').val(data.driver_id);

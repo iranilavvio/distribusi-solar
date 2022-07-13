@@ -14,6 +14,24 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label for="no_order" class="form-label">No Order</label>
+                                <span class="text-danger">*</span>
+                                <div class="input-group input-group-alternative mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                    </div>
+                                    <input
+                                        class="form-control form-control-alternative @error('no_order') is-invalid @enderror"
+                                        value="{{ old('no_order') }}" placeholder="Masukkan No Order" type="text"
+                                        name="no_order" id="no_order_edit">
+                                </div>
+                                @error('no_order')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label for="customer" class="form-label">Customer</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative mb-4">
@@ -33,6 +51,8 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="alamat" class="form-label">Alamat</label>
@@ -50,8 +70,6 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="receive" class="form-label">Receive PO</label>
@@ -70,6 +88,8 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="realisasi" class="form-label">Realisasi</label>
@@ -88,8 +108,6 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="unreal" class="form-label">Unreal</label>
@@ -100,13 +118,16 @@
                                     </div>
                                     <input
                                         class="form-control form-control-alternative @error('unreal') is-invalid @enderror"
-                                        placeholder="Masukkan Unreal" type="number" name="unreal" id="unreal_edit">
+                                        placeholder="Masukkan Unreal" type="number" name="unreal"
+                                        id="unreal_edit">
                                 </div>
                                 @error('unreal')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="keterangan" class="form-label">Keterangan</label>
@@ -149,6 +170,7 @@
                 success: function(data) {
                     console.log(data)
                     $('#action-modal-edit').attr('action', url_update);
+                    $('#no_order_edit').val(data.no_order);
                     $('#customer_id_edit').val(data.customer_id);
                     $('#alamat_edit').val(data.alamat);
                     $('#receive_po_edit').val(data.receive_po);
