@@ -119,4 +119,10 @@ class OrderRealController extends Controller
         //redirect
         return redirect()->back();
     }
+
+    public function createPDF()
+    {
+        $orderreal = OrderReal::with('customer')->get();
+        return view('order_real.pdf', compact('orderreal'));
+    }
 }

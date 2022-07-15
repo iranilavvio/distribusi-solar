@@ -7,6 +7,7 @@ use App\Models\Driver;
 use App\Models\Karyawan;
 use App\Models\Truck;
 use Illuminate\Http\Request;
+use PDF;
 
 class DriverController extends Controller
 {
@@ -109,5 +110,13 @@ class DriverController extends Controller
 
         //redirect
         return redirect()->back();
+    }
+
+    //createPDF
+    public function createPDF()
+    {
+        //driver with karyawan and truck
+        $driver = Driver::with('karyawan', 'truck')->get();
+        return view('driver.pdf', compact('driver'));
     }
 }
