@@ -28,8 +28,19 @@
 </head>
 
 <body>
-    <h3 class="text-center mb-4">LAPORAN DATA DRIVER</h3>
-    <table class="table table-bordered">
+    <div class="d-flex justify-content-center">
+        <div class="flex-item">
+            <img src="{{ asset('assets/img/gab/gab.jpg') }}" alt="" width="70%">
+        </div>
+        <div class="flex-item text-center">
+            <h1 class="" style="color: #8b0c0c; font-weight: 800;">PT. GLOBAL ARTA BORNEO</h1>
+            <p class="mb-0">Office : Jl. H. Hasan Basri Komp. Ruko Kayutangi Blok C No. 5</p>
+            <p>Banjarmasin Telp. (0511) 3308313 Fax. (0511) 3308413</p>
+        </div>
+    </div>
+    <hr>
+    <h4 class="text-center mt-4">LAPORAN DATA DRIVER</h4>
+    <table class="table table-bordered mt-4">
         <tr class="text-center">
             <th>No</th>
             <th>Nama</th>

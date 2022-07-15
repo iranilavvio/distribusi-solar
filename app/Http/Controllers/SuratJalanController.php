@@ -122,4 +122,11 @@ class SuratJalanController extends Controller
         //redirect
         return redirect()->back();
     }
+    
+    public function createPDF()
+    {
+        //suratjalan with driver,customer,karyawan
+        $suratjalan = SuratJalan::with('driver', 'customer', 'karyawan')->get();
+        return view('surat_jalan.pdf', compact('suratjalan'));
+    }
 }

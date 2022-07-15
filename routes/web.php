@@ -5,6 +5,7 @@ use App\Http\Controllers\DriverController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LaporanPenjualanController;
 use App\Http\Controllers\OrderRealController;
+use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\TruckController;
 use App\Models\LaporanPenjualan;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
 	//report PDF
 	Route::get('/driverpdf', [DriverController::class, 'createPDF'])->name('driver.pdf');
 	Route::get('/orderrealpdf', [OrderRealController::class, 'createPDF'])->name('orderreal.pdf');
+	Route::get('/suratjalanpdf', [SuratJalanController::class, 'createPDF'])->name('suratjalan.pdf');
 
 });
 
