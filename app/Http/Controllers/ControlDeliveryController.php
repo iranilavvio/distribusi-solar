@@ -99,4 +99,11 @@ class ControlDeliveryController extends Controller
 
         return redirect()->back();
     }
+
+    public function createPDF()
+    {
+        $control = ControlDelivery::with('suratjalan')->get();
+
+        return view('control_delivery.pdf', compact('control'));
+    }
 }

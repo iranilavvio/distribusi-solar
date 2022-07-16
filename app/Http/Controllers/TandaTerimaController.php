@@ -101,4 +101,11 @@ class TandaTerimaController extends Controller
 
         return redirect()->back();
     }
+
+    public function createPDF()
+    {
+        $tandaterima = TandaTerima::with('suratjalan')->get();
+
+        return view('tanda_terima.pdf', compact('tandaterima'));
+    }
 }

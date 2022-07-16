@@ -106,4 +106,11 @@ class PendistribusianController extends Controller
 
         return redirect()->back();
     }
+
+    public function createPDF()
+    {
+        $distribusi = Pendistribusian::with('orderreal', 'suratjalan')->get();
+
+        return view('pendistribusian.pdf', compact('distribusi'));
+    }
 }

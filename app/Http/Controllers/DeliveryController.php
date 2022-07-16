@@ -102,4 +102,11 @@ class DeliveryController extends Controller
 
         return redirect()->back();
     }
+
+    public function createPDF()
+    {
+        $delivery = Delivery::with('suratjalan')->get();
+
+        return view('delivery.pdf', compact('delivery'));
+    }
 }

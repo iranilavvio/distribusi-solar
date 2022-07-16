@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\ControlDeliveryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LaporanPenjualanController;
 use App\Http\Controllers\OrderRealController;
+use App\Http\Controllers\PendistribusianController;
 use App\Http\Controllers\SuratJalanController;
+use App\Http\Controllers\TandaTerimaController;
 use App\Http\Controllers\TruckController;
 use App\Models\LaporanPenjualan;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +64,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/driverpdf', [DriverController::class, 'createPDF'])->name('driver.pdf');
 	Route::get('/orderrealpdf', [OrderRealController::class, 'createPDF'])->name('orderreal.pdf');
 	Route::get('/suratjalanpdf', [SuratJalanController::class, 'createPDF'])->name('suratjalan.pdf');
+	Route::get('/distribusipdf', [PendistribusianController::class, 'createPDF'])->name('distribusi.pdf');
+	Route::get('/deliverypdf', [DeliveryController::class, 'createPDF'])->name('delivery.pdf');
+	Route::get('/controlpdf', [ControlDeliveryController::class, 'createPDF'])->name('control.pdf');
+	Route::get('/tandaterimapdf', [TandaTerimaController::class, 'createPDF'])->name('tandaterima.pdf');
 
 });
 

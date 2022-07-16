@@ -16,8 +16,9 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="#" class="btn btn-sm btn-neutral">New</a>
-                        <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                        <a href="{{ route('tandaterima.pdf') }}" target="_blank" class="btn btn-sm btn-neutral"><i
+                                class="fas fa-print"></i> PDF</a>
+                        {{-- <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
                     </div>
                 </div>
             </div>
