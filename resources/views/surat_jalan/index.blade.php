@@ -43,7 +43,8 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-gas-pump"></i></span>
+                                                <span class="input-group-text"><i
+                                                        class="fas fa-envelope-open-text"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('no_sj') is-invalid @enderror"
@@ -77,7 +78,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-keyboard"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-fax"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('no_kirim') is-invalid @enderror"
@@ -122,7 +123,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-gas-pump"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-fill-drip"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('volume') is-invalid @enderror"
@@ -140,7 +141,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-building"></i></span>
                                             </div>
                                             <select name="customer_id" id="customer_id"
                                                 class="form-control form-control-alternative @error('customer_id') is-invalid @enderror">
@@ -183,7 +184,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-badge-check"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-check-circle"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('seal_a') is-invalid @enderror"
@@ -203,7 +204,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                                <span class="input-group-text"><i class="far fa-check-circle"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('seal_b') is-invalid @enderror"
@@ -221,7 +222,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-user-check"></i></span>
                                             </div>
                                             <select name="karyawan_id" id="karyawan_id"
                                                 class="form-control form-control-alternative @error('karyawan_id') is-invalid @enderror">

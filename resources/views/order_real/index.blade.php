@@ -43,7 +43,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-shopping-bag"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('no_order') is-invalid @enderror"
@@ -61,7 +61,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-building"></i></span>
                                             </div>
                                             <select name="customer_id" id="customer_id"
                                                 class="form-control form-control-alternative @error('customer_id') is-invalid @enderror">
@@ -86,7 +86,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-map-marked"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('alamat') is-invalid @enderror"
@@ -104,7 +104,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-city"></i></i></span>
+                                                <span class="input-group-text"><i class="fas fa-hand-holding"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('receive_po') is-invalid @enderror"
@@ -124,7 +124,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-city"></i></i></span>
+                                                <span class="input-group-text"><i class="fas fa-truck-moving"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('realisasi') is-invalid @enderror"
@@ -142,7 +142,8 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-city"></i></i></span>
+                                                <span class="input-group-text"><i
+                                                        class="fas fa-cart-arrow-down"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('unreal') is-invalid @enderror"
@@ -162,7 +163,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-map"></i></span>
+                                                <span class="input-group-text"><i class="far fa-sticky-note"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('keterangan') is-invalid @enderror"

@@ -42,7 +42,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-car"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('no_pol') is-invalid @enderror"
@@ -60,7 +60,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                                <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('no_lambung') is-invalid @enderror"
@@ -80,7 +80,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-user-tie"></i></span>
+                                                <span class="input-group-text"><i class="fa fa-box"></i></span>
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('kuantitas') is-invalid @enderror"

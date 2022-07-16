@@ -66,7 +66,7 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                                <span class="input-group-text"><i class="fa fa-car"></i></span>
                                             </div>
                                             <select name="truck_id" id="truck_id"
                                                 class="form-control form-control-alternative @error('truck_id') is-invalid @enderror">

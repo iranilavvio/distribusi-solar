@@ -56,7 +56,8 @@
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                                <span class="input-group-text"><i
+                                                        class="fas fa-envelope-open-text"></i></span>
                                             </div>
                                             <select name="surat_jalan_id" id="surat_jalan_id"
                                                 class="form-control form-control-alternative @error('surat_jalan_id') is-invalid @enderror">
