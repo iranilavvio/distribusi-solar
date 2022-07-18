@@ -38,4 +38,10 @@ class Customer extends Model
     {
         return $this->hasMany(LaporanPenjualan::class, 'customer_id');
     }
+
+    //relationship with purchaseorder
+    public function purchaseorder()
+    {
+        return $this->hasMany(PurchaseOrder::class, 'customer_id');
+    }
 }

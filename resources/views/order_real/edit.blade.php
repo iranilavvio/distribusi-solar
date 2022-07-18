@@ -14,35 +14,52 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="no_order" class="form-label">No Order</label>
+                                <label for="tanggal" class="form-label">Tanggal</label>
                                 <span class="text-danger">*</span>
-                                <div class="input-group input-group-alternative mb-4">
+                                <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input
-                                        class="form-control form-control-alternative @error('no_order') is-invalid @enderror"
-                                        value="{{ old('no_order') }}" placeholder="Masukkan No Order" type="text"
-                                        name="no_order" id="no_order_edit">
+                                    <input class="form-control datepicker" placeholder="Select date"
+                                        data-date-format='yy-mm-dd' type="text" id="tanggal_edit" name="tanggal">
                                 </div>
-                                @error('no_order')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="customer" class="form-label">Customer</label>
+                                <label for="no_po" class="form-label">No Purchase Order</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-shopping-bag"></i></span>
+                                    </div>
+                                    <input
+                                        class="form-control form-control-alternative @error('no_po') is-invalid @enderror"
+                                        value="{{ old('no_po') }}" placeholder="Masukkan No Surat Jalan"
+                                        type="text" name="no_po" id="no_po_edit">
+                                </div>
+                                @error('no_po')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="perusahaan" class="form-label">Customer</label>
+                                <span class="text-danger">*</span>
+                                <div class="input-group input-group-alternative mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-building"></i></span>
                                     </div>
                                     <select name="customer_id" id="customer_id_edit"
                                         class="form-control form-control-alternative @error('customer_id') is-invalid @enderror">
                                         <option value="">Pilih Customer</option>
                                         @foreach ($customer as $cust)
-                                            <option value="{{ $cust->id }}">{{ $cust->name }}</option>
+                                            <option value="{{ $cust->id }}"
+                                                {{ old('customer_id') == $cust->id ? 'selected' : '' }}>
+                                                {{ $cust->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -51,39 +68,20 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="alamat" class="form-label">Alamat</label>
+                                <label for="kuantitas" class="form-label">Kuantitas</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-fill-drip"></i></span>
                                     </div>
                                     <input
-                                        class="form-control form-control-alternative @error('alamat') is-invalid @enderror"
-                                        placeholder="Masukkan Alamat" type="text" name="alamat" id="alamat_edit">
+                                        class="form-control form-control-alternative @error('kuantitas') is-invalid @enderror"
+                                        value="{{ old('kuantitas') }}" placeholder="Masukkan Kuantitas" type="number"
+                                        name="kuantitas" id="kuantitas_edit">
                                 </div>
-                                @error('alamat')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="receive" class="form-label">Receive PO</label>
-                                <span class="text-danger">*</span>
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-city"></i></i></span>
-                                    </div>
-                                    <input
-                                        class="form-control form-control-alternative @error('receive_po') is-invalid @enderror"
-                                        placeholder="Masukkan Receive PO" type="number" name="receive_po"
-                                        id="receive_po_edit">
-                                </div>
-                                @error('receive_po')
+                                @error('kuantitas')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -92,56 +90,23 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="realisasi" class="form-label">Realisasi</label>
+                                <label for="pj" class="form-label">Penanggung Jawab</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-city"></i></i></span>
+                                        <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
                                     </div>
-                                    <input
-                                        class="form-control form-control-alternative @error('realisasi') is-invalid @enderror"
-                                        placeholder="Masukkan realisasi" type="number" name="realisasi"
-                                        id="realisasi_edit">
+                                    <select name="karyawan_id" id="karyawan_id_edit"
+                                        class="form-control form-control-alternative @error('karyawan_id') is-invalid @enderror">
+                                        <option value="">Pilih Penanggungjawab</option>
+                                        @foreach ($karyawan as $kary)
+                                            <option value="{{ $kary->id }}"
+                                                {{ old('karyawan_id') == $kary->id ? 'selected' : '' }}>
+                                                {{ $kary->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                @error('realisasi')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="unreal" class="form-label">Unreal</label>
-                                <span class="text-danger">*</span>
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-city"></i></i></span>
-                                    </div>
-                                    <input
-                                        class="form-control form-control-alternative @error('unreal') is-invalid @enderror"
-                                        placeholder="Masukkan Unreal" type="number" name="unreal"
-                                        id="unreal_edit">
-                                </div>
-                                @error('unreal')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="keterangan" class="form-label">Keterangan</label>
-                                <span class="text-danger">*</span>
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-map"></i></span>
-                                    </div>
-                                    <input
-                                        class="form-control form-control-alternative @error('keterangan') is-invalid @enderror"
-                                        placeholder="Masukkan Keterangan" type="text" name="keterangan"
-                                        id="keterangan_edit">
-                                </div>
-                                @error('keterangan')
+                                @error('karyawan_id')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -170,13 +135,11 @@
                 success: function(data) {
                     console.log(data)
                     $('#action-modal-edit').attr('action', url_update);
-                    $('#no_order_edit').val(data.no_order);
+                    $('#tanggal_edit').val(data.tanggal);
+                    $('#no_po_edit').val(data.no_po);
                     $('#customer_id_edit').val(data.customer_id);
-                    $('#alamat_edit').val(data.alamat);
-                    $('#receive_po_edit').val(data.receive_po);
-                    $('#realisasi_edit').val(data.realisasi);
-                    $('#unreal_edit').val(data.unreal);
-                    $('#keterangan_edit').val(data.keterangan);
+                    $('#kuantitas_edit').val(data.kuantitas);
+                    $('#karyawan_id_edit').val(data.karyawan_id);
                     $('#edit-modal').modal('show');
                 }
             });

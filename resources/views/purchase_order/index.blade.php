@@ -6,18 +6,19 @@
             <div class="header-body">
                 <div class="row align-items-center py-4">
                     <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-white d-inline-block mb-0">Karyawan</h6>
+                        <h6 class="h2 text-white d-inline-block mb-0">Purchase Order</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Karyawan</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Karyawan</li>
+                                <li class="breadcrumb-item"><a href="#">Purchase Order</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Purchase Order</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="#" class="btn btn-sm btn-neutral">New</a>
-                        <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                        <a href="{{ route('purchase.pdf') }}" target="_blank" class="btn btn-sm btn-neutral"><i
+                                class="fas fa-print"></i> PDF</a>
+                        {{-- <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
                     </div>
                 </div>
             </div>
@@ -27,175 +28,125 @@
     <div class="container-fluid mt--8">
         <div class="row mb-5">
             <div class="col">
-                <div class="card">
-                    <!-- Card header -->
-                    <div class="card-header border-0">
-                        <h3 class="mb-0">Tambah Data Karyawan</h3>
-                    </div>
-                    <div class="container">
-                        <form action="{{ route('karyawan.store') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="namakaryawan" class="form-label">Nama Karyawan</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
-                                            </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('name') is-invalid @enderror"
-                                                placeholder="Masukkan Nama Karyawan" type="text" name="name"
-                                                id="name">
-                                        </div>
-                                        @error('name')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="nik" class="form-label">NIK</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
-                                            </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('nik') is-invalid @enderror"
-                                                placeholder="Masukkan NIK" type="number" name="nik" id="nik">
-                                        </div>
-                                        @error('nik')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="jk" class="form-label">Jenis Kelamin</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="position-relative form-group">
-                                            <div>
-                                                <div class=" custom-control custom-control-inline">
-                                                    <label class="form-check-label">
-                                                        <input name="jenis_kelamin" type="radio" class="form-check-input"
-                                                            value="Laki-laki">
-                                                        Laki-laki
-                                                    </label>
+                @can('create po')
+                    <div class="card">
+                        <!-- Card header -->
+                        <div class="card-header border-0">
+                            <h3 class="mb-0">Tambah Data Purchase Order</h3>
+                        </div>
+                        <div class="container">
+                            <form action="{{ route('purchase.store') }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="tanggal" class="form-label">Tanggal</label>
+                                            <span class="text-danger">*</span>
+                                            <div class="input-group input-group-alternative">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <div class=" custom-control custom-control-inline">
-                                                    <label class="form-check-label">
-                                                        <input name="jenis_kelamin" type="radio" class="form-check-input"
-                                                            value="Perempuan">
-                                                        Perempuan
-                                                    </label>
+                                                <input class="form-control datepicker" placeholder="Select date"
+                                                    data-date-format='yy-mm-dd' type="text" id="tanggal" name="tanggal">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="no_po" class="form-label">No Purchase Order</label>
+                                            <span class="text-danger">*</span>
+                                            <div class="input-group input-group-alternative mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-shopping-bag"></i></span>
                                                 </div>
+                                                <input
+                                                    class="form-control form-control-alternative @error('no_po') is-invalid @enderror"
+                                                    value="{{ old('no_po') }}" placeholder="Masukkan No Surat Jalan"
+                                                    type="text" name="no_po" id="no_po">
                                             </div>
+                                            @error('no_po')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="tempatlahir" class="form-label">Tempat Lahir</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-city"></i></i></span>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="perusahaan" class="form-label">Customer</label>
+                                            <span class="text-danger">*</span>
+                                            <div class="input-group input-group-alternative mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-building"></i></span>
+                                                </div>
+                                                <select name="customer_id" id="customer_id"
+                                                    class="form-control form-control-alternative @error('customer_id') is-invalid @enderror">
+                                                    <option value="">Pilih Customer</option>
+                                                    @foreach ($customer as $cust)
+                                                        <option value="{{ $cust->id }}"
+                                                            {{ old('customer_id') == $cust->id ? 'selected' : '' }}>
+                                                            {{ $cust->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('tempat_lahir') is-invalid @enderror"
-                                                placeholder="Masukkan Tempat Lahir" type="text" name="tempat_lahir"
-                                                id="tempat_lahir">
-                                        </div>
-                                        @error('tempat_lahir')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="tanggallahir" class="form-label">Tanggal Lahir</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="ni ni-calendar-grid-58"></i></span>
-                                            </div>
-                                            <input class="form-control datepicker" placeholder="Select date"
-                                                data-date-format='yy-mm-dd' type="text" id="tanggal_lahir"
-                                                name="tanggal_lahir">
+                                            @error('customer_id')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="alamat" class="form-label">Alamat</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-map"></i></span>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="kuantitas" class="form-label">Kuantitas</label>
+                                            <span class="text-danger">*</span>
+                                            <div class="input-group input-group-alternative mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-fill-drip"></i></span>
+                                                </div>
+                                                <input
+                                                    class="form-control form-control-alternative @error('kuantitas') is-invalid @enderror"
+                                                    value="{{ old('kuantitas') }}" placeholder="Masukkan Kuantitas"
+                                                    type="number" name="kuantitas" id="kuantitas">
                                             </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('alamat') is-invalid @enderror"
-                                                placeholder="Masukkan Alamat" type="text" name="alamat"
-                                                id="alamat">
+                                            @error('kuantitas')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
-                                        @error('alamat')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="jabatan" class="form-label">Jabatan</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-user-tie"></i></span>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="pj" class="form-label">Penanggung Jawab</label>
+                                            <span class="text-danger">*</span>
+                                            <div class="input-group input-group-alternative mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                                                </div>
+                                                <select name="karyawan_id" id="karyawan_id"
+                                                    class="form-control form-control-alternative @error('karyawan_id') is-invalid @enderror">
+                                                    <option value="">Pilih Penanggungjawab</option>
+                                                    @foreach ($karyawan as $kary)
+                                                        <option value="{{ $kary->id }}"
+                                                            {{ old('karyawan_id') == $kary->id ? 'selected' : '' }}>
+                                                            {{ $kary->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('jabatan') is-invalid @enderror"
-                                                placeholder="Masukkan Jabatan" type="text" name="jabatan"
-                                                id="jabatan">
+                                            @error('karyawan_id')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
-                                        @error('jabatan')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="telp" class="form-label">Nomor Telpon</label>
-                                        <span class="text-danger">*</span>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
-                                            </div>
-                                            <input
-                                                class="form-control form-control-alternative @error('no_telp') is-invalid @enderror"
-                                                placeholder="Masukkan Nomor Telpon" type="text" name="no_telp"
-                                                id="no_telp">
-                                        </div>
-                                        @error('no_telp')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-
-                                        <div class="d-flex flex-column">
+                                    <div class="col-md-6">
+                                        <div class="d-flex flex-column mt-4">
                                             <button class="btn btn-primary align-self-end">Simpan</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                @endcan
             </div>
         </div>
 
@@ -204,7 +155,7 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Light table</h3>
+                        <h3 class="mb-0">Table List Purchase Order</h3>
                     </div>
                     <!-- Light table -->
                     <div class="table-responsive">
@@ -212,42 +163,45 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Jabatan</th>
-                                    <th>No Telp</th>
+                                    <th>No Purchase Order</th>
+                                    <th>Perusahaan</th>
+                                    <th>Alamat</th>
+                                    <th>Kuantitas</th>
+                                    <th>Penanggungjawab</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                @forelse ($karyawan as $kary)
+                                @forelse ($purchase as $order)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kary->name }}</td>
-                                        <td>{{ $kary->jenis_kelamin }}</td>
-                                        <td>{{ $kary->jabatan }}</td>
-                                        <td>{{ $kary->no_telp }}</td>
+                                        <td>{{ $order->no_po }}</td>
+                                        <td>{{ $order->customer->name }}</td>
+                                        <td>{{ $order->customer->alamat }}</td>
+                                        <td>{{ $order->kuantitas }}</td>
+                                        <td>{{ $order->karyawan->name }}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
-                                                data-url="{{ route('karyawan.edit', $kary->id) }}" data-toggle="modal"
-                                                data-target=".modalOpen" data-title="Edit Karyawan"><i
-                                                    class="fas fa-edit mr-1"></i> Ubah</button>
-                                            <button class="btn btn-sm btn-danger" style="border-radius: 0.5rem"
-                                                data-url="{{ route('karyawan.destroy', $kary->id) }}"
-                                                data-toggle="modal" data-target="#modalDelete"
-                                                data-title="Hapus Karyawan" data-message="{{ $kary->name }}"><i
-                                                    class="fas fa-trash"></i></button>
+                                            @can('update po')
+                                                <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
+                                                    onclick="showEditModal({{ $order->id }}, `{{ route('purchase.edit', ['purchase' => $order->id]) }}`, `{{ route('purchase.update', ['purchase' => $order->id]) }}`)"><i
+                                                        class="fas fa-edit"></i></button>
+                                            @endcan
+
+                                            @can('delete po')
+                                                <button class="btn btn-sm btn-danger"
+                                                    onclick="hapusData(`{{ route('purchase.destroy', ['purchase' => $order->id]) }}`)"><i
+                                                        class="far fa-trash-alt"></i></button>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="10" align="center">-tidak ada data-</td>
+                                        <td colspan="7" align="center">-tidak ada data-</td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
-                    {{-- <x-pagination :pagination="$karyawan" /> --}}
                     <!-- Card footer -->
                     <div class="card-footer py-4">
                         <nav aria-label="...">
@@ -282,8 +236,8 @@
 
     {{-- include modal delete component --}}
     <x-modal-delete />
-    {{-- include modal edit component --}}
-    <x-modal class="modal-lg" />
+
+    @include('order_real.edit')
 @endsection
 
 @push('js')

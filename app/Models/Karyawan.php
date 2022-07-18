@@ -46,4 +46,10 @@ class Karyawan extends Model
     {
         return $this->hasMany(SuratJalan::class, 'karyawan_id');
     }
+
+    //relationship with purchaseorder
+    public function purchaseorder()
+    {
+        return $this->hasMany(PurchaseOrder::class, 'karyawan_id');
+    }
 }

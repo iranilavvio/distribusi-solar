@@ -8,6 +8,7 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LaporanPenjualanController;
 use App\Http\Controllers\OrderRealController;
 use App\Http\Controllers\PendistribusianController;
+use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\TandaTerimaController;
 use App\Http\Controllers\TruckController;
@@ -47,6 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
 	 Route::get('table-list', function () {return view('pages.tables');})->name('table');
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 	//resource
+	Route::group(['middleware' => ['role:super admin|admin distribusi|head distribusi']], function () {
+		//
 	Route::resource('karyawan', KaryawanController::class);
 	Route::resource('customer', CustomerController::class);
 	Route::resource('driver', DriverController::class);
@@ -68,6 +71,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/deliverypdf', [DeliveryController::class, 'createPDF'])->name('delivery.pdf');
 	Route::get('/controlpdf', [ControlDeliveryController::class, 'createPDF'])->name('control.pdf');
 	Route::get('/tandaterimapdf', [TandaTerimaController::class, 'createPDF'])->name('tandaterima.pdf');
+	Route::get('/purchasepdf', [PurchaseOrderController::class, 'createPDF'])->name('purchase.pdf');
 
+});
 });
 

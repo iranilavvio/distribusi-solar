@@ -90,31 +90,33 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button"
-                        aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="fas fa-table text-primary"></i>
-                        <span class="nav-link-text">{{ __('Master Data') }}</span>
-                    </a>
+                    @can('karyawan')
+                        <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button"
+                            aria-expanded="true" aria-controls="navbar-examples">
+                            <i class="fas fa-table text-primary"></i>
+                            <span class="nav-link-text">{{ __('Master Data') }}</span>
+                        </a>
 
-                    <div class="collapse show" id="navbar-examples">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('karyawan.index') }}">
-                                    <i class="fas fa-user-tie text-primary"></i> {{ __('Karyawan') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('customer.index') }}">
-                                    <i class="fas fa-people-carry text-primary"></i> {{ __('Customer') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('truck.index') }}">
-                                    <i class="fas fa-truck text-primary"></i> {{ __('Truck') }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                        <div class="collapse show" id="navbar-examples">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('karyawan.index') }}">
+                                        <i class="fas fa-user-tie text-primary"></i> {{ __('Karyawan') }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('customer.index') }}">
+                                        <i class="fas fa-people-carry text-primary"></i> {{ __('Customer') }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('truck.index') }}">
+                                        <i class="fas fa-truck text-primary"></i> {{ __('Truck') }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    @endcan
                 </li>
 
 
@@ -125,15 +127,25 @@
             <h6 class="navbar-heading text-muted">Data</h6>
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
-                <li class="nav-item">
-                    <a href="{{ route('driver.index') }}"
-                        class="nav-link {{ request()->routeIs('driver.index') ? 'mm-active' : '' }}">
-                        <i class="fas fa-truck-loading text-blue"></i> {{ __('Driver') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('orderreal.index') }}">
-                        <i class="fas fa-shopping-cart text-blue"></i> {{ __('Order & Real') }}
+                @can('driver')
+                    <li class="nav-item">
+                        <a href="{{ route('driver.index') }}"
+                            class="nav-link {{ request()->routeIs('driver.index') ? 'mm-active' : '' }}">
+                            <i class="fas fa-truck-loading text-blue"></i> {{ __('Driver') }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('order')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('orderreal.index') }}">
+                            <i class="fas fa-shopping-cart text-blue"></i> {{ __('Order & Real') }}
+                        </a>
+                    </li>
+                @endcan
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('purchase.index') }}">
+                        <i class="fas fa-mail-bulk text-orange"></i> {{ __('Purchase Order') }}
                     </a>
                 </li>
                 <li class="nav-item ">
@@ -141,26 +153,38 @@
                         <i class="fas fa-mail-bulk text-orange"></i> {{ __('Surat Jalan') }}
                     </a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('distribusi.index') }}">
-                        <i class="fas fa-store text-orange"></i> {{ __('Pendistribusian') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('delivery.index') }}">
-                        <i class="fas fa-truck-loading text-pink"></i> {{ __('Delivery') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('control.index') }}">
-                        <i class="fas fa-shopping-basket text-pink"></i> {{ __('Control Delivery') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('tandaterima.index') }}">
-                        <i class="fas fa-clipboard text-pink"></i> {{ __('Tanda Terima') }}
-                    </a>
-                </li>
+
+                @can('distribusi')
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('distribusi.index') }}">
+                            <i class="fas fa-store text-orange"></i> {{ __('Pendistribusian') }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('delivery')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('delivery.index') }}">
+                            <i class="fas fa-truck-loading text-pink"></i> {{ __('Delivery') }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('control')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('control.index') }}">
+                            <i class="fas fa-shopping-basket text-pink"></i> {{ __('Control Delivery') }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('tt')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('tandaterima.index') }}">
+                            <i class="fas fa-clipboard text-pink"></i> {{ __('Tanda Terima') }}
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
     </div>
