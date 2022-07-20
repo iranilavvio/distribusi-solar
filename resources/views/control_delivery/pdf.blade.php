@@ -49,6 +49,7 @@
             <th>No Surat Jalan</th>
             <th>Customer</th>
             <th>Volume</th>
+            <th>No Pol</th>
         </tr>
         @foreach ($control as $item)
             <tr>
@@ -58,9 +59,14 @@
                 <th style="font-weight: normal">{{ $item->jam_finish }}</th>
                 <th style="font-weight: normal">{{ $item->suratjalan->no_sj }}</th>
                 <th style="font-weight: normal">{{ $item->suratjalan->customer->name }}</th>
-                <th style="font-weight: normal">{{ $item->suratjalan->volume }}</th>
+                <th style="font-weight: normal">{{ number_format($item->suratjalan->volume, 0, ',', '.') }}</th>
+                <th style="font-weight: normal">{{ $item->suratjalan->driver->truck->no_pol }}</th>
             </tr>
         @endforeach
+        {{-- <tr>
+            <td colspan="6">Total Delivery</td>
+            <td>{{ $sum_volume }}</td>
+        </tr> --}}
     </table>
     <script>
         print();

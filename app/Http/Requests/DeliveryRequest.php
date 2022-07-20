@@ -26,6 +26,7 @@ class DeliveryRequest extends FormRequest
         return [
             'tanggal' => 'required|date',
             'surat_jalan_id' => 'required|integer',
+            'pengiriman' => 'required',
         ];
     }
 
@@ -34,6 +35,7 @@ class DeliveryRequest extends FormRequest
         return [
             'tanggal' => 'Tanggal',
             'surat_jalan_id' => 'Surat Jalan',
+            'pengiriman' => 'Pengiriman',
         ];
     }
 }

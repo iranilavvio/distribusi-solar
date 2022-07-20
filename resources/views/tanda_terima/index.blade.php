@@ -122,9 +122,9 @@
                                     <th>Tanggal</th>
                                     <th>No Surat Jalan</th>
                                     <th>No Polisi</th>
+                                    <th>Driver</th>
                                     <th>Customer</th>
                                     <th>Volume</th>
-                                    <th>Keterangan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -135,9 +135,9 @@
                                         <td>{{ $item->tanggal }}</td>
                                         <td>{{ $item->suratjalan->no_sj }}</td>
                                         <td>{{ $item->suratjalan->driver->truck->no_pol }}</td>
+                                        <td>{{ $item->suratjalan->driver->karyawan->name }}</td>
                                         <td>{{ $item->suratjalan->customer->name }}</td>
                                         <td>{{ $item->suratjalan->volume }}</td>
-                                        <td>{{ $item->keterangan }}</td>
                                         <td>
                                             <button class="btn btn-sm btn-success" style="border-radius: 0.5rem"
                                                 onclick="showEditModal({{ $item->id }}, `{{ route('tandaterima.edit', ['tandaterima' => $item->id]) }}`, `{{ route('tandaterima.update', ['tandaterima' => $item->id]) }}`)"><i

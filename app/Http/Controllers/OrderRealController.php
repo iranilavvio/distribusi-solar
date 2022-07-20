@@ -123,6 +123,9 @@ class OrderRealController extends Controller
     public function createPDF()
     {
         $orderreal = OrderReal::with('customer')->get();
-        return view('order_real.pdf', compact('orderreal'));
+        $sum_receive_po = OrderReal::sum('receive_po');
+        $sum_realisasi = OrderReal::sum('realisasi');
+        $sum_unreal = OrderReal::sum('unreal');
+        return view('order_real.pdf', compact('orderreal', 'sum_receive_po', 'sum_realisasi', 'sum_unreal'));
     }
 }

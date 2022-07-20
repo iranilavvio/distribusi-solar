@@ -25,8 +25,8 @@ class ControlDeliveryRequest extends FormRequest
     {
         return [
             'kode' => 'required|string|max:255',
-            'jam_isi' => 'required|string|max:255',
-            'jam_finish' => 'required|string|max:255',
+            'jam_pengiriman' => 'required|string|max:255',
+            'jam_kembali' => 'required|string|max:255',
             'surat_jalan_id' => 'required|integer',
             'keterangan' => 'required|string|max:255',
         ];
@@ -36,8 +36,8 @@ class ControlDeliveryRequest extends FormRequest
     {
         return [
             'kode' => 'Kode',
-            'jam_isi' => 'Jam Isi',
-            'jam_finish' => 'Jam Finish',
+            'jam_pengiriman' => 'Jam Isi',
+            'jam_kembali' => 'Jam Finish',
             'surat_jalan_id' => 'Surat Jalan',
             'keterangan' => 'Keterangan',
         ];

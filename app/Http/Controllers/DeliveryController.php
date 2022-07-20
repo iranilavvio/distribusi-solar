@@ -109,4 +109,22 @@ class DeliveryController extends Controller
 
         return view('delivery.pdf', compact('delivery'));
     }
+
+    //getDelivery
+    public function getDelivery(Request $request)
+    {
+        $delivery = Delivery::with('suratjalan')->where('surat_jalan_id', $request->surat_jalan_id)->get();
+        if ($delivery) {
+            return response()->json([
+                'status' => 'success',
+                'data' => $delivery
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data tidak ditemukan',
+                'data' => []
+            ]);
+        }
+    }
 }

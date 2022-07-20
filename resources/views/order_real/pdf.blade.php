@@ -44,11 +44,10 @@
     <table class="table table-bordered">
         <tr class="text-center">
             <th>No</th>
-            <th>Customer</th>
+            <th>Perusahaan</th>
             <th>Alamat</th>
             <th>Receive PO</th>
             <th>Realisasi</th>
-            </th>
             <th>Unreal</th>
             <th>Keterangan</th>
         </tr>
@@ -63,6 +62,13 @@
                 <th style="font-weight: normal">{{ $order->keterangan }}</th>
             </tr>
         @endforeach
+        <tr>
+            <td colspan="3" class="text-center" style="font-weight: bold">Total Delivery</td>
+            <td>{{ number_format($sum_receive_po, 0, ',', '.') }}</td>
+            <td>{{ number_format($sum_realisasi, 0, ',', '.') }}</td>
+            <td>{{ number_format($sum_unreal, 0, ',', '.') }}</td>
+            <td></td>
+        </tr>
     </table>
     <script>
         print();

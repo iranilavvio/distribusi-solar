@@ -57,17 +57,18 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="isi" class="form-label">Jam Isi</label>
+                                        <label for="isi" class="form-label">Jam Pengiriman</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-clock"></i></span>
                                             </div>
                                             <input
-                                                class="form-control form-control-alternative @error('jam_isi') is-invalid @enderror"
-                                                value="{{ old('jam_isi') }}" type="time" name="jam_isi" id="jam_isi">
+                                                class="form-control form-control-alternative @error('jam_pengiriman') is-invalid @enderror"
+                                                value="{{ old('jam_pengiriman') }}" type="time" name="jam_pengiriman"
+                                                id="jam_pengiriman">
                                         </div>
-                                        @error('jam_isi')
+                                        @error('jam_pengiriman')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -76,18 +77,18 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="finish" class="form-label">Jam Finish</label>
+                                        <label for="finish" class="form-label">Jam Kembali</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-stopwatch"></i></span>
                                             </div>
                                             <input
-                                                class="form-control form-control-alternative @error('jam_finish') is-invalid @enderror"
-                                                value="{{ old('jam_finish') }}" type="time" name="jam_finish"
-                                                id="jam_finish">
+                                                class="form-control form-control-alternative @error('jam_kembali') is-invalid @enderror"
+                                                value="{{ old('jam_kembali') }}" type="time" name="jam_kembali"
+                                                id="jam_kembali">
                                         </div>
-                                        @error('jam_finish')
+                                        @error('jam_kembali')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -162,8 +163,8 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kode</th>
-                                    <th>Jam Isi</th>
-                                    <th>Jam Finish</th>
+                                    <th>Jam Pengiriman</th>
+                                    <th>Jam Kembali</th>
                                     <th>No Surat Jalan</th>
                                     <th>Customer</th>
                                     <th>Volume</th>
@@ -175,8 +176,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->kode }}</td>
-                                        <td>{{ $item->jam_isi }}</td>
-                                        <td>{{ $item->jam_finish }}</td>
+                                        <td>{{ $item->jam_pengiriman }}</td>
+                                        <td>{{ $item->jam_kembali }}</td>
                                         <td>{{ $item->suratjalan->no_sj }}</td>
                                         <td>{{ $item->suratjalan->customer->name }}</td>
                                         <td>{{ $item->suratjalan->volume }}</td>

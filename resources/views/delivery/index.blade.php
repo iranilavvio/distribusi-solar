@@ -59,8 +59,8 @@
                                                 <span class="input-group-text"><i
                                                         class="fas fa-envelope-open-text"></i></span>
                                             </div>
-                                            <select name="surat_jalan_id" id="surat_jalan_id"
-                                                class="form-control form-control-alternative @error('surat_jalan_id') is-invalid @enderror">
+                                            <select name="surat_jalan_id" id="surat_jalan_id" autocomplete="off"
+                                                class="form-control form-control-alternative @error('surat_jalan_id') is-invalid @enderror pilihSj">
                                                 <option value="">Pilih No Surat Jalan</option>
                                                 @foreach ($suratjalan as $sj)
                                                     <option value="{{ $sj->id }}"
@@ -69,12 +69,75 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <span class="text-sm text-success" id="alert"></span>
                                         @error('surat_jalan_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <div class="d-flex flex-column mt-4">
-                                            <button class="btn btn-primary align-self-end">Simpan</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cust" class="form-label">Customer</label>
+                                        <span class="text-danger">*</span>
+                                        <div class="input-group input-group-alternative mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-tag"></i></span>
+                                            </div>
+                                            <input class="form-control form-control-alternative" type="text"
+                                                name="customer" id="customer" readonly>
                                         </div>
+                                        @error('customer_id')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="tujuan" class="form-label">Tujuan</label>
+                                        <span class="text-danger">*</span>
+                                        <div class="input-group input-group-alternative mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-tag"></i></span>
+                                            </div>
+                                            <input class="form-control form-control-alternative" type="text"
+                                                name="tujuan" id="tujuan" readonly>
+                                        </div>
+                                        @error('tujuan')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="kirim" class="form-label">Pengiriman</label>
+                                        <span class="text-danger">*</span>
+                                        <div class="position-relative form-group">
+                                            <div>
+                                                <div class=" custom-control custom-control-inline">
+                                                    <label class="form-check-label">
+                                                        <input name="pengiriman" type="radio" class="form-check-input"
+                                                            value="Dalam Kota">
+                                                        Dalam Kota
+                                                    </label>
+                                                </div>
+                                                <div class=" custom-control custom-control-inline">
+                                                    <label class="form-check-label">
+                                                        <input name="pengiriman" type="radio" class="form-check-input"
+                                                            value="Luar Kota">
+                                                        Luar Kota
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex flex-column mt-4">
+                                        <button class="btn btn-primary align-self-end">Simpan</button>
                                     </div>
                                 </div>
                             </div>
@@ -175,4 +238,33 @@
 @push('js')
     <script src="{{ asset('argon') }}/vendor/js-cookie/js.cookie.js"></script>
     <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $(".pilihSj").on('change', function() {
+            //get this value
+            var surat_jalan_id = $(this).val();
+            let alert = $("#alert");
+            //ajax
+            $.ajax({
+                url: '{{ route('delivery.suratjalan') }}',
+                data: {
+                    'surat_jalan_id': surat_jalan_id
+                },
+                type: 'GET',
+                success: function(result) {
+                    console.log(result);
+                    let data = result.data;
+                    if (result.status == 'success') {
+                        $("#customer").val(data.customer.name);
+                        $("#tujuan").val(data.kota_tujuan);
+                        alert.html('<i class="fas fa-check-circle me-1"></i> Data Ditemukan');
+                    } else {
+                        $("#customer").val('');
+                        $("#tujuan").val('');
+                        alert.html('<i class="fas fa-times-circle me-1"></i> Data Tidak Ditemukan');
+                    }
+                }
+            })
+        })
+    </script>
 @endpush

@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('laporan', LaporanPenjualanController::class);
 	Route::resource('orderreal', 'App\Http\Controllers\OrderRealController');
 	Route::resource('delivery', 'App\Http\Controllers\DeliveryController');
+	//getDelivery
+	Route::get('/getDelivery', [DeliveryController::class, 'getDelivery'])->name('delivery.suratjalan');
 	Route::resource('purchase', 'App\Http\Controllers\PurchaseOrderController');
 	Route::resource('control', 'App\Http\Controllers\ControlDeliveryController');
 	Route::resource('suratjalan', 'App\Http\Controllers\SuratJalanController');
