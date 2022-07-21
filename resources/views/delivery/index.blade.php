@@ -243,28 +243,35 @@
         $(".pilihSj").on('change', function() {
             //get this value
             var surat_jalan_id = $(this).val();
-            let alert = $("#alert");
-            //ajax
-            $.ajax({
-                url: '{{ route('delivery.suratjalan') }}',
-                data: {
-                    'surat_jalan_id': surat_jalan_id
-                },
-                type: 'GET',
-                success: function(result) {
-                    console.log(result);
-                    let data = result.data;
-                    if (result.status == 'success') {
-                        $("#customer").val(data.customer.name);
-                        $("#tujuan").val(data.kota_tujuan);
-                        alert.html('<i class="fas fa-check-circle me-1"></i> Data Ditemukan');
-                    } else {
-                        $("#customer").val('');
-                        $("#tujuan").val('');
-                        alert.html('<i class="fas fa-times-circle me-1"></i> Data Tidak Ditemukan');
+
+            if(surat_jalan_id == ''){
+                $("#customer").val('');
+                $("#tujuan").val('');
+            }else{
+                let alert = $("#alert");
+                //ajax
+                $.ajax({
+                    url: '{{ route('delivery.suratjalan') }}',
+                    data: {
+                        'surat_jalan_id': surat_jalan_id
+                    },
+                    type: 'GET',
+                    success: function(result) {
+                        console.log(result);
+                        let data = result.data;
+                        if (result.status == 'success') {
+                            $("#customer").val(data.customer.name);
+                            $("#tujuan").val(data.kota_tujuan);
+                            alert.html('<i class="fas fa-check-circle me-1"></i> Data Ditemukan');
+                        } else {
+                            $("#customer").val('');
+                            $("#tujuan").val('');
+                            alert.html('<i class="fas fa-times-circle me-1"></i> Data Tidak Ditemukan');
+                        }
                     }
-                }
-            })
+                })
+            }
+
         })
     </script>
 @endpush
