@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TandaTerimaRequest;
 use App\Models\SuratJalan;
 use App\Models\TandaTerima;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TandaTerimaController extends Controller
@@ -104,6 +105,8 @@ class TandaTerimaController extends Controller
 
     public function createPDF()
     {
+        //tandaterima where date = today
+        // $tandaterima = TandaTerima::whereDate('created_at', Carbon::today())->get();
         $tandaterima = TandaTerima::with('suratjalan')->get();
 
         return view('tanda_terima.pdf', compact('tandaterima'));

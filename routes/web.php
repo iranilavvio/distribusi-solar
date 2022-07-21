@@ -62,6 +62,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('purchase', 'App\Http\Controllers\PurchaseOrderController');
 	Route::resource('control', 'App\Http\Controllers\ControlDeliveryController');
 	Route::resource('suratjalan', 'App\Http\Controllers\SuratJalanController');
+	//cetakSurat
+	Route::get('/cetakSurat/{id}', [SuratJalanController::class, 'cetakSurat'])->name('suratjalan.cetak');
 	Route::resource('distribusi', 'App\Http\Controllers\PendistribusianController');
 	Route::resource('tandaterima', 'App\Http\Controllers\TandaTerimaController');
 

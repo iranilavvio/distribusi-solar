@@ -24,6 +24,15 @@
                 display: none
             }
         }
+
+        .ttd {
+            margin-left: 30px;
+            margin-right: 150px;
+        }
+
+        .ttd2 {
+            margin-top: 130px;
+        }
     </style>
 </head>
 
@@ -46,7 +55,7 @@
             <th>Tanggal</th>
             <th>No Surat Jalan</th>
             <th>No Polisi</th>
-            <th>Customer</th>
+            <th>Perusahaan</th>
             <th>Volume</th>
             <th>Keterangan</th>
         </tr>
@@ -62,6 +71,24 @@
             </tr>
         @endforeach
     </table>
+    <h6>Banjarmasin, {{ Carbon\Carbon::today()->format('d F Y') }}</h6><br>
+    <h6 style="width: 600px; font-size: 0.9rem">Note : Apabila Dokumen Surat Jalan tersebut sudah diterima, mohon
+        bantuannya agar tanda
+        terima surat jalan tersebut dapat dikirimkan kembali ke kami by email.</h6>
+    <div class="d-flex justify-content-between ttd mt-4">
+        <div class="flex-item text-center">
+            <h6>Dibuat Oleh :</h6>
+            <h6 class="ttd2">{{ Auth::user()->name }}</h6>
+        </div>
+        <div class="flex-item text-center">
+            <h6>Mengetahui </h6>
+            <h6 class="ttd2">Mas Hafiz</h6>
+        </div>
+        <div class="flex-item text-center">
+            <h6>Penerima</h6>
+            <h6 class="ttd2">Mbak Vina</h6>
+        </div>
+    </div>
     <script>
         print();
     </script>

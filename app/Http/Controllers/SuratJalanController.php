@@ -129,4 +129,12 @@ class SuratJalanController extends Controller
         $suratjalan = SuratJalan::with('driver', 'customer', 'karyawan')->get();
         return view('surat_jalan.pdf', compact('suratjalan'));
     }
+    
+    //cetakSurat
+    public function cetakSurat($id)
+    {
+        //find or fail with driver,customer,karyawan
+        $suratjalan = SuratJalan::with('driver', 'customer', 'karyawan')->findOrFail($id);
+        return view('surat_jalan.cetak', compact('suratjalan'));
+    }
 }

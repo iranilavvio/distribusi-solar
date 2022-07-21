@@ -296,6 +296,8 @@
                                                     data-message="{{ $sj->name }}"><i
                                                         class="far fa-trash-alt"></i></button>
                                             @endcan
+                                            <a href="{{ route('suratjalan.cetak', $sj->id) }}" target="_blank"
+                                                class="btn btn-sm btn-primary" style="border-radius: 0.5rem">Cetak</a>
                                         </td>
                                     </tr>
                                 @empty
