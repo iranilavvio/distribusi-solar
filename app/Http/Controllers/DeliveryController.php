@@ -113,11 +113,25 @@ class DeliveryController extends Controller
     //getDelivery
     public function getDelivery(Request $request)
     {
-        $delivery = Delivery::with('suratjalan')->where('surat_jalan_id', $request->surat_jalan_id)->get();
-        if ($delivery) {
+        // $delivery = Delivery::with('suratjalan')->where('surat_jalan_id', $request->surat_jalan_id)->get();
+        // if ($delivery) {
+        //     return response()->json([
+        //         'status' => 'success',
+        //         'data' => $delivery
+        //     ]);
+        // } else {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Data tidak ditemukan',
+        //         'data' => []
+        //     ]);
+        // }
+
+        $suratjalan = SuratJalan::with(['customer'])->findOrFail($request->surat_jalan_id);
+        if ($suratjalan) {
             return response()->json([
                 'status' => 'success',
-                'data' => $delivery
+                'data' => $suratjalan
             ]);
         } else {
             return response()->json([
