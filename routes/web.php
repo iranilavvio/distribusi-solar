@@ -66,6 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/cetakSurat/{id}', [SuratJalanController::class, 'cetakSurat'])->name('suratjalan.cetak');
 	Route::resource('distribusi', 'App\Http\Controllers\PendistribusianController');
 	Route::resource('tandaterima', 'App\Http\Controllers\TandaTerimaController');
+	//cetakTandaTerima
+	Route::get('/cetakTandaTerima/{id}', [TandaTerimaController::class, 'cetakTandaTerima'])->name('tandaterima.cetak');
 
 	//report PDF
 	Route::get('/driverpdf', [DriverController::class, 'createPDF'])->name('driver.pdf');

@@ -8,6 +8,7 @@ use App\Models\Driver;
 use App\Models\Karyawan;
 use App\Models\SuratJalan;
 use App\Models\Truck;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SuratJalanController extends Controller
@@ -123,10 +124,13 @@ class SuratJalanController extends Controller
         return redirect()->back();
     }
     
-    public function createPDF()
+    public function createPDF(Request $request)
     {
+        $from_date = Carbon::parse($request->from_date)->toDateTimeString();
+
+        $to_date = Carbon::parse($request->to_date)->toDateTimeString();
         //suratjalan with driver,customer,karyawan
-        $suratjalan = SuratJalan::with('driver', 'customer', 'karyawan')->get();
+        $suratjalan = SuratJalan::with('driver', 'customer', 'karyawan')->whereBetween('tanggal_kirim',[$from_date,$to_date])->get();
         return view('surat_jalan.pdf', compact('suratjalan'));
     }
     

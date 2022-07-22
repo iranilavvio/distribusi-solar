@@ -58,7 +58,7 @@
             <tr>
                 <th style="font-weight: normal" class="text-center">{{ $loop->iteration }}</th>
                 <th style="font-weight: normal">{{ $sj->no_sj }}</th>
-                <th style="font-weight: normal">{{ $sj->tanggal_kirim }}</th>
+                <th style="font-weight: normal">{{ date('d/m/Y', strtotime($sj->tanggal_kirim)) }}</th>
                 <th style="font-weight: normal">{{ $sj->no_kirim }}</th>
                 <th style="font-weight: normal">{{ $sj->driver->karyawan->name }}</th>
                 <th style="font-weight: normal">{{ $sj->volume }}</th>

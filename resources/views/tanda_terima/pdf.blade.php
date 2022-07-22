@@ -62,7 +62,7 @@
         @foreach ($tandaterima as $tt)
             <tr>
                 <th style="font-weight: normal" class="text-center">{{ $loop->iteration }}</th>
-                <th style="font-weight: normal">{{ $tt->tanggal }}</th>
+                <th style="font-weight: normal">{{ date('d/m/Y', strtotime($tt->tanggal)) }}</th>
                 <th style="font-weight: normal">{{ $tt->suratjalan->no_sj }}</th>
                 <th style="font-weight: normal">{{ $tt->suratjalan->driver->truck->no_pol }}</th>
                 <th style="font-weight: normal">{{ $tt->suratjalan->customer->name }}</th>

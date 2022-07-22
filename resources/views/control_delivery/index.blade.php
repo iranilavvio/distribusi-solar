@@ -176,8 +176,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->kode }}</td>
-                                        <td>{{ $item->jam_pengiriman }}</td>
-                                        <td>{{ $item->jam_kembali }}</td>
+                                        <td>{{ date('H:i', strtotime($item->jam_pengiriman)) }} WITA</td>
+                                        <td>{{ date('H:i', strtotime($item->jam_kembali)) }} WITA</td>
                                         <td>{{ $item->suratjalan->no_sj }}</td>
                                         <td>{{ $item->suratjalan->customer->name }}</td>
                                         <td>{{ $item->suratjalan->volume }}</td>

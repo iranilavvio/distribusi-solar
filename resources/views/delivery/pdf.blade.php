@@ -53,7 +53,7 @@
         @foreach ($delivery as $deliv)
             <tr>
                 <th style="font-weight: normal" class="text-center">{{ $loop->iteration }}</th>
-                <th style="font-weight: normal">{{ $deliv->tanggal }}</th>
+                <th style="font-weight: normal">{{ date('d/m/Y', strtotime($deliv->tanggal)) }}</th>
                 <th style="font-weight: normal">{{ $deliv->suratjalan->no_sj }}</th>
                 <th style="font-weight: normal">{{ $deliv->suratjalan->driver->karyawan->name }}</th>
                 <th style="font-weight: normal">{{ $deliv->suratjalan->customer->name }}</th>

@@ -103,12 +103,24 @@ class TandaTerimaController extends Controller
         return redirect()->back();
     }
 
-    public function createPDF()
+    public function createPDF(Request $request)
     {
+        $from_date = Carbon::parse($request->from_date)->toDateTimeString();
+
+        $to_date = Carbon::parse($request->to_date)->toDateTimeString();
         //tandaterima where date = today
         // $tandaterima = TandaTerima::whereDate('created_at', Carbon::today())->get();
-        $tandaterima = TandaTerima::with('suratjalan')->get();
+        $tandaterima = TandaTerima::with('suratjalan')->whereBetween('tanggal',[$from_date,$to_date])->get();
 
         return view('tanda_terima.pdf', compact('tandaterima'));
+    }
+
+    //cetakTandaTerima
+    public function cetakTandaTerima($id)
+    {
+        //find or fail with suratjalan
+        $tandaterima = TandaTerima::with('suratjalan')->findOrFail($id);
+        //return view
+        return view('tanda_terima.cetak', compact('tandaterima'));
     }
 }

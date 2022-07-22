@@ -173,7 +173,7 @@
                                 @forelse ($delivery as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->tanggal }}</td>
+                                        <td>{{ date('d F Y', strtotime($item->tanggal)) }}</td>
                                         <td>{{ $item->suratjalan->no_sj }}</td>
                                         <td>{{ $item->suratjalan->driver->karyawan->name }}</td>
                                         <td>{{ $item->suratjalan->customer->name }}</td>

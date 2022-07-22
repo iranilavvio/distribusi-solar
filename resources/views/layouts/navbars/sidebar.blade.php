@@ -96,7 +96,6 @@
                             <i class="fas fa-table text-primary"></i>
                             <span class="nav-link-text">{{ __('Master Data') }}</span>
                         </a>
-
                         <div class="collapse show" id="navbar-examples">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">

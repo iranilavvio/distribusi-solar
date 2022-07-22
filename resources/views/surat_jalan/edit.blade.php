@@ -22,8 +22,8 @@
                                     </div>
                                     <input
                                         class="form-control form-control-alternative @error('no_sj') is-invalid @enderror"
-                                        value="{{ old('no_sj') }}" placeholder="Masukkan No Surat Jalan"
-                                        type="text" name="no_sj" id="no_sj_edit">
+                                        value="{{ old('no_sj') }}" placeholder="Masukkan No Surat Jalan" type="text"
+                                        name="no_sj" id="no_sj_edit">
                                 </div>
                                 @error('no_sj')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -39,7 +39,7 @@
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
                                     <input class="form-control datepicker" placeholder="Select date"
-                                        data-date-format='yy-mm-dd' type="text" id="tanggal_kirim_edit"
+                                        data-date-format='dd-mm-yy' type="text" id="tanggal_kirim_edit"
                                         name="tanggal_kirim">
                                 </div>
                             </div>
