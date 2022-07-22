@@ -15,11 +15,6 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-lg-6 col-5 text-right">
-                        <a href="{{ route('purchase.pdf') }}" target="_blank" class="btn btn-sm btn-neutral"><i
-                                class="fas fa-print"></i> PDF</a>
-                        {{-- <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
-                    </div>
                 </div>
             </div>
         </div>
@@ -40,14 +35,15 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="tanggal" class="form-label">Tanggal</label>
+                                            <label for="tanggal" class="form-label">Tanggal PO</label>
                                             <span class="text-danger">*</span>
                                             <div class="input-group input-group-alternative">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control datepicker" placeholder="Select date"
-                                                    data-date-format='yy-mm-dd' type="text" id="tanggal" name="tanggal">
+                                                <input class="form-control" placeholder="dd-mm-yyyy" value=""
+                                                    min="1997-01-01" max="2030-12-31" type="date" id="tanggal"
+                                                    name="tanggal">
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +57,7 @@
                                                 </div>
                                                 <input
                                                     class="form-control form-control-alternative @error('no_po') is-invalid @enderror"
-                                                    value="{{ old('no_po') }}" placeholder="Masukkan No Surat Jalan"
+                                                    value="{{ old('no_po') }}" placeholder="Masukkan Purchase Order"
                                                     type="text" name="no_po" id="no_po">
                                             </div>
                                             @error('no_po')
@@ -157,12 +153,40 @@
                     <div class="card-header border-0">
                         <h3 class="mb-0">Table List Purchase Order</h3>
                     </div>
+                    <div class="container">
+                        <form action="{{ route('purchase.pdf') }}" target="_blank" method="get">
+                            <div class="row">
+                                <div class="col-md-auto">
+                                    <div class="form-group">
+                                        <!-- Date input -->
+                                        <label class="control-label" for="date">From Date</label>
+                                        <input class="form-control form-control-sm" name="from_date" type="date" />
+                                    </div>
+                                </div>
+                                <div class="col-md-auto">
+                                    <div class="form-group">
+                                        <!-- Date input -->
+                                        <label class="control-label" for="date">To Date</label>
+                                        <input class="form-control form-control-sm"name="to_date" type="date" />
+                                    </div>
+                                </div>
+                                <div class="col-md-auto mt-4">
+                                    <div class="form-group">
+                                        <!-- Date input -->
+                                        <button class="btn btn-primary" type="submit"><i class="fas fa-print"></i>
+                                            Print</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <!-- Light table -->
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
+                                    <th>Tanggal PO</th>
                                     <th>No Purchase Order</th>
                                     <th>Perusahaan</th>
                                     <th>Alamat</th>
@@ -175,6 +199,7 @@
                                 @forelse ($purchase as $order)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ date('d F Y', strtotime($order->tanggal)) }}</td>
                                         <td>{{ $order->no_po }}</td>
                                         <td>{{ $order->customer->name }}</td>
                                         <td>{{ $order->customer->alamat }}</td>
@@ -237,7 +262,7 @@
     {{-- include modal delete component --}}
     <x-modal-delete />
 
-    @include('order_real.edit')
+    @include('purchase_order.edit')
 @endsection
 
 @push('js')

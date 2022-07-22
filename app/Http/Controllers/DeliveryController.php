@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DeliveryRequest;
 use App\Models\Delivery;
 use App\Models\SuratJalan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
@@ -77,8 +78,13 @@ class DeliveryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DeliveryRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        //validatation
+        $request->validate([
+            'tanggal' => 'required|date',
+            'surat_jalan_id' => 'required|integer',
+        ]);
         $attr = $request->all();
 
         $delivery = Delivery::findOrFail($id);
@@ -103,9 +109,12 @@ class DeliveryController extends Controller
         return redirect()->back();
     }
 
-    public function createPDF()
+    public function createPDF(Request $request)
     {
-        $delivery = Delivery::with('suratjalan')->get();
+        $from_date = Carbon::parse($request->from_date)->toDateTimeString();
+
+        $to_date = Carbon::parse($request->to_date)->toDateTimeString();
+        $delivery = Delivery::with('suratjalan')->whereBetween('tanggal',[$from_date, $to_date])->get();
 
         return view('delivery.pdf', compact('delivery'));
     }
@@ -113,11 +122,11 @@ class DeliveryController extends Controller
     //getDelivery
     public function getDelivery(Request $request)
     {
-        $delivery = Delivery::with('suratjalan')->where('surat_jalan_id', $request->surat_jalan_id)->get();
-        if ($delivery) {
+        $suratjalan = SuratJalan::with(['customer'])->findOrFail($request->surat_jalan_id);
+        if ($suratjalan) {
             return response()->json([
                 'status' => 'success',
-                'data' => $delivery
+                'data' => $suratjalan
             ]);
         } else {
             return response()->json([

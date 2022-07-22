@@ -15,11 +15,6 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-lg-6 col-5 text-right">
-                        <a href="{{ route('control.pdf') }}" target="_blank" class="btn btn-sm btn-neutral"><i
-                                class="fas fa-print"></i> PDF</a>
-                        {{-- <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
-                    </div>
                 </div>
             </div>
         </div>
@@ -155,6 +150,33 @@
                     <!-- Card header -->
                     <div class="card-header border-0">
                         <h3 class="mb-0">Table List Control Delivery</h3>
+                    </div>
+                    <div class="container">
+                        <form action="{{ route('control.pdf') }}" target="_blank" method="get">
+                            <div class="row">
+                                <div class="col-md-auto">
+                                    <div class="form-group">
+                                        <!-- Date input -->
+                                        <label class="control-label" for="date">From Date</label>
+                                        <input class="form-control form-control-sm" name="from_date" type="date" />
+                                    </div>
+                                </div>
+                                <div class="col-md-auto">
+                                    <div class="form-group">
+                                        <!-- Date input -->
+                                        <label class="control-label" for="date">To Date</label>
+                                        <input class="form-control form-control-sm"name="to_date" type="date" />
+                                    </div>
+                                </div>
+                                <div class="col-md-auto mt-4">
+                                    <div class="form-group">
+                                        <!-- Date input -->
+                                        <button class="btn btn-primary" type="submit"><i class="fas fa-print"></i>
+                                            Print</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <!-- Light table -->
                     <div class="table-responsive">

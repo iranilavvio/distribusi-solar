@@ -82,7 +82,7 @@ class KaryawanController extends Controller
     public function update(Request $request, $id)
     {
        $request->validate([
-        'name' => 'required',
+            'name' => 'required',
             'nik' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',

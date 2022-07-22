@@ -68,6 +68,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('tandaterima', 'App\Http\Controllers\TandaTerimaController');
 	//cetakTandaTerima
 	Route::get('/cetakTandaTerima/{id}', [TandaTerimaController::class, 'cetakTandaTerima'])->name('tandaterima.cetak');
+	//getTandaTerima
+	Route::get('/getTandaTerima', [TandaTerimaController::class, 'getTandaTerima'])->name('tandaterima.suratjalan');
 
 	//report PDF
 	Route::get('/driverpdf', [DriverController::class, 'createPDF'])->name('driver.pdf');

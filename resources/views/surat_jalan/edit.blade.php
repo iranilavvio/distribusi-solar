@@ -38,9 +38,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input class="form-control datepicker" placeholder="Select date"
-                                        data-date-format='dd-mm-yy' type="text" id="tanggal_kirim_edit"
-                                        name="tanggal_kirim">
+                                    <input class="form-control" placeholder="dd-mm-yyyy" value="" min="1997-01-01"
+                                        max="2030-12-31" type="date" id="tanggal_kirim_edit" name="tanggal_kirim">
                                 </div>
                             </div>
                         </div>

@@ -14,110 +14,52 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="no_sj" class="form-label">No Surat Jalan</label>
-                                <span class="text-danger">*</span>
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-gas-pump"></i></span>
-                                    </div>
-                                    <input
-                                        class="form-control form-control-alternative @error('no_sj') is-invalid @enderror"
-                                        value="{{ old('no_sj') }}" placeholder="Masukkan No Surat Jalan"
-                                        type="text" name="no_sj" id="no_sj_edit">
-                                </div>
-                                @error('no_sj')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="tanggalkirim" class="form-label">Tanggal Kirim</label>
+                                <label for="tanggal" class="form-label">Tanggal PO</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input class="form-control datepicker" placeholder="Select date"
-                                        data-date-format='yy-mm-dd' type="text" id="tanggal_kirim_edit"
-                                        name="tanggal_kirim">
+                                    <input class="form-control" placeholder="dd-mm-yyyy" value="" min="1997-01-01"
+                                        max="2030-12-31" type="date" id="tanggal_Edit" name="tanggal">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="no_kirim" class="form-label">No Kirim</label>
+                                <label for="no_po" class="form-label">No Purchase Order</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-shopping-bag"></i></span>
                                     </div>
                                     <input
-                                        class="form-control form-control-alternative @error('no_kirim') is-invalid @enderror"
-                                        placeholder="Masukkan No Kirim" type="text" name="no_kirim"
-                                        id="no_kirim_edit">
+                                        class="form-control form-control-alternative @error('no_po') is-invalid @enderror"
+                                        value="{{ old('no_po') }}" placeholder="Masukkan No Surat Jalan" type="text"
+                                        name="no_po" id="no_po_edit">
                                 </div>
-                                @error('no_kirim')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="driver" class="form-label">Nama Driver</label>
-                                <span class="text-danger">*</span>
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
-                                    </div>
-                                    <select name="driver_id" id="driver_id_edit"
-                                        class="form-control form-control-alternative @error('driver_id') is-invalid @enderror">
-                                        <option value="">Pilih Driver</option>
-                                        @foreach ($driver as $driv)
-                                            <option value="{{ $driv->id }}">{{ $driv->karyawan->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                @error('driver_id')
+                                @error('no_po')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="volume" class="form-label">Volume</label>
-                                <span class="text-danger">*</span>
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-map"></i></span>
-                                    </div>
-                                    <input
-                                        class="form-control form-control-alternative @error('volume') is-invalid @enderror"
-                                        placeholder="Masukkan Volume" type="number" name="volume" id="volume_edit">
-                                </div>
-                                @error('volume')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="perusahaan" class="form-label">Customer</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-building"></i></span>
                                     </div>
                                     <select name="customer_id" id="customer_id_edit"
                                         class="form-control form-control-alternative @error('customer_id') is-invalid @enderror">
                                         <option value="">Pilih Customer</option>
                                         @foreach ($customer as $cust)
-                                            <option value="{{ $cust->id }}">{{ $cust->name }}</option>
+                                            <option value="{{ $cust->id }}"
+                                                {{ old('customer_id') == $cust->id ? 'selected' : '' }}>
+                                                {{ $cust->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -126,40 +68,20 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="kota" class="form-label">Kota Tujuan</label>
+                                <label for="kuantitas" class="form-label">Kuantitas</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-fill-drip"></i></span>
                                     </div>
                                     <input
-                                        class="form-control form-control-alternative @error('kota_tujuan') is-invalid @enderror"
-                                        placeholder="Masukkan Kota Tujuan" type="text" name="kota_tujuan"
-                                        id="kota_tujuan_edit">
+                                        class="form-control form-control-alternative @error('kuantitas') is-invalid @enderror"
+                                        value="{{ old('kuantitas') }}" placeholder="Masukkan Kuantitas" type="number"
+                                        name="kuantitas" id="kuantitas_edit">
                                 </div>
-                                @error('kota_tujuan')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="a" class="form-label">Seal A</label>
-                                <span class="text-danger">*</span>
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-phone"></i></span>
-                                    </div>
-                                    <input
-                                        class="form-control form-control-alternative @error('seal_a') is-invalid @enderror"
-                                        placeholder="Masukkan Seal A" type="text" name="seal_a"
-                                        id="seal_a_edit">
-                                </div>
-                                @error('seal_a')
+                                @error('kuantitas')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -168,25 +90,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="b" class="form-label">Seal B</label>
-                                <span class="text-danger">*</span>
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-phone"></i></span>
-                                    </div>
-                                    <input
-                                        class="form-control form-control-alternative @error('seal_b') is-invalid @enderror"
-                                        placeholder="Masukkan Seal B" type="text" name="seal_b"
-                                        id="seal_b_edit">
-                                </div>
-                                @error('seal_b')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="petugascatat" class="form-label">Petugas Catat</label>
+                                <label for="pj" class="form-label">Penanggung Jawab</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend">
@@ -194,9 +98,11 @@
                                     </div>
                                     <select name="karyawan_id" id="karyawan_id_edit"
                                         class="form-control form-control-alternative @error('karyawan_id') is-invalid @enderror">
-                                        <option value="">Petugas Catat</option>
-                                        @foreach ($karyawan as $petugas)
-                                            <option value="{{ $petugas->id }}">{{ $petugas->name }}</option>
+                                        <option value="">Pilih Penanggungjawab</option>
+                                        @foreach ($karyawan as $kary)
+                                            <option value="{{ $kary->id }}"
+                                                {{ old('karyawan_id') == $kary->id ? 'selected' : '' }}>
+                                                {{ $kary->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -229,17 +135,10 @@
                 success: function(data) {
                     console.log(data)
                     $('#action-modal-edit').attr('action', url_update);
-                    $('#no_sj_edit').val(data.no_sj);
-                    $('#tanggal_kirim_edit').val(data.tanggal_kirim);
-                    $('#no_kirim_edit').val(data.no_kirim);
-                    $('#driver_id_edit').val(data.driver_id);
-                    $('#truck_id_edit').val(data.truck_id);
-                    $('#volume_edit').val(data.volume);
-                    $('#kode_prs_edit').val(data.kode_prs);
+                    $('#tanggal_Edit').val(data.tanggal);
+                    $('#no_po_edit').val(data.no_po);
                     $('#customer_id_edit').val(data.customer_id);
-                    $('#kota_tujuan_edit').val(data.kota_tujuan);
-                    $('#seal_a_edit').val(data.seal_a);
-                    $('#seal_b_edit').val(data.seal_b);
+                    $('#kuantitas_edit').val(data.kuantitas);
                     $('#karyawan_id_edit').val(data.karyawan_id);
                     $('#edit-modal').modal('show');
                 }

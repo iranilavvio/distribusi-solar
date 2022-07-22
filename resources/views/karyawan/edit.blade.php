@@ -75,9 +75,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input class="form-control datepicker" placeholder="Select date"
-                                        data-date-format='dd-mm-yy' type="text" id="tanggal_lahir_edit"
-                                        name="tanggal_lahir">
+                                    <input class="form-control" placeholder="dd-mm-yyyy" value="" type="date"
+                                        id="tanggal_lahir_edit" name="tanggal_lahir">
                                 </div>
                             </div>
                         </div>

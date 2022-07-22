@@ -74,6 +74,40 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="driver" class="form-label">Driver</label>
+                                        <span class="text-danger">*</span>
+                                        <div class="input-group input-group-alternative mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            </div>
+                                            <input class="form-control form-control-alternative" type="text"
+                                                name="driver" id="driver" readonly>
+                                        </div>
+                                        @error('driver')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cust" class="form-label">Customer</label>
+                                        <span class="text-danger">*</span>
+                                        <div class="input-group input-group-alternative mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-tag"></i></span>
+                                            </div>
+                                            <input class="form-control form-control-alternative" type="text"
+                                                name="customer" id="customer" readonly>
+                                        </div>
+                                        @error('customer_id')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for="keterangan" class="form-label">Keterangan</label>
                                         <span class="text-danger">*</span>
                                         <div class="input-group input-group-alternative mb-4">
@@ -136,13 +170,6 @@
                             </div>
                         </form>
                     </div>
-                    {{-- <div class="row">
-                        <div class="col-md-auto ml-md-2 mb-2">
-                            <a href="{{ route('tandaterima.pdf') }}" target="_blank" class="btn btn-sm btn-neutral"><i
-                                    class="fas fa-print"></i> Hari Ini</a>
-                        </div>
-                    </div> --}}
-                    <!-- Light table -->
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
@@ -224,3 +251,41 @@
     {{-- include modal edit component --}}
     @include('tanda_terima.edit')
 @endsection
+
+@push('js')
+    <script>
+        $("#surat_jalan_id").on('change', function() {
+            //get this value
+            var surat_jalan_id = $(this).val();
+
+            if (surat_jalan_id == '') {
+                $("#driver").val('');
+                $("#customer").val('');
+            } else {
+                let alert = $("#alert");
+                //ajax
+                $.ajax({
+                    url: '{{ route('tandaterima.suratjalan') }}',
+                    data: {
+                        'surat_jalan_id': surat_jalan_id
+                    },
+                    type: 'GET',
+                    success: function(result) {
+                        console.log(result);
+                        let data = result.data;
+                        if (result.status == 'success') {
+                            $("#driver").val(data.driver.karyawan.name);
+                            $("#customer").val(data.customer.name);
+                            alert.html('<i class="fas fa-check-circle me-1"></i> Data Ditemukan');
+                        } else {
+                            $("#driver").val('');
+                            $("#customer").val('');
+                            alert.html('<i class="fas fa-times-circle me-1"></i> Data Tidak Ditemukan');
+                        }
+                    }
+                })
+            }
+
+        })
+    </script>
+@endpush

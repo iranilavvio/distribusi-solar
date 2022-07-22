@@ -127,9 +127,8 @@
                                                 <span class="input-group-text"><i
                                                         class="ni ni-calendar-grid-58"></i></span>
                                             </div>
-                                            <input class="form-control datepicker" placeholder="Select date"
-                                                data-date-format='dd-mm-yy' type="text" id="tanggal_lahir"
-                                                name="tanggal_lahir">
+                                            <input class="form-control" placeholder="dd-mm-yyyy" value=""
+                                                type="date" id="tanggal_lahir" name="tanggal_lahir">
                                         </div>
                                     </div>
                                 </div>
@@ -143,8 +142,8 @@
                                             </div>
                                             <input
                                                 class="form-control form-control-alternative @error('alamat') is-invalid @enderror"
-                                                value="{{ old('alamat') }}" placeholder="Masukkan Alamat"
-                                                type="text" name="alamat" id="alamat">
+                                                value="{{ old('alamat') }}" placeholder="Masukkan Alamat" type="text"
+                                                name="alamat" id="alamat">
                                         </div>
                                         @error('alamat')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -167,8 +166,7 @@
                                                 <option value="">Pilih Posisi</option>
                                                 <option value="Karyawan"
                                                     {{ old('posisi') == 'Karyawan' ? 'selected' : '' }}>Karyawan</option>
-                                                <option value="Driver"
-                                                    {{ old('posisi') == 'Driver' ? 'selected' : '' }}>
+                                                <option value="Driver" {{ old('posisi') == 'Driver' ? 'selected' : '' }}>
                                                     Driver</option>
                                             </select>
                                         </div>

@@ -60,8 +60,8 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control datepicker" placeholder="Select date"
-                                                    data-date-format='dd-mm-yy' type="text" id="tanggal_kirim"
+                                                <input class="form-control" placeholder="dd-mm-yyyy" value=""
+                                                    min="1997-01-01" max="2030-12-31" type="date" id="tanggal_kirim"
                                                     name="tanggal_kirim">
                                             </div>
                                         </div>
@@ -317,10 +317,11 @@
                                                     onclick="hapusData(`{{ route('suratjalan.destroy', ['suratjalan' => $sj->id]) }}`)"
                                                     data-message="{{ $sj->name }}"><i
                                                         class="far fa-trash-alt"></i></button>
+
+                                                <a href="{{ route('suratjalan.cetak', $sj->id) }}" target="_blank"
+                                                    class="btn btn-sm btn-primary" style="border-radius: 0.5rem"><i
+                                                        class="fas fa-print"></i></a>
                                             @endcan
-                                            <a href="{{ route('suratjalan.cetak', $sj->id) }}" target="_blank"
-                                                class="btn btn-sm btn-primary" style="border-radius: 0.5rem"><i
-                                                    class="fas fa-print"></i></a>
                                         </td>
                                     </tr>
                                 @empty

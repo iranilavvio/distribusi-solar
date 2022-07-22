@@ -43,6 +43,7 @@
     <table class="table table-bordered">
         <tr class="text-center">
             <th>No</th>
+            <th>Tanggal PO</th>
             <th>No Purchase Order</th>
             <th>Perusahaan</th>
             <th>Alamat</th>
@@ -52,6 +53,7 @@
         @foreach ($purchase as $po)
             <tr>
                 <th style="font-weight: normal" class="text-center">{{ $loop->iteration }}</th>
+                <th style="font-weight: normal">{{ date('d/m/Y', strtotime($po->tanggal)) }}</th>
                 <th style="font-weight: normal">{{ $po->no_po }}</th>
                 <th style="font-weight: normal">{{ $po->customer->name }}</th>
                 <th style="font-weight: normal">{{ $po->customer->alamat }}</th>

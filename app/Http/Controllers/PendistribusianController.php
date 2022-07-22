@@ -6,6 +6,7 @@ use App\Http\Requests\PendistribusianRequest;
 use App\Models\OrderReal;
 use App\Models\Pendistribusian;
 use App\Models\SuratJalan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PendistribusianController extends Controller
@@ -107,9 +108,13 @@ class PendistribusianController extends Controller
         return redirect()->back();
     }
 
-    public function createPDF()
+    public function createPDF(Request $request)
     {
-        $distribusi = Pendistribusian::with('orderreal', 'suratjalan')->get();
+        $from_date = Carbon::parse($request->from_date)->toDateTimeString();
+
+        $to_date = Carbon::parse($request->to_date)->toDateTimeString();
+        
+        $distribusi = Pendistribusian::with('orderreal', 'suratjalan')->whereBetween('created_at',[$from_date,$to_date])->get();
 
         return view('pendistribusian.pdf', compact('distribusi'));
     }

@@ -123,4 +123,21 @@ class TandaTerimaController extends Controller
         //return view
         return view('tanda_terima.cetak', compact('tandaterima'));
     }
+
+    public function getTandaTerima(Request $request)
+    {
+        $tandaterima = SuratJalan::with(['customer', 'driver', 'karyawan'])->findOrFail($request->surat_jalan_id);
+        if ($tandaterima) {
+            return response()->json([
+                'status' => 'success',
+                'data' => $tandaterima
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data tidak ditemukan',
+                'data' => []
+            ]);
+        }
+    }
 }
