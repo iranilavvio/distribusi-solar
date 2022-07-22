@@ -56,7 +56,7 @@
                                                         class="fas fa-envelope-open-text"></i></span>
                                             </div>
                                             <select name="surat_jalan_id" id="surat_jalan_id"
-                                                class="form-control form-control-alternative @error('surat_jalan_id') is-invalid @enderror">
+                                                class="form-control form-control-alternative @error('surat_jalan_id') is-invalid @enderror pilihSj">
                                                 <option value="">Pilih No Surat Jalan</option>
                                                 @foreach ($suratjalan as $sj)
                                                     <option value="{{ $sj->id }}"
@@ -254,10 +254,9 @@
 
 @push('js')
     <script>
-        $("#surat_jalan_id").on('change', function() {
+        $(".pilihSj").on('change', function() {
             //get this value
             var surat_jalan_id = $(this).val();
-
             if (surat_jalan_id == '') {
                 $("#driver").val('');
                 $("#customer").val('');
@@ -274,6 +273,7 @@
                         console.log(result);
                         let data = result.data;
                         if (result.status == 'success') {
+                            //driver
                             $("#driver").val(data.driver.karyawan.name);
                             $("#customer").val(data.customer.name);
                             alert.html('<i class="fas fa-check-circle me-1"></i> Data Ditemukan');
@@ -285,7 +285,6 @@
                     }
                 })
             }
-
         })
     </script>
 @endpush

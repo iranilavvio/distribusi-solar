@@ -24,6 +24,10 @@
                 display: none
             }
         }
+
+        .ttd {
+            margin-top: 100px;
+        }
     </style>
 </head>
 
@@ -62,6 +66,13 @@
             </tr>
         @endforeach
     </table>
+    <div class="d-flex justify-content-end mt-4" style="margin-right: 50px">
+        <div class="flex-item mt-4">
+            <p class="text-center mb-0">Mengetahui,</p>
+            <p class="text-center">Manager PT. GLOBAL ARTA BORNEO</p>
+            <p class="text-center ttd"> Abdul Muthalib</p>
+        </div>
+    </div>
     <script>
         print();
     </script>
