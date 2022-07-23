@@ -55,6 +55,7 @@
             <th>Tanggal</th>
             <th>No Surat Jalan</th>
             <th>No Polisi</th>
+            <th>Driver</th>
             <th>Perusahaan</th>
             <th>Volume</th>
             <th>Keterangan</th>
@@ -65,6 +66,7 @@
                 <th style="font-weight: normal">{{ date('d/m/Y', strtotime($tt->tanggal)) }}</th>
                 <th style="font-weight: normal">{{ $tt->suratjalan->no_sj }}</th>
                 <th style="font-weight: normal">{{ $tt->suratjalan->driver->truck->no_pol }}</th>
+                <th style="font-weight: normal">{{ $tt->suratjalan->driver->karyawan->name }}</th>
                 <th style="font-weight: normal">{{ $tt->suratjalan->customer->name }}</th>
                 <th style="font-weight: normal">{{ $tt->suratjalan->volume }}</th>
                 <th style="font-weight: normal">{{ $tt->keterangan }}</th>

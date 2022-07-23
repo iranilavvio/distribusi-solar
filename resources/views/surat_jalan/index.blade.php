@@ -298,7 +298,7 @@
                             <tbody class="list">
                                 @forelse ($suratjalan as $sj)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $suratjalan->currentPage() * 10 - 10 + $loop->iteration }}</td>
                                         <td>{{ $sj->no_sj }}</td>
                                         <td>{{ date('d F Y', strtotime($sj->tanggal_kirim)) }}</td>
                                         <td>{{ $sj->no_kirim }}</td>
@@ -326,7 +326,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="10" align="center">-tidak ada data-</td>
+                                        <td colspan="8" align="center">-tidak ada data-</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -335,29 +335,7 @@
                     {{-- <x-pagination :pagination="$karyawan" /> --}}
                     <!-- Card footer -->
                     <div class="card-footer py-4">
-                        <nav aria-label="...">
-                            <ul class="pagination justify-content-end mb-0">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">
-                                        <i class="fas fa-angle-left"></i>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
-                                        <i class="fas fa-angle-right"></i>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <x-pagination :pagination="$suratjalan" />
                     </div>
                 </div>
             </div>

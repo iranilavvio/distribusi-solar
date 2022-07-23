@@ -16,8 +16,8 @@ class KaryawanController extends Controller
     public function index(Request $request)
     {
         $params = $request->except('_token');   
-        $karya = Karyawan::filter($params)->latest()->paginate($params['show'] ?? 10);
-        $karyawan = Karyawan::all();
+        $karyawan = Karyawan::filter($params)->latest()->paginate($params['show'] ?? 10);
+        // $karyawan = Karyawan::all();
         return view('karyawan.index', compact('karyawan'));
     }
 

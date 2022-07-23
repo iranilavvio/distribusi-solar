@@ -16,11 +16,10 @@ class DriverController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //get all
-        $driver = Driver::all();
-        //karyawan get all where posisi=Driver
+        $params = $request->except('_token');   
+        $driver = Driver::filter($params)->latest()->paginate($params['show'] ?? 10);
         $karyawan = Karyawan::where('posisi', 'Driver')->get();
         $truck = Truck::all();
         return view('driver.index', compact('driver', 'karyawan', 'truck'));

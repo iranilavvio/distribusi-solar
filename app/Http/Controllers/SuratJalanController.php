@@ -18,16 +18,15 @@ class SuratJalanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //all
-        $suratjalan = SuratJalan::all();
-        $driver = Driver::all();
-        $truck = Truck::all();
+        $params = $request->except('_token');   
+        $suratjalan = SuratJalan::filter($params)->latest()->paginate($params['show'] ?? 10);
         $customer = Customer::all();
+        $driver = Driver::all();
         $karyawan = Karyawan::where('posisi', 'Karyawan')->get();
-
-        return view('surat_jalan.index', compact('suratjalan', 'driver', 'truck', 'customer', 'karyawan'));
+        $truck = Truck::all();
+        return view('surat_jalan.index', compact('suratjalan', 'customer', 'driver', 'karyawan', 'truck'));
     }
 
     /**

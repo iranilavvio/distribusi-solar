@@ -15,9 +15,10 @@ class TandaTerimaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tandaterima = TandaTerima::all();
+        $params = $request->except('_token');   
+        $tandaterima = TandaTerima::filter($params)->latest()->paginate($params['show'] ?? 10);
         $suratjalan = SuratJalan::all();
         return view('tanda_terima.index', compact('tandaterima', 'suratjalan'));
     }
@@ -126,7 +127,7 @@ class TandaTerimaController extends Controller
 
     public function getTandaTerima(Request $request)
     {
-        $tandaterima = SuratJalan::with(['customer', 'driver', 'karyawan'])->findOrFail($request->surat_jalan_id);
+        $tandaterima = SuratJalan::with(['customer', 'driver.karyawan'])->findOrFail($request->surat_jalan_id);
         if ($tandaterima) {
             return response()->json([
                 'status' => 'success',

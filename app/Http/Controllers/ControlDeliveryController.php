@@ -16,9 +16,10 @@ class ControlDeliveryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $control = ControlDelivery::all();
+        $params = $request->except('_token');   
+        $control = ControlDelivery::filter($params)->latest()->paginate($params['show'] ?? 10);
         $suratjalan = SuratJalan::all();
         return view('control_delivery.index', compact('control', 'suratjalan'));
     }

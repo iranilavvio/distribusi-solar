@@ -16,10 +16,10 @@ class PurchaseOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //all
-        $purchase = PurchaseOrder::all();
+        $params = $request->except('_token');   
+        $purchase = PurchaseOrder::filter($params)->latest()->paginate($params['show'] ?? 10);
         $customer = Customer::all();
         $karyawan = Karyawan::where('posisi', 'Karyawan')->get();
         return view('purchase_order.index', compact('purchase', 'customer', 'karyawan'));

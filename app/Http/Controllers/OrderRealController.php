@@ -15,10 +15,10 @@ class OrderRealController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //get all
-        $orderreal = OrderReal::all();
+        $params = $request->except('_token');   
+        $orderreal = OrderReal::filter($params)->latest()->paginate($params['show'] ?? 10);
         $customer = Customer::all();
         return view('order_real.index', compact('orderreal', 'customer'));
     }

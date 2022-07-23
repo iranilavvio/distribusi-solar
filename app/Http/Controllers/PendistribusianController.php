@@ -16,12 +16,13 @@ class PendistribusianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $distribusi = Pendistribusian::all();
-        $orderreal = OrderReal::all();
+        $params = $request->except('_token');   
+        $distribusi = Pendistribusian::filter($params)->latest()->paginate($params['show'] ?? 10);
         $suratjalan = SuratJalan::all();
-        return view('pendistribusian.index', compact('distribusi', 'orderreal', 'suratjalan'));
+        $orderreal = OrderReal::all();
+        return view('pendistribusian.index', compact('distribusi', 'suratjalan', 'orderreal'));
     }
 
     /**

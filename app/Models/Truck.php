@@ -35,4 +35,16 @@ class Truck extends Model
     {
         return $this->hasMany(LaporanPenjualan::class);
     }
+
+    public function scopeFilter($query, $params)
+    {
+
+        $query->where(function($query) use ($params) {
+            if(@$params['search']) {
+                $query->where('no_pol', 'LIKE', "%{$params['search']}%")
+                    ->orWhere('no_lambung', 'LIKE', "%{$params['search']}%");
+            }
+
+        });
+    }
 }
