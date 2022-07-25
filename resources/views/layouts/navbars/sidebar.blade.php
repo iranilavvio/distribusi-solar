@@ -135,16 +135,9 @@
                     </li>
                 @endcan
 
-                @can('order')
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('orderreal.index') }}">
-                            <i class="fas fa-shopping-cart text-blue"></i> {{ __('Order & Real') }}
-                        </a>
-                    </li>
-                @endcan
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('purchase.index') }}">
-                        <i class="fas fa-mail-bulk text-orange"></i> {{ __('Purchase Order') }}
+                        <i class="fas fa-mail-bulk text-blue"></i> {{ __('Purchase Order') }}
                     </a>
                 </li>
                 <li class="nav-item ">
@@ -152,6 +145,13 @@
                         <i class="fas fa-mail-bulk text-orange"></i> {{ __('Surat Jalan') }}
                     </a>
                 </li>
+                @can('order')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('orderreal.index') }}">
+                            <i class="fas fa-shopping-cart text-orange"></i> {{ __('Order & Real') }}
+                        </a>
+                    </li>
+                @endcan
 
                 @can('distribusi')
                     <li class="nav-item ">
