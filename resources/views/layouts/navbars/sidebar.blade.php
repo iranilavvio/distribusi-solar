@@ -113,6 +113,11 @@
                                         <i class="fas fa-truck text-primary"></i> {{ __('Truck') }}
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('kepangkatan.index') }}">
+                                        <i class="fas fa-truck text-primary"></i> {{ __('Kepangkatan') }}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     @endcan

@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\KepangkatanController;
 use App\Http\Controllers\LaporanPenjualanController;
 use App\Http\Controllers\OrderRealController;
 use App\Http\Controllers\PendistribusianController;
@@ -71,6 +72,10 @@ Route::group(['middleware' => 'auth'], function () {
 	//getTandaTerima
 	Route::get('/getTandaTerima', [TandaTerimaController::class, 'getTandaTerima'])->name('tandaterima.suratjalan');
 
+	//resource kepangkatan
+	Route::resource('kepangkatan', 'App\Http\Controllers\KepangkatanController');
+	
+
 	//report PDF
 	Route::get('/driverpdf', [DriverController::class, 'createPDF'])->name('driver.pdf');
 	Route::get('/orderrealpdf', [OrderRealController::class, 'createPDF'])->name('orderreal.pdf');
@@ -80,6 +85,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/controlpdf', [ControlDeliveryController::class, 'createPDF'])->name('control.pdf');
 	Route::get('/tandaterimapdf', [TandaTerimaController::class, 'createPDF'])->name('tandaterima.pdf');
 	Route::get('/purchasepdf', [PurchaseOrderController::class, 'createPDF'])->name('purchase.pdf');
+	//pangkatan PDF
+	Route::get('/kepangkatanpdf', [KepangkatanController::class, 'createPDF'])->name('kepangkatan.pdf');
 
 });
 });
