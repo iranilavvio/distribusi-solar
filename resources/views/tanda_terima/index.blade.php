@@ -15,6 +15,31 @@
                             </ol>
                         </nav>
                     </div>
+                    <form action="{{ route('tandaterima.pdf') }}" target="_blank" method="get">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="form-group">
+                                    <!-- Date input -->
+                                    <label class="control-label text-white" for="date">From Date</label>
+                                    <input class="form-control form-control-sm" name="from_date" type="date" />
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-group">
+                                    <!-- Date input -->
+                                    <label class="control-label text-white" for="date">To Date</label>
+                                    <input class="form-control form-control-sm"name="to_date" type="date" />
+                                </div>
+                            </div>
+                            <div class="col-md-auto mt-4">
+                                <div class="form-group">
+                                    <!-- Date input -->
+                                    <button class="btn btn-info" type="submit"><i class="fas fa-print"></i>
+                                        Print</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -144,31 +169,21 @@
                         <h3 class="mb-0">Table List Tanda Terima</h3>
                     </div>
                     <div class="container">
-                        <form action="{{ route('tandaterima.pdf') }}" target="_blank" method="get">
-                            <div class="row">
-                                <div class="col-md-auto">
-                                    <div class="form-group">
-                                        <!-- Date input -->
-                                        <label class="control-label" for="date">From Date</label>
-                                        <input class="form-control form-control-sm" name="from_date" type="date" />
+                        <div class="d-flex justify-content-end mb-3">
+                            <div class="flex-item mx-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-transparent"><i class="fas fa-search"></i></span>
                                     </div>
-                                </div>
-                                <div class="col-md-auto">
-                                    <div class="form-group">
-                                        <!-- Date input -->
-                                        <label class="control-label" for="date">To Date</label>
-                                        <input class="form-control form-control-sm"name="to_date" type="date" />
-                                    </div>
-                                </div>
-                                <div class="col-md-auto mt-4">
-                                    <div class="form-group">
-                                        <!-- Date input -->
-                                        <button class="btn btn-primary" type="submit"><i class="fas fa-print"></i>
-                                            Print</button>
-                                    </div>
+                                    <input placeholder="Pencarian" type="text" name="search"
+                                        onchange="this.form.submit();" value="{{ @$_GET['search'] }}"
+                                        class="form-control">
                                 </div>
                             </div>
-                        </form>
+                            <div class="flex-item">
+                                <button class="btn btn-secondary">Search</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
@@ -213,7 +228,6 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <x-pagination :pagination="$karyawan" /> --}}
                     <!-- Card footer -->
                     <div class="card-footer py-4">
                         <x-pagination :pagination="$tandaterima" />

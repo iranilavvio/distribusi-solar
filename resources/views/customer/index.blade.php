@@ -15,10 +15,6 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:void(0)" class="btn btn-sm btn-neutral" id="create">New</a>
-                        <a href="#" class="btn btn-sm btn-neutral">Filters</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -148,6 +144,23 @@
                     <!-- Card header -->
                     <div class="card-header border-0">
                         <h3 class="mb-0">Table List Customer</h3>
+                    </div>
+                    <div class="container">
+                        <div class="d-flex justify-content-end mb-3">
+                            <div class="flex-item mx-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-transparent"><i class="fas fa-search"></i></span>
+                                    </div>
+                                    <input placeholder="Pencarian" type="text" name="search"
+                                        onchange="this.form.submit();" value="{{ @$_GET['search'] }}"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="flex-item">
+                                <button class="btn btn-secondary">Search</button>
+                            </div>
+                        </div>
                     </div>
                     <!-- Light table -->
                     <div class="table-responsive">

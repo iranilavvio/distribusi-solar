@@ -207,20 +207,23 @@
                     <div class="card-header border-0">
                         <h3 class="mb-0">Table List Karyawan</h3>
                     </div>
-                    {{-- <div class="row">
-                        <div class="col-md-auto">
-                            <x-ordering class="custom-select-sm" />
-                        </div>
-                        <div class="col-auto mb-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text bg-transparent"><i class="fas fa-search"></i></span>
+                    <div class="container">
+                        <div class="d-flex justify-content-end mb-3">
+                            <div class="flex-item mx-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-transparent"><i class="fas fa-search"></i></span>
+                                    </div>
+                                    <input placeholder="Pencarian" type="text" name="search"
+                                        onchange="this.form.submit();" value="{{ @$_GET['search'] }}"
+                                        class="form-control">
                                 </div>
-                                <input placeholder="Pencarian" type="text" name="search"
-                                    onchange="this.form.submit();" value="{{ @$_GET['search'] }}" class="form-control">
+                            </div>
+                            <div class="flex-item">
+                                <button class="btn btn-secondary">Search</button>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <!-- Light table -->
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
