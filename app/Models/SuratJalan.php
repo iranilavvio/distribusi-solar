@@ -69,10 +69,15 @@ class SuratJalan extends Model
     {
 
         if (@$params['search']) {
-            $query
-                ->whereHas('customer', function ($query) use ($params) {
+            $query->whereHas('customer', function ($query) use ($params) {
                     $query->where('name', 'LIKE', "%{$params['search']}%");
-                })->orWhere('no_sj', 'LIKE', "%{$params['search']}%");
+                })->orWhereHas('driver', function ($query) use ($params) {
+                    $query->whereHas('truck', function ($query) use ($params) {
+                        $query->where('no_pol', 'LIKE', "%{$params['search']}%");
+                    });
+                })
+                ->orWhere('no_sj', 'LIKE', "%{$params['search']}%")
+                ->orWhere('no_kirim', 'LIKE', "%{$params['search']}%");
         }
     }
 }

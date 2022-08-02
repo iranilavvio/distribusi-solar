@@ -50,7 +50,8 @@ class Customer extends Model
 
         $query->where(function($query) use ($params) {
             if(@$params['search']) {
-                $query->where('name', 'LIKE', "%{$params['search']}%")
+                $query->where('kode', 'LIKE', "%{$params['search']}%")
+                    ->orWhere('name', 'LIKE', "%{$params['search']}%")
                     ->orWhere('alamat', 'LIKE', "%{$params['search']}%");
             }
 

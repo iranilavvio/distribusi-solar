@@ -28,11 +28,19 @@ class Pendistribusian extends Model
 
         if (@$params['search']) {
             $query
-                ->whereHas('surat_jalan', function ($query) use ($params) {
+                ->whereHas('suratjalan', function ($query) use ($params) {
                     $query->where('no_sj', 'LIKE', "%{$params['search']}%");
+                })->orWhereHas('suratjalan', function ($query) use ($params) {
+                    $query->whereHas('driver', function ($query) use ($params) {
+                        $query->whereHas('truck', function ($query) use ($params) {
+                            $query->where('no_pol', 'LIKE', "%{$params['search']}%");
+                        });
+                    });
                 })
-                ->orWhereHas('customer', function ($query) use ($params) {
-                    $query->where('name', 'LIKE', "%{$params['search']}%");
+                ->orWhereHas('suratjalan', function ($query) use ($params) {
+                    $query->whereHas('customer', function ($query) use ($params) {
+                        $query->where('name', 'LIKE', "%{$params['search']}%");
+                    });
                 });
         }
     }
