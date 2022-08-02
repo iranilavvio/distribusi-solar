@@ -235,7 +235,6 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <x-pagination :pagination="$karyawan" /> --}}
                     <!-- Card footer -->
                     <div class="card-footer py-4">
                         <x-pagination :pagination="$control" />
