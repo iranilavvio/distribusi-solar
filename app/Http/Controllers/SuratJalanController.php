@@ -8,6 +8,7 @@ use App\Models\Driver;
 use App\Models\Karyawan;
 use App\Models\SuratJalan;
 use App\Models\Truck;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SuratJalanController extends Controller
@@ -17,16 +18,15 @@ class SuratJalanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //all
-        $suratjalan = SuratJalan::all();
-        $driver = Driver::all();
-        $truck = Truck::all();
+        $params = $request->except('_token');   
+        $suratjalan = SuratJalan::filter($params)->latest()->paginate($params['show'] ?? 10);
         $customer = Customer::all();
+        $driver = Driver::all();
         $karyawan = Karyawan::where('posisi', 'Karyawan')->get();
-
-        return view('surat_jalan.index', compact('suratjalan', 'driver', 'truck', 'customer', 'karyawan'));
+        $truck = Truck::all();
+        return view('surat_jalan.index', compact('suratjalan', 'customer', 'driver', 'karyawan', 'truck'));
     }
 
     /**
@@ -123,10 +123,21 @@ class SuratJalanController extends Controller
         return redirect()->back();
     }
     
-    public function createPDF()
+    public function createPDF(Request $request)
     {
+        $from_date = Carbon::parse($request->from_date)->toDateTimeString();
+
+        $to_date = Carbon::parse($request->to_date)->toDateTimeString();
         //suratjalan with driver,customer,karyawan
-        $suratjalan = SuratJalan::with('driver', 'customer', 'karyawan')->get();
+        $suratjalan = SuratJalan::with('driver', 'customer', 'karyawan')->whereBetween('tanggal_kirim',[$from_date,$to_date])->get();
         return view('surat_jalan.pdf', compact('suratjalan'));
+    }
+    
+    //cetakSurat
+    public function cetakSurat($id)
+    {
+        //find or fail with driver,customer,karyawan
+        $suratjalan = SuratJalan::with('driver', 'customer', 'karyawan')->findOrFail($id);
+        return view('surat_jalan.cetak', compact('suratjalan'));
     }
 }

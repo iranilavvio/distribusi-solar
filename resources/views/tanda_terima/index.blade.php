@@ -9,17 +9,37 @@
                         <h6 class="h2 text-white d-inline-block mb-0">Tanda Terima</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Tanda Terima</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a>
+                                </li>
                                 <li class="breadcrumb-item active" aria-current="page">Tanda Terima</li>
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-lg-6 col-5 text-right">
-                        <a href="{{ route('tandaterima.pdf') }}" target="_blank" class="btn btn-sm btn-neutral"><i
-                                class="fas fa-print"></i> PDF</a>
-                        {{-- <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
-                    </div>
+                    <form action="{{ route('tandaterima.pdf') }}" target="_blank" method="get">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="form-group">
+                                    <!-- Date input -->
+                                    <label class="control-label text-white" for="date">From Date</label>
+                                    <input class="form-control form-control-sm" name="from_date" type="date" />
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-group">
+                                    <!-- Date input -->
+                                    <label class="control-label text-white" for="date">To Date</label>
+                                    <input class="form-control form-control-sm"name="to_date" type="date" />
+                                </div>
+                            </div>
+                            <div class="col-md-auto mt-4">
+                                <div class="form-group">
+                                    <!-- Date input -->
+                                    <button class="btn btn-info" type="submit"><i class="fas fa-print"></i>
+                                        Print</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -45,8 +65,9 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                             </div>
-                                            <input class="form-control datepicker" placeholder="Select date"
-                                                data-date-format='dd-mm-yy' type="text" id="tanggal" name="tanggal">
+                                            <input class="form-control" placeholder="dd-mm-yyyy" value=""
+                                                min="1997-01-01" max="2030-12-31" type="date" id="tanggal"
+                                                name="tanggal">
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +81,7 @@
                                                         class="fas fa-envelope-open-text"></i></span>
                                             </div>
                                             <select name="surat_jalan_id" id="surat_jalan_id"
-                                                class="form-control form-control-alternative @error('surat_jalan_id') is-invalid @enderror">
+                                                class="form-control form-control-alternative @error('surat_jalan_id') is-invalid @enderror pilihSj">
                                                 <option value="">Pilih No Surat Jalan</option>
                                                 @foreach ($suratjalan as $sj)
                                                     <option value="{{ $sj->id }}"
@@ -70,6 +91,40 @@
                                             </select>
                                         </div>
                                         @error('surat_jalan_id')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="driver" class="form-label">Driver</label>
+                                        <span class="text-danger">*</span>
+                                        <div class="input-group input-group-alternative mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            </div>
+                                            <input class="form-control form-control-alternative" type="text"
+                                                name="driver" id="driver" readonly>
+                                        </div>
+                                        @error('driver')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cust" class="form-label">Customer</label>
+                                        <span class="text-danger">*</span>
+                                        <div class="input-group input-group-alternative mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-tag"></i></span>
+                                            </div>
+                                            <input class="form-control form-control-alternative" type="text"
+                                                name="customer" id="customer" readonly>
+                                        </div>
+                                        @error('customer_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -113,7 +168,25 @@
                     <div class="card-header border-0">
                         <h3 class="mb-0">Table List Tanda Terima</h3>
                     </div>
-                    <!-- Light table -->
+                    <form>
+                        <div class="container">
+                            <div class="d-flex justify-content-end mb-3">
+                                <div class="flex-item mx-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-transparent"><i
+                                                    class="fas fa-search"></i></span>
+                                        </div>
+                                        <input placeholder="Pencarian" type="text" name="search"
+                                            value="{{ @$_GET['search'] }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="flex-item">
+                                    <button class="btn btn-secondary">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
@@ -131,8 +204,8 @@
                             <tbody class="list">
                                 @forelse ($tandaterima as $item)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->tanggal }}</td>
+                                        <td>{{ $tandaterima->currentPage() * 10 - 10 + $loop->iteration }}</td>
+                                        <td>{{ date('d F Y', strtotime($item->tanggal)) }}</td>
                                         <td>{{ $item->suratjalan->no_sj }}</td>
                                         <td>{{ $item->suratjalan->driver->truck->no_pol }}</td>
                                         <td>{{ $item->suratjalan->driver->karyawan->name }}</td>
@@ -145,6 +218,8 @@
                                             <button class="btn btn-sm btn-danger"
                                                 onclick="hapusData(`{{ route('tandaterima.destroy', ['tandaterima' => $item->id]) }}`)"><i
                                                     class="far fa-trash-alt"></i></button>
+                                            <a href="{{ route('tandaterima.cetak', $item->id) }}" target="_blank"
+                                                class="btn btn-sm btn-primary"><i class="fas fa-print"></i></a>
                                         </td>
                                     </tr>
                                 @empty
@@ -155,32 +230,9 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <x-pagination :pagination="$karyawan" /> --}}
                     <!-- Card footer -->
                     <div class="card-footer py-4">
-                        <nav aria-label="...">
-                            <ul class="pagination justify-content-end mb-0">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">
-                                        <i class="fas fa-angle-left"></i>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
-                                        <i class="fas fa-angle-right"></i>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <x-pagination :pagination="$tandaterima" />
                     </div>
                 </div>
             </div>
@@ -195,6 +247,38 @@
 @endsection
 
 @push('js')
-    <script src="{{ asset('argon') }}/vendor/js-cookie/js.cookie.js"></script>
-    <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(".pilihSj").on('change', function() {
+            //get this value
+            var surat_jalan_id = $(this).val();
+            if (surat_jalan_id == '') {
+                $("#driver").val('');
+                $("#customer").val('');
+            } else {
+                let alert = $("#alert");
+                //ajax
+                $.ajax({
+                    url: '{{ route('tandaterima.suratjalan') }}',
+                    data: {
+                        'surat_jalan_id': surat_jalan_id
+                    },
+                    type: 'GET',
+                    success: function(result) {
+                        console.log(result);
+                        let data = result.data;
+                        if (result.status == 'success') {
+                            //driver
+                            $("#driver").val(data.driver.karyawan.name);
+                            $("#customer").val(data.customer.name);
+                            alert.html('<i class="fas fa-check-circle me-1"></i> Data Ditemukan');
+                        } else {
+                            $("#driver").val('');
+                            $("#customer").val('');
+                            alert.html('<i class="fas fa-times-circle me-1"></i> Data Tidak Ditemukan');
+                        }
+                    }
+                })
+            }
+        })
+    </script>
 @endpush

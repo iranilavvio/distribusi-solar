@@ -40,7 +40,7 @@
                                     </div>
                                     <input
                                         class="form-control form-control-alternative @error('no_lambung') is-invalid @enderror"
-                                        placeholder="Masukkan Nomor Lambung" type="number" name="no_lambung"
+                                        placeholder="Masukkan Nomor Lambung" type="text" name="no_lambung"
                                         id="no_lambung_edit">
                                 </div>
                                 @error('no_lambung')

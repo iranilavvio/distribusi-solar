@@ -24,6 +24,10 @@
                 display: none
             }
         }
+
+        .ttd {
+            margin-top: 100px;
+        }
     </style>
 </head>
 
@@ -44,8 +48,8 @@
         <tr class="text-center">
             <th>No</th>
             <th>Kode</th>
-            <th>Jam Isi</th>
-            <th>Jam Finish</th>
+            <th>Jam Pengiriman</th>
+            <th>Jam Kembali</th>
             <th>No Surat Jalan</th>
             <th>Customer</th>
             <th>Volume</th>
@@ -55,8 +59,8 @@
             <tr>
                 <th style="font-weight: normal" class="text-center">{{ $loop->iteration }}</th>
                 <th style="font-weight: normal">{{ $item->kode }}</th>
-                <th style="font-weight: normal">{{ $item->jam_isi }}</th>
-                <th style="font-weight: normal">{{ $item->jam_finish }}</th>
+                <th style="font-weight: normal">{{ date('H:i', strtotime($item->jam_pengiriman)) }}</th>
+                <th style="font-weight: normal">{{ date('H:i', strtotime($item->jam_kembali)) }}</th>
                 <th style="font-weight: normal">{{ $item->suratjalan->no_sj }}</th>
                 <th style="font-weight: normal">{{ $item->suratjalan->customer->name }}</th>
                 <th style="font-weight: normal">{{ number_format($item->suratjalan->volume, 0, ',', '.') }}</th>
@@ -68,6 +72,13 @@
             <td>{{ $sum_volume }}</td>
         </tr> --}}
     </table>
+    <div class="d-flex justify-content-end mt-4" style="margin-right: 50px">
+        <div class="flex-item mt-4">
+            <p class="text-center mb-0">Mengetahui,</p>
+            <p class="text-center">Manager PT. GLOBAL ARTA BORNEO</p>
+            <p class="text-center ttd"> Abdul Muthalib</p>
+        </div>
+    </div>
     <script>
         print();
     </script>

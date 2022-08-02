@@ -6,6 +6,7 @@ use App\Http\Requests\PurchaseOrderRequest;
 use App\Models\Customer;
 use App\Models\Karyawan;
 use App\Models\PurchaseOrder;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PurchaseOrderController extends Controller
@@ -15,10 +16,10 @@ class PurchaseOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //all
-        $purchase = PurchaseOrder::all();
+        $params = $request->except('_token');   
+        $purchase = PurchaseOrder::filter($params)->latest()->paginate($params['show'] ?? 10);
         $customer = Customer::all();
         $karyawan = Karyawan::where('posisi', 'Karyawan')->get();
         return view('purchase_order.index', compact('purchase', 'customer', 'karyawan'));
@@ -105,10 +106,13 @@ class PurchaseOrderController extends Controller
         return redirect()->back();
     }
     
-    public function createPDF()
+    public function createPDF(Request $request)
     {
+        $from_date = Carbon::parse($request->from_date)->toDateTimeString();
+
+        $to_date = Carbon::parse($request->to_date)->toDateTimeString();
         //purchase with customer and karyawan
-        $purchase = PurchaseOrder::with('customer', 'karyawan')->get();
+        $purchase = PurchaseOrder::with('customer', 'karyawan')->whereBetween('tanggal', [$from_date, $to_date])->get();
         //return view
         return view('purchase_order.pdf', compact('purchase'));
     }

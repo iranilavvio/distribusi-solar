@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRealRequest;
 use App\Models\Customer;
 use App\Models\OrderReal;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderRealController extends Controller
@@ -14,10 +15,10 @@ class OrderRealController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //get all
-        $orderreal = OrderReal::all();
+        $params = $request->except('_token');   
+        $orderreal = OrderReal::filter($params)->latest()->paginate($params['show'] ?? 10);
         $customer = Customer::all();
         return view('order_real.index', compact('orderreal', 'customer'));
     }
@@ -120,12 +121,20 @@ class OrderRealController extends Controller
         return redirect()->back();
     }
 
-    public function createPDF()
+    public function createPDF(Request $request)
     {
-        $orderreal = OrderReal::with('customer')->get();
-        $sum_receive_po = OrderReal::sum('receive_po');
-        $sum_realisasi = OrderReal::sum('realisasi');
-        $sum_unreal = OrderReal::sum('unreal');
+        $from_date = Carbon::parse($request->from_date)
+                             ->toDateTimeString();
+
+       $to_date = Carbon::parse($request->to_date)
+                             ->toDateTimeString();
+        
+
+        $orderreal = OrderReal::with('customer')->whereBetween('created_at',[$from_date,$to_date])->get();
+        $sum_receive_po = OrderReal::whereBetween('created_at',[$from_date,$to_date])->sum('receive_po');
+        $sum_realisasi = OrderReal::whereBetween('created_at',[$from_date,$to_date])->sum('realisasi');
+        $sum_unreal = OrderReal::whereBetween('created_at',[$from_date,$to_date])->sum('unreal');
+
         return view('order_real.pdf', compact('orderreal', 'sum_receive_po', 'sum_realisasi', 'sum_unreal'));
     }
 }

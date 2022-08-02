@@ -20,8 +20,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input class="form-control datepicker" placeholder="Select date"
-                                        data-date-format='dd-mm-yy' type="text" id="tanggal_edit" name="tanggal">
+                                    <input class="form-control" placeholder="dd-mm-yyyy" value="" min="1997-01-01"
+                                        max="2030-12-31" type="date" id="tanggal_edit" name="tanggal">
                                 </div>
                             </div>
                         </div>
@@ -60,8 +60,8 @@
                                     </div>
                                     <input
                                         class="form-control form-control-alternative @error('keterangan') is-invalid @enderror"
-                                        value="{{ old('keterangan') }}" placeholder="Masukkan Keterangan"
-                                        type="text" name="keterangan" id="keterangan_edit">
+                                        value="{{ old('keterangan') }}" placeholder="Masukkan Keterangan" type="text"
+                                        name="keterangan" id="keterangan_edit">
                                 </div>
                                 @error('keterangan')
                                     <div class="alert alert-danger">{{ $message }}</div>

@@ -13,9 +13,11 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customer = Customer::all();
+        $params = $request->except('_token');   
+        $customer = Customer::filter($params)->latest()->paginate($params['show'] ?? 10);
+        // $karyawan = Karyawan::all();
         return view('customer.index', compact('customer'));
     }
 

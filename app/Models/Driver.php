@@ -41,4 +41,16 @@ class Driver extends Model
     {
         return $this->hasMany(LaporanPenjualan::class, 'driver_id');
     }
+
+    public function scopeFilter($query, $params)
+    {
+
+        if (@$params['search']) {
+            $query->whereHas('karyawan', function ($query) use ($params) {
+                    $query->where('name', 'LIKE', "%{$params['search']}%");
+                })->orWhereHas('truck', function ($query) use ($params) {
+                    $query->where('no_pol', 'LIKE', "%{$params['search']}%");
+                });
+        }
+    }
 }

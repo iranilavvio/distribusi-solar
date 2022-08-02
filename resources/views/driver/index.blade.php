@@ -9,8 +9,8 @@
                         <h6 class="h2 text-white d-inline-block mb-0">Driver</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Driver</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a>
+                                </li>
                                 <li class="breadcrumb-item active" aria-current="page">Driver</li>
                             </ol>
                         </nav>
@@ -100,6 +100,25 @@
                     <div class="card-header border-0">
                         <h3 class="mb-0">Table List Driver</h3>
                     </div>
+                    <form>
+                        <div class="container">
+                            <div class="d-flex justify-content-end mb-3">
+                                <div class="flex-item mx-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-transparent"><i
+                                                    class="fas fa-search"></i></span>
+                                        </div>
+                                        <input placeholder="Pencarian" type="text" name="search"
+                                            value="{{ @$_GET['search'] }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="flex-item">
+                                    <button class="btn btn-secondary">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <!-- Light table -->
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
@@ -118,7 +137,7 @@
                             <tbody class="list">
                                 @forelse ($driver as $item)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $driver->currentPage() * 10 - 10 + $loop->iteration }}</td>
                                         <td>{{ $item->karyawan->name }}</td>
                                         <td>{{ $item->karyawan->nik }}</td>
                                         <td>{{ $item->karyawan->alamat }}</td>
@@ -144,29 +163,7 @@
                     </div>
                     <!-- Card footer -->
                     <div class="card-footer py-4">
-                        <nav aria-label="...">
-                            <ul class="pagination justify-content-end mb-0">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">
-                                        <i class="fas fa-angle-left"></i>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
-                                        <i class="fas fa-angle-right"></i>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <x-pagination :pagination="$driver" />
                     </div>
                 </div>
             </div>

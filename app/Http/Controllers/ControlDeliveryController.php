@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ControlDeliveryRequest;
 use App\Models\ControlDelivery;
 use App\Models\SuratJalan;
+use Carbon\Carbon;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,10 @@ class ControlDeliveryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $control = ControlDelivery::all();
+        $params = $request->except('_token');   
+        $control = ControlDelivery::filter($params)->latest()->paginate($params['show'] ?? 10);
         $suratjalan = SuratJalan::all();
         return view('control_delivery.index', compact('control', 'suratjalan'));
     }
@@ -100,9 +102,12 @@ class ControlDeliveryController extends Controller
         return redirect()->back();
     }
 
-    public function createPDF()
+    public function createPDF(Request $request)
     {
-        $control = ControlDelivery::with('suratjalan')->get();
+        $from_date = Carbon::parse($request->from_date)->toDateTimeString();
+
+        $to_date = Carbon::parse($request->to_date)->toDateTimeString();
+        $control = ControlDelivery::with('suratjalan')->whereBetween('created_at', [$from_date, $to_date])->get();
 
         return view('control_delivery.pdf', compact('control'));
     }

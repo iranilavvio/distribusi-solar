@@ -24,6 +24,10 @@
                 display: none
             }
         }
+
+        .ttd {
+            margin-top: 100px;
+        }
     </style>
 </head>
 
@@ -43,6 +47,7 @@
     <table class="table table-bordered">
         <tr class="text-center">
             <th>No</th>
+            <th>Tanggal PO</th>
             <th>No Purchase Order</th>
             <th>Perusahaan</th>
             <th>Alamat</th>
@@ -52,6 +57,7 @@
         @foreach ($purchase as $po)
             <tr>
                 <th style="font-weight: normal" class="text-center">{{ $loop->iteration }}</th>
+                <th style="font-weight: normal">{{ date('d/m/Y', strtotime($po->tanggal)) }}</th>
                 <th style="font-weight: normal">{{ $po->no_po }}</th>
                 <th style="font-weight: normal">{{ $po->customer->name }}</th>
                 <th style="font-weight: normal">{{ $po->customer->alamat }}</th>
@@ -60,6 +66,13 @@
             </tr>
         @endforeach
     </table>
+    <div class="d-flex justify-content-end mt-4" style="margin-right: 50px">
+        <div class="flex-item mt-4">
+            <p class="text-center mb-0">Mengetahui,</p>
+            <p class="text-center">Manager PT. GLOBAL ARTA BORNEO</p>
+            <p class="text-center ttd"> Abdul Muthalib</p>
+        </div>
+    </div>
     <script>
         print();
     </script>

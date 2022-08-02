@@ -30,7 +30,7 @@ class Karyawan extends Model
         $query->where(function($query) use ($params) {
             if(@$params['search']) {
                 $query->where('name', 'LIKE', "%{$params['search']}%")
-                    ->orWhere('phone', 'LIKE', "%{$params['search']}%");
+                    ->orWhere('no_telp', 'LIKE', "%{$params['search']}%");
             }
 
         });

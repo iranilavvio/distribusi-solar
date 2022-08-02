@@ -44,4 +44,17 @@ class Customer extends Model
     {
         return $this->hasMany(PurchaseOrder::class, 'customer_id');
     }
+
+    public function scopeFilter($query, $params)
+    {
+
+        $query->where(function($query) use ($params) {
+            if(@$params['search']) {
+                $query->where('kode', 'LIKE', "%{$params['search']}%")
+                    ->orWhere('name', 'LIKE', "%{$params['search']}%")
+                    ->orWhere('alamat', 'LIKE', "%{$params['search']}%");
+            }
+
+        });
+    }
 }

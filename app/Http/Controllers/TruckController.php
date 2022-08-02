@@ -13,10 +13,11 @@ class TruckController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //get all
-        $truck = Truck::all();
+        $params = $request->except('_token');   
+        $truck = Truck::filter($params)->latest()->paginate($params['show'] ?? 10);
+        // $karyawan = Karyawan::all();
         return view('truck.index', compact('truck'));
     }
 

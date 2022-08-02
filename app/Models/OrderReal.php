@@ -33,4 +33,14 @@ class OrderReal extends Model
     {
         return $this->hasMany(Pendistribusian::class, 'order_real_id');
     }
+
+    public function scopeFilter($query, $params)
+    {
+
+        if (@$params['search']) {
+            $query->whereHas('customer', function ($query) use ($params) {
+                    $query->where('name', 'LIKE', "%{$params['search']}%");
+                })->orWhere('no_order', 'LIKE', "%{$params['search']}%");
+        }
+    }
 }

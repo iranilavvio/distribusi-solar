@@ -9,17 +9,37 @@
                         <h6 class="h2 text-white d-inline-block mb-0">Delivery</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Delivery</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a>
+                                </li>
                                 <li class="breadcrumb-item active" aria-current="page">Delivery</li>
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-lg-6 col-5 text-right">
-                        <a href="{{ route('delivery.pdf') }}" target="_blank" class="btn btn-sm btn-neutral"><i
-                                class="fas fa-print"></i> PDF</a>
-                        {{-- <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
-                    </div>
+                    <form action="{{ route('delivery.pdf') }}" target="_blank" method="get">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="form-group">
+                                    <!-- Date input -->
+                                    <label class="control-label text-white" for="date">From Date</label>
+                                    <input class="form-control form-control-sm" name="from_date" type="date" />
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-group">
+                                    <!-- Date input -->
+                                    <label class="control-label text-white" for="date">To Date</label>
+                                    <input class="form-control form-control-sm"name="to_date" type="date" />
+                                </div>
+                            </div>
+                            <div class="col-md-auto mt-4">
+                                <div class="form-group">
+                                    <!-- Date input -->
+                                    <button class="btn btn-info" type="submit"><i class="fas fa-print"></i>
+                                        Print</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -45,8 +65,9 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                             </div>
-                                            <input class="form-control datepicker" placeholder="Select date"
-                                                data-date-format='dd-mm-yy' type="text" id="tanggal" name="tanggal">
+                                            <input class="form-control" placeholder="dd-mm-yyyy" value=""
+                                                min="1997-01-01" max="2030-12-31" type="date" id="tanggal"
+                                                name="tanggal">
                                         </div>
                                     </div>
                                 </div>
@@ -154,6 +175,25 @@
                     <div class="card-header border-0">
                         <h3 class="mb-0">Table List Delivery</h3>
                     </div>
+                    <form>
+                        <div class="container">
+                            <div class="d-flex justify-content-end mb-3">
+                                <div class="flex-item mx-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-transparent"><i
+                                                    class="fas fa-search"></i></span>
+                                        </div>
+                                        <input placeholder="Pencarian" type="text" name="search"
+                                            value="{{ @$_GET['search'] }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="flex-item">
+                                    <button class="btn btn-secondary">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <!-- Light table -->
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
@@ -172,8 +212,8 @@
                             <tbody class="list">
                                 @forelse ($delivery as $item)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->tanggal }}</td>
+                                        <td>{{ $delivery->currentPage() * 10 - 10 + $loop->iteration }}</td>
+                                        <td>{{ date('d F Y', strtotime($item->tanggal)) }}</td>
                                         <td>{{ $item->suratjalan->no_sj }}</td>
                                         <td>{{ $item->suratjalan->driver->karyawan->name }}</td>
                                         <td>{{ $item->suratjalan->customer->name }}</td>
@@ -196,32 +236,9 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <x-pagination :pagination="$karyawan" /> --}}
                     <!-- Card footer -->
                     <div class="card-footer py-4">
-                        <nav aria-label="...">
-                            <ul class="pagination justify-content-end mb-0">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">
-                                        <i class="fas fa-angle-left"></i>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
-                                        <i class="fas fa-angle-right"></i>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <x-pagination :pagination="$delivery" />
                     </div>
                 </div>
             </div>
@@ -244,10 +261,10 @@
             //get this value
             var surat_jalan_id = $(this).val();
 
-            if(surat_jalan_id == ''){
+            if (surat_jalan_id == '') {
                 $("#customer").val('');
                 $("#tujuan").val('');
-            }else{
+            } else {
                 let alert = $("#alert");
                 //ajax
                 $.ajax({

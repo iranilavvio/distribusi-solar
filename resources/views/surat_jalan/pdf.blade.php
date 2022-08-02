@@ -24,6 +24,10 @@
                 display: none
             }
         }
+
+        .ttd {
+            margin-top: 100px;
+        }
     </style>
 </head>
 
@@ -58,7 +62,7 @@
             <tr>
                 <th style="font-weight: normal" class="text-center">{{ $loop->iteration }}</th>
                 <th style="font-weight: normal">{{ $sj->no_sj }}</th>
-                <th style="font-weight: normal">{{ $sj->tanggal_kirim }}</th>
+                <th style="font-weight: normal">{{ date('d/m/Y', strtotime($sj->tanggal_kirim)) }}</th>
                 <th style="font-weight: normal">{{ $sj->no_kirim }}</th>
                 <th style="font-weight: normal">{{ $sj->driver->karyawan->name }}</th>
                 <th style="font-weight: normal">{{ $sj->volume }}</th>
@@ -70,6 +74,13 @@
             </tr>
         @endforeach
     </table>
+    <div class="d-flex justify-content-end mt-4" style="margin-right: 50px">
+        <div class="flex-item mt-4">
+            <p class="text-center mb-0">Mengetahui,</p>
+            <p class="text-center">Manager PT. GLOBAL ARTA BORNEO</p>
+            <p class="text-center ttd"> Abdul Muthalib</p>
+        </div>
+    </div>
     <script>
         print();
     </script>

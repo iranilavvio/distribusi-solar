@@ -32,17 +32,18 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="isi" class="form-label">Jam Isi</label>
+                                <label for="isi" class="form-label">Jam Pengiriman</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-map"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-clock"></i></span>
                                     </div>
                                     <input
-                                        class="form-control form-control-alternative @error('jam_isi') is-invalid @enderror"
-                                        value="{{ old('jam_isi') }}" type="time" name="jam_isi" id="jam_isi_edit">
+                                        class="form-control form-control-alternative @error('jam_pengiriman') is-invalid @enderror"
+                                        value="{{ old('jam_pengiriman') }}" type="time" name="jam_pengiriman"
+                                        id="jam_pengiriman_edit">
                                 </div>
-                                @error('jam_isi')
+                                @error('jam_pengiriman')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -51,18 +52,18 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="finish" class="form-label">Jam Finish</label>
+                                <label for="finish" class="form-label">Jam Kembali</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-map"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-stopwatch"></i></span>
                                     </div>
                                     <input
-                                        class="form-control form-control-alternative @error('jam_finish') is-invalid @enderror"
-                                        value="{{ old('jam_finish') }}" type="time" name="jam_finish"
-                                        id="jam_finish_edit">
+                                        class="form-control form-control-alternative @error('jam_kembali') is-invalid @enderror"
+                                        value="{{ old('jam_kembali') }}" type="time" name="jam_kembali"
+                                        id="jam_kembali_edit">
                                 </div>
-                                @error('jam_finish')
+                                @error('jam_kembali')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -135,8 +136,8 @@
                     console.log(data)
                     $('#action-modal-edit').attr('action', url_update);
                     $('#kode_edit').val(data.kode);
-                    $('#jam_isi_edit').val(data.jam_isi);
-                    $('#jam_finish_edit').val(data.jam_finish);
+                    $('#jam_pengiriman_edit').val(data.jam_pengiriman);
+                    $('#jam_kembali_edit').val(data.jam_kembali);
                     $('#surat_jalan_id_edit').val(data.surat_jalan_id);
                     $('#keterangan_edit').val(data.keterangan);
                     $('#edit-modal').modal('show');

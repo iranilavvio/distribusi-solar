@@ -6,6 +6,7 @@ use App\Http\Requests\PendistribusianRequest;
 use App\Models\OrderReal;
 use App\Models\Pendistribusian;
 use App\Models\SuratJalan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PendistribusianController extends Controller
@@ -15,12 +16,13 @@ class PendistribusianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $distribusi = Pendistribusian::all();
-        $orderreal = OrderReal::all();
+        $params = $request->except('_token');   
+        $distribusi = Pendistribusian::filter($params)->latest()->paginate($params['show'] ?? 10);
         $suratjalan = SuratJalan::all();
-        return view('pendistribusian.index', compact('distribusi', 'orderreal', 'suratjalan'));
+        $orderreal = OrderReal::all();
+        return view('pendistribusian.index', compact('distribusi', 'suratjalan', 'orderreal'));
     }
 
     /**
@@ -107,9 +109,13 @@ class PendistribusianController extends Controller
         return redirect()->back();
     }
 
-    public function createPDF()
+    public function createPDF(Request $request)
     {
-        $distribusi = Pendistribusian::with('orderreal', 'suratjalan')->get();
+        $from_date = Carbon::parse($request->from_date)->toDateTimeString();
+
+        $to_date = Carbon::parse($request->to_date)->toDateTimeString();
+        
+        $distribusi = Pendistribusian::with('orderreal', 'suratjalan')->whereBetween('created_at',[$from_date,$to_date])->get();
 
         return view('pendistribusian.pdf', compact('distribusi'));
     }

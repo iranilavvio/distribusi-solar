@@ -24,6 +24,15 @@
                 display: none
             }
         }
+
+        .ttd {
+            margin-left: 50px;
+            margin-right: 120px;
+        }
+
+        .ttd2 {
+            margin-top: 100px;
+        }
     </style>
 </head>
 
@@ -46,22 +55,35 @@
             <th>Tanggal</th>
             <th>No Surat Jalan</th>
             <th>No Polisi</th>
-            <th>Customer</th>
+            <th>Driver</th>
+            <th>Perusahaan</th>
             <th>Volume</th>
             <th>Keterangan</th>
         </tr>
         @foreach ($tandaterima as $tt)
             <tr>
                 <th style="font-weight: normal" class="text-center">{{ $loop->iteration }}</th>
-                <th style="font-weight: normal">{{ $tt->tanggal }}</th>
+                <th style="font-weight: normal">{{ date('d/m/Y', strtotime($tt->tanggal)) }}</th>
                 <th style="font-weight: normal">{{ $tt->suratjalan->no_sj }}</th>
                 <th style="font-weight: normal">{{ $tt->suratjalan->driver->truck->no_pol }}</th>
+                <th style="font-weight: normal">{{ $tt->suratjalan->driver->karyawan->name }}</th>
                 <th style="font-weight: normal">{{ $tt->suratjalan->customer->name }}</th>
                 <th style="font-weight: normal">{{ $tt->suratjalan->volume }}</th>
                 <th style="font-weight: normal">{{ $tt->keterangan }}</th>
             </tr>
         @endforeach
     </table>
+    <h6>Banjarmasin, {{ Carbon\Carbon::today()->format('d F Y') }}</h6><br>
+    <div class="d-flex justify-content-between ttd">
+        <div class="flex-item text-center">
+            <h6>Dibuat Oleh :</h6>
+            <h6 class="ttd2">{{ Auth::user()->name }}</h6>
+        </div>
+        <div class="flex-item text-center">
+            <h6>Mengetahui </h6>
+            <h6 class="ttd2">Mas Hafiz</h6>
+        </div>
+    </div>
     <script>
         print();
     </script>
