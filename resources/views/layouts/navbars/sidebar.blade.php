@@ -126,6 +126,13 @@
             <h6 class="navbar-heading text-muted">Data</h6>
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <a href="{{ route('pengambilan.index') }}"
+                        class="nav-link {{ request()->routeIs('pengambilan.index') ? 'mm-active' : '' }}">
+                        <i class="fas fa-users text-blue"></i> {{ __('Pengambilan') }}
+                    </a>
+                </li>
+
                 @can('driver')
                     <li class="nav-item">
                         <a href="{{ route('driver.index') }}"

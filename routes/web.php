@@ -81,6 +81,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/tandaterimapdf', [TandaTerimaController::class, 'createPDF'])->name('tandaterima.pdf');
 	Route::get('/purchasepdf', [PurchaseOrderController::class, 'createPDF'])->name('purchase.pdf');
 
+	//pengambilan resource
+	Route::resource('pengambilan', 'App\Http\Controllers\PengambilanController');
+
 });
 });
 
